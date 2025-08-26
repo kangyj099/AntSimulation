@@ -134,6 +134,8 @@
     <ClCompile Include="Contains.ixx" />
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="LogManager.ixx" />
+    <ClCompile Include="Utils.ixx" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

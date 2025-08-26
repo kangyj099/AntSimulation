@@ -42,5 +42,11 @@
     <ClCompile Include="Contains.ixx">
       <Filter>유틸</Filter>
     </ClCompile>
+    <ClCompile Include="Utils.ixx">
+      <Filter>유틸</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>유틸</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
