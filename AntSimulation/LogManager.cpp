@@ -1,6 +1,7 @@
 Ôªømodule logManager;
 
 import contains;
+import utils;
 
 LogManager::LogManager()
 {
@@ -26,13 +27,15 @@ void LogManager::AddLog(LogType _logType, std::string _logText) {
 
 void LogManager::PrintLog()
 {
+	GotoXY(c_SCREEN_logStartX, c_SCREEN_logStartY);
+
 	for (auto log : logList)
 	{
 		switch (log.logType)
 		{
-		case LogType::State: printf("°› "); break;
-		case LogType::Action: printf("°· "); break;
-		case LogType::Outcome: printf("°‹ "); break;
+		case LogType::State: PrintText("‚óé ", c_COLOR_defaultBG, Color::Blue); break;
+		case LogType::Action: PrintText("‚ñ† ", c_COLOR_defaultBG, Color::Yellow); break;
+		case LogType::Outcome: PrintText("‚óè ", c_COLOR_defaultBG, Color::Green); break;
 
 		case LogType::None: [[fallthrough]];
 		default:;
