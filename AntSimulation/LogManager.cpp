@@ -1,4 +1,4 @@
-module logManager;
+﻿module logManager;
 
 
 export const short c_LOG_printLine = 5; // 로그 출력 줄 수
