@@ -131,7 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AntSimulation.cpp" />
-    <ClCompile Include="Contains.ixx" />
+    <ClCompile Include="Common.ixx" />
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="LogManager.ixx" />
     <ClCompile Include="Utils.ixx" />

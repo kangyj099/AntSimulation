@@ -1,7 +1,10 @@
 ﻿module logManager;
 
-import contains;
+import common;
 import utils;
+
+using namespace Constants;
+using namespace Utils;
 
 LogManager::LogManager()
 {

@@ -1,0 +1,99 @@
+﻿export module common;
+
+/////////////////////////////////
+// 구조체
+/// <summary>
+/// 필드에서의 위치
+/// </summary>
+export struct FieldPos {
+	short x;
+	short y;
+
+	FieldPos() : x(0), y(0) {}
+	FieldPos(short _x, short _y) : x(_x), y(_y) {}
+
+	void Set(short _x, short _y)
+	{
+		x = _x;
+		y = _y;
+	}
+};
+
+/// <summary>
+/// 콘솔 화면에서의 위치
+/// </summary>
+export struct ConsolePos {
+	short x;
+	short y;
+
+	ConsolePos() : x(0), y(0) {}
+	ConsolePos(short _x, short _y) : x(_x), y(_y) {}
+
+	void Set(short _x, short _y)
+	{
+		x = _x;
+		y = _y;
+	}
+};
+
+// 상수
+export namespace Constants
+{
+	/////////////////////////////////
+	// 인게임 정보
+	const short c_GAME_antCount = 10;	// 최대 개미 수
+	const short c_GAME_foodCount = 20;	// 먹이 수
+	const short c_GAME_homeCount = 1;	// 집 수
+	const short c_GAME_obstacleCount = 30;	// 장애물 수
+
+	const float c_GAME_antBaseSpeed = 3.0f;	// 개미 기본 속도 (칸/초)
+	const short c_GAME_antWeightMin = 2;	// 개미 무게 최소
+	const short c_GAME_antWeightMax = 7;	// 개미 무게 최대
+
+
+	/////////////////////////////////
+	// 로그
+	const short c_LOG_printLine = 5;	// 로그 출력 줄 수
+
+	/////////////////////////////////
+	// 필드
+	const short c_FIELD_width = 40;
+	const short c_FIELD_height = 20;
+	const short c_FIELD_toScreenXScale = 2;
+
+	/////////////////////////////////
+	// 화면 출력 관련
+	const short c_SCREEN_width = 80;
+	const short c_SCREEN_height = 26;
+
+	const short c_SCREEN_fieldStartX = 0;
+	const short c_SCREEN_fieldStartY = 0;
+
+	const short c_SCREEN_logStartX = 0;
+	const short c_SCREEN_logStartY = c_SCREEN_height - c_LOG_printLine;
+
+	/////////////////////////////////
+	// 색상 정의
+	enum class Color : unsigned short
+	{
+		Black = 0,
+		DarkBlue = 1,
+		DarkGreen = 2,
+		DarkCyan = 3,
+		DarkRed = 4,
+		DarkMagenta = 5,
+		DarkYellow = 6,
+		Gray = 7,
+		DarkGray = 8,
+		Blue = 9,
+		Green = 10,
+		Cyan = 11,
+		Red = 12,
+		Magenta = 13,
+		Yellow = 14,
+		White = 15,
+	};
+
+	const Color c_COLOR_defaultBG = Color::Black;
+	const Color c_COLOR_defaultText = Color::White;
+}

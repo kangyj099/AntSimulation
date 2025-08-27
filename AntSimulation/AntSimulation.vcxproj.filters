@@ -39,7 +39,7 @@
     <ClCompile Include="LogManager.cpp">
       <Filter>로그</Filter>
     </ClCompile>
-    <ClCompile Include="Contains.ixx">
+    <ClCompile Include="Common.ixx">
       <Filter>유틸</Filter>
     </ClCompile>
     <ClCompile Include="Utils.ixx">
