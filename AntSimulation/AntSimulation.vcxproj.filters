@@ -51,5 +51,8 @@
     <ClCompile Include="Interface.ixx">
       <Filter>유틸</Filter>
     </ClCompile>
+    <ClCompile Include="Component.ixx">
+      <Filter>게임 오브젝트\기능</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

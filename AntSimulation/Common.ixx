@@ -129,4 +129,16 @@ export namespace Constants
 		{ -1, 0 },   // Left
 		{ -1, -1 }   // UpLeft
 	};
+
+	/////////////////////////////////
+	// 컴포넌트
+
+	/// <summary>
+	/// 컴포넌트 타입(ComponentBase 상속 클래스의 기능 종류)
+	/// </summary>
+	enum class ComponentType
+	{
+		None = -1,
+		Movement = 0,
+	};
 }
