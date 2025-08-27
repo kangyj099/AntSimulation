@@ -1,5 +1,8 @@
 ﻿module logManager;
 
+import <iostream>;
+import <vector>;
+
 import common;
 import utils;
 
@@ -32,9 +35,9 @@ void LogManager::PrintLog()
 {
 	GotoXY(c_SCREEN_logStartX, c_SCREEN_logStartY);
 
-	for (auto log : logList)
+	for (auto log = logList.begin(); log != logList.end(); ++log)
 	{
-		switch (log.logType)
+		switch (log->logType)
 		{
 		case LogType::State: PrintText("◎ ", c_COLOR_defaultBG, Color::Blue); break;
 		case LogType::Action: PrintText("■ ", c_COLOR_defaultBG, Color::Yellow); break;
@@ -44,7 +47,11 @@ void LogManager::PrintLog()
 		default:;
 		}
 
-		printf("%s\n", log.logText.c_str());
+		PrintText(log->logText.c_str());
+		if (logList.end()-1 != log)
+		{
+			std::cout << std::endl;
+		}
 	}
 }
 
