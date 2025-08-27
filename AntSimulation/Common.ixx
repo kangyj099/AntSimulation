@@ -96,4 +96,37 @@ export namespace Constants
 
 	const Color c_COLOR_defaultBG = Color::Black;
 	const Color c_COLOR_defaultText = Color::White;
+
+	/////////////////////////////////
+	// 8방향
+	enum class Direction8
+	{
+		None = -1,
+
+		Up = 0,    // ↑
+		UpRight,   // ↗
+		Right,     // →
+		DownRight, // ↘
+		Down,      // ↓
+		DownLeft,  // ↙
+		Left,      // ←
+		UpLeft,    // ↖
+
+		Count
+	};
+
+	// 방향
+	typedef FieldPos Direction8Pos;
+
+	// 8방향 좌표 변화량
+	const Direction8Pos c_FIELD_directions[8] = {
+		{ 0, -1 },   // Up
+		{ 1, -1 },   // UpRight
+		{ 1, 0 },    // Right
+		{ 1, 1 },    // DownRight
+		{ 0, 1 },    // Down
+		{ -1, 1 },   // DownLeft
+		{ -1, 0 },   // Left
+		{ -1, -1 }   // UpLeft
+	};
 }
