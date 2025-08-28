@@ -134,6 +134,7 @@
     <ClCompile Include="Common.ixx" />
     <ClCompile Include="Interface.ixx" />
     <ClCompile Include="Component.ixx" />
+    <ClCompile Include="ComponentBase.cpp" />
     <ClCompile Include="Concepts.ixx" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="LogManager.cpp" />

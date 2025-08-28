@@ -63,5 +63,8 @@
     <ClCompile Include="Concepts.ixx">
       <Filter>유틸</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentBase.cpp">
+      <Filter>게임 오브젝트\기능</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

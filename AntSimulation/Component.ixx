@@ -19,9 +19,10 @@ export enum class ComponentType
 export class ComponentBase : public IUpdate
 {
 protected:
+	GameObject* owner;
 
 public:
-	ComponentBase() {};
+	ComponentBase(GameObject& _owner);
 	virtual ~ComponentBase() {}
 
 	virtual void Update() override = 0;

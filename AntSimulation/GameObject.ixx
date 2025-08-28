@@ -57,17 +57,17 @@ public:
 	/// 컴포넌트 추가, 구현 기능에 따라서 각 벡터에도 추가
 	/// </summary>
 	/// <typeparam name="T">컴포넌트 클래스</typeparam>
-	/// <param name="_component"></param>
-	template<ComponentDerived T>
-	T* AddComponent()
+	/// <param name="args"></param>
+	template<ComponentDerived T, typename... Args>
+	T* AddComponent(Args&&... args)
 	{
 		// 컴포넌트 생성
-		T* component = new T();
+		T* component = new T(*this, std::forward<Args>(args)...);
 		ComponentType type = component->GetType();
 
 		// 컴포넌트 벡터에 추가
 		if (allComponents.end() != allComponents.find(type))
-		{	// 왜있음??
+		{	// 동종의 컴포넌트가 이미 있으면 문제상황
 			__debugbreak();
 			return nullptr;
 		}
