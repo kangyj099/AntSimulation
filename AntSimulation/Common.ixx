@@ -98,6 +98,7 @@ export namespace Constants
 	const Color c_COLOR_defaultText = Color::White;
 
 	/////////////////////////////////
+	// 이동
 	// 8방향
 	enum class Direction8
 	{
@@ -130,15 +131,4 @@ export namespace Constants
 		{ -1, -1 }   // UpLeft
 	};
 
-	/////////////////////////////////
-	// 컴포넌트
-
-	/// <summary>
-	/// 컴포넌트 타입(ComponentBase 상속 클래스의 기능 종류)
-	/// </summary>
-	enum class ComponentType
-	{
-		None = -1,
-		Movement = 0,
-	};
 }
