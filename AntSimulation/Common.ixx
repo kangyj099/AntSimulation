@@ -17,6 +17,47 @@ export struct FieldPos {
 		x = _x;
 		y = _y;
 	}
+
+	FieldPos operator +(const FieldPos& other) const
+	{
+		return FieldPos(x + other.x, y + other.y);
+	}
+	FieldPos& operator +=(const FieldPos& other)
+	{
+		x += other.x;	y += other.y;
+		return *this;
+	}
+	FieldPos operator -(const FieldPos& other) const
+	{
+		return FieldPos(x - other.x, y - other.y);
+	}
+	FieldPos& operator -=(const FieldPos& other)
+	{
+		x -= other.x;	y -= other.y;
+		return *this;
+	}
+	FieldPos operator *(float multiFactor) const
+	{
+		return FieldPos(static_cast<short>(x * multiFactor), static_cast<short>(y * multiFactor));
+	}
+	FieldPos& operator *=(float multiFactor)
+	{
+		x = static_cast<short>(x * multiFactor);	y = static_cast<short>(y * multiFactor);
+		return *this;
+	}
+	FieldPos operator /(float divFactor) const
+	{
+		return FieldPos(static_cast<short>(x / divFactor), static_cast<short>(y / divFactor));
+	}
+	FieldPos& operator /=(float divFactor)
+	{
+		x = static_cast<short>(x / divFactor);	y = static_cast<short>(y / divFactor);
+		return *this;
+	}
+	bool operator ==(const FieldPos& other) const
+	{
+		return (x == other.x) && (y == other.y);
+	}
 };
 
 /// <summary>
@@ -33,6 +74,46 @@ export struct ConsolePos {
 	{
 		x = _x;
 		y = _y;
+	}
+	ConsolePos operator +(const ConsolePos& other) const
+	{
+		return ConsolePos(x + other.x, y + other.y);
+	}
+	ConsolePos& operator +=(const ConsolePos& other)
+	{
+		x += other.x;	y += other.y;
+		return *this;
+	}
+	ConsolePos operator -(const ConsolePos& other) const
+	{
+		return ConsolePos(x - other.x, y - other.y);
+	}
+	ConsolePos& operator -=(const ConsolePos& other)
+	{
+		x -= other.x;	y -= other.y;
+		return *this;
+	}
+	ConsolePos operator *(float multiFactor) const
+	{
+		return ConsolePos(static_cast<short>(x * multiFactor), static_cast<short>(y * multiFactor));
+	}
+	ConsolePos& operator *=(float multiFactor)
+	{
+		x = static_cast<short>(x * multiFactor);	y = static_cast<short>(y * multiFactor);
+		return *this;
+	}
+	ConsolePos operator /(float divFactor) const
+	{
+		return ConsolePos(static_cast<short>(x / divFactor), static_cast<short>(y / divFactor));
+	}
+	ConsolePos& operator /=(float divFactor)
+	{
+		x = static_cast<short>(x / divFactor);	y = static_cast<short>(y / divFactor);
+		return *this;
+	}
+	bool operator ==(const ConsolePos& other) const
+	{
+		return (x == other.x) && (y == other.y);
 	}
 };
 
