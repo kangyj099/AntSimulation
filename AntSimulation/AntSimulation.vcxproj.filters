@@ -1,26 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="로그">
       <UniqueIdentifier>{acb4e389-f8c7-44f0-8310-a687cac69c2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="개미">
-      <UniqueIdentifier>{16000756-109f-41e3-8a92-47eb0536afde}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="먹이">
-      <UniqueIdentifier>{15ec2537-6685-43fc-8284-c9ef9d287005}</UniqueIdentifier>
     </Filter>
     <Filter Include="게임매니저">
       <UniqueIdentifier>{4076174d-c709-4d13-a954-1b719f08bf97}</UniqueIdentifier>
@@ -28,11 +10,23 @@
     <Filter Include="유틸">
       <UniqueIdentifier>{6dd85d53-8931-4fc2-9299-c0368d67e0d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="게임 오브젝트">
+      <UniqueIdentifier>{6ade90b5-a6fa-43a1-8b5a-f55618c94c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="게임 오브젝트\개미">
+      <UniqueIdentifier>{16000756-109f-41e3-8a92-47eb0536afde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="게임 오브젝트\먹이">
+      <UniqueIdentifier>{f6600d34-09ce-4bd1-9e7a-c64abe86d2bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="게임 오브젝트\기능">
+      <UniqueIdentifier>{c1950ace-40c8-4137-b678-525e1fee0629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="게임 오브젝트\기능\오브젝트 이동">
+      <UniqueIdentifier>{a296b625-ef80-4aa9-82dc-52b5055ee9f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AntSimulation.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="LogManager.ixx">
       <Filter>로그</Filter>
     </ClCompile>
