@@ -1,7 +1,10 @@
 ﻿module gameObject;
 
-GameObject::GameObject()
+import field;
+
+GameObject::GameObject(Field& _field)
 {
+	field = &_field;
 }
 
 GameObject::~GameObject()

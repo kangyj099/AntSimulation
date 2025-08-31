@@ -132,6 +132,8 @@
   <ItemGroup>
     <ClCompile Include="AntSimulation.cpp" />
     <ClCompile Include="Common.ixx" />
+    <ClCompile Include="Field.cpp" />
+    <ClCompile Include="Field.ixx" />
     <ClCompile Include="Interface.ixx" />
     <ClCompile Include="Component.ixx" />
     <ClCompile Include="ComponentBase.cpp" />

@@ -10,9 +10,14 @@ import concepts;
 import interface;
 import component;
 
+export class Field;
+
 export class GameObject : IUpdate, IDraw
 {
 protected:
+	// 필드
+	Field* field;
+
 	// 필드에서의 좌표
 	FieldPos pos;
 
@@ -41,7 +46,7 @@ protected:
 	}
 
 public:
-	GameObject();
+	GameObject(Field& _field);
 	virtual ~GameObject();
 
 	virtual void Update() override;
