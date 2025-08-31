@@ -130,6 +130,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ant.cpp" />
+    <ClCompile Include="Ant.ixx" />
     <ClCompile Include="AntSimulation.cpp" />
     <ClCompile Include="Common.ixx" />
     <ClCompile Include="Field.cpp" />
