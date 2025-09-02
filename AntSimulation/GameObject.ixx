@@ -27,6 +27,9 @@ protected:
 	// 무게(밀리그람단위)
 	float weightMG;
 
+	// 현재 활동중인지
+	bool isActive;
+
 private:
 	// 컴포넌트
 	std::unordered_map<ComponentType, ComponentBase*> allComponents;
@@ -57,6 +60,9 @@ public:
 
 	virtual void Reset();
 	void ReleaseAllComponents();
+
+	void SetActive(bool _activeState);
+	bool IsActive() { return isActive; };
 
 	/// <summary>
 	/// 컴포넌트 추가, 구현 기능에 따라서 각 벡터에도 추가
