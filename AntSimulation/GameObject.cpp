@@ -4,6 +4,7 @@ import field;
 
 GameObject::GameObject(Field& _field): field(&_field), isActive(true)
 {
+	field->AddObject(*this, pos);
 }
 
 GameObject::~GameObject()
