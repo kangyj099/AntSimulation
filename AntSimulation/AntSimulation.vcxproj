@@ -140,6 +140,8 @@
     <ClCompile Include="Component.ixx" />
     <ClCompile Include="ComponentBase.cpp" />
     <ClCompile Include="Concepts.ixx" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameManager.ixx" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="LogManager.ixx" />

@@ -2,25 +2,29 @@
 //
 import <iostream>;
 
-import logManager;
+import common;
+import gameManager;
+
+// test
+ import utils;
 
 int main()
 {
-	LogManager logManager;
-	logManager.AddLog(LogType::None, "논로그");
-	logManager.AddLog(LogType::State, "개미가 먹이를 발견했다.");
-	logManager.AddLog(LogType::Action, "개미가 먹이를 주웠다.");
-	logManager.AddLog(LogType::Outcome, "집에 보관한 먹이 1개");
+	// 콘솔창 크기 조절, 이름 변경
+	char cmd[100];
+	sprintf_s(cmd, "mode con cols=%d lines=%d | title %s"
+		, Constants::c_SCREEN_width, Constants::c_SCREEN_height, "개미 시뮬레이션");
+	system(cmd);
 
-	logManager.PrintLog();
+	GameManager gameManager;
+	gameManager.Init();
 
-	std::cout<<std::endl;
-	std::cout << std::endl;
-
-	logManager.AddLog(LogType::State, "개미가 먹이를 발견했다.");
-	logManager.AddLog(LogType::Action, "개미가 먹이를 주웠다.");
-	logManager.AddLog(LogType::Outcome, "집에 보관한 먹이 2개");
-	logManager.PrintLog();
+	bool isRun = true;
+	do
+	{
+		isRun = gameManager.Update();
+		gameManager.Draw();
+	} while (isRun);
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴

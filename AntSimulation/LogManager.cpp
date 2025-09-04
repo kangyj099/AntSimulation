@@ -33,8 +33,6 @@ void LogManager::AddLog(LogType _logType, std::string _logText) {
 
 void LogManager::PrintLog()
 {
-	GotoXY(c_SCREEN_logStartX, c_SCREEN_logStartY);
-
 	for (auto log = logList.begin(); log != logList.end(); ++log)
 	{
 		switch (log->logType)
