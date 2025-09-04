@@ -12,12 +12,6 @@ export struct FieldPos {
 	FieldPos() : x(0), y(0) {}
 	FieldPos(short _x, short _y) : x(_x), y(_y) {}
 
-	void Set(short _x, short _y)
-	{
-		x = _x;
-		y = _y;
-	}
-
 	FieldPos operator +(const FieldPos& other) const
 	{
 		return FieldPos(x + other.x, y + other.y);
@@ -70,11 +64,6 @@ export struct ConsolePos {
 	ConsolePos() : x(0), y(0) {}
 	ConsolePos(short _x, short _y) : x(_x), y(_y) {}
 
-	void Set(short _x, short _y)
-	{
-		x = _x;
-		y = _y;
-	}
 	ConsolePos operator +(const ConsolePos& other) const
 	{
 		return ConsolePos(x + other.x, y + other.y);

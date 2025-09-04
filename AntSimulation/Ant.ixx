@@ -21,6 +21,6 @@ public:
 
 	void SetPos(short _x, short _y)
 	{
-		pos.Set(_x, _y);
+		pos = {_x, _y};
 	}
 };
