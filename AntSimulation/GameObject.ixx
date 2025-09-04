@@ -97,4 +97,7 @@ public:
 
 		return component;
 	}
+
+	Field* GetField() { return field; }
+	FieldPos GetPos() { return pos; }
 };

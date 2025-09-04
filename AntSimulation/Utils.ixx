@@ -12,14 +12,15 @@ export namespace Utils
 	void PrintText(std::string _printText, Constants::Color _bgColor = Constants::c_COLOR_defaultBG, Constants::Color _textColor = Constants::c_COLOR_defaultText);
 	void FillTile(ConsolePos _pos, Constants::Color _color);
 
-	/// <summary>
-	/// 막힌 방향 제외한 나머지 방향 중에서 랜덤으로 하나 선택
-	/// </summary>
-	/// <param name="_blockDirections">막힌 방향</param>
-	/// <returns>방향 랜덤 추출 결과</returns>
-	Direction8 GetRandomDirection(std::span<Direction8>& _blockDirections);
 
+	/// <summary>
+	/// 유효한 방향값인지 확인
+	/// </summary>
+	/// <param name="_dir">검증 필요한 방향</param>
+	/// <returns></returns>
+	bool IsValidDirection(Constants::Direction8 _dir);
 	ConsolePos FieldPositionToConsolePos(FieldPos _position);
+	
 	void ClearScreen();
 
 	/// <summary>

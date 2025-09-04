@@ -1,5 +1,9 @@
 ﻿module field;
 
+import <array>;
+
+using Constants::Direction8;
+
 Field::Field() : antHome(nullptr)
 {
 	// 타일 초기화
@@ -48,27 +52,34 @@ bool Field::ReleaseObject(GameObject& _object, FieldPos _tilePos)
 	return cell->ReleaseObject(_object);
 }
 
-bool Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
+Constants::MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
 {
+	using Constants::MoveResult;
+
+	if (false == IsValidPos(_from) || false == IsValidPos(_to))
+	{
+		return MoveResult::NotValidPos;
+	}
+
 	Tile* fromCell = GetCell(_from);
 	Tile* toCell = GetCell(_to);
 
 	// 정상적인 필드 위치가 아니면 안됨
 	if (nullptr == fromCell || nullptr == toCell)
 	{
-		return false;
+		return MoveResult::NotValidPos;
 	}
 
 	//from에 실제로 _object가 있는지 확인 후 from에서 to로 move
 	if (false == fromCell->IsContains(_object)
 		|| true == toCell->IsContains(_object))
 	{
-		return false;
+		return MoveResult::CellObjectProblom;
 	}
 
 	if (false == ReleaseObject(_object, _from))
 	{
-		return false;
+		return MoveResult::CellObjectProblom;
 	}
 
 	if (false == AddObject(_object, _to))
@@ -79,10 +90,10 @@ bool Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
 			// Todo: 이동 취소 실패하면 집으로 돌려보내기
 		}
 
-		return false;
+		return MoveResult::CellObjectProblom;
 	}
 
-	return true;
+	return MoveResult::Success;
 }
 
 bool Field::IsValidPos(FieldPos _pos)
@@ -96,6 +107,48 @@ bool Field::IsValidPos(FieldPos _pos)
 	return true;
 }
 
+
+std::array<bool, static_cast<int>(Direction8::Count)> Field::GetDirectionAvailableArray(FieldPos _centerPos)
+{
+	std::array<bool, static_cast<int>(Direction8::Count)> directionAvailableArr = {};
+	std::fill(directionAvailableArr.begin(), directionAvailableArr.end(), true);
+
+	for (int i = 0; i < static_cast<int>(Direction8::Count); ++i)
+	{
+		auto dirPos = Constants::c_FIELD_directions[i];
+
+		if (false == IsValidPos(_centerPos + dirPos))
+		{
+			directionAvailableArr[i] = false;
+			continue;
+		}
+
+		// Todo: 장애물 케이스 추가
+	}
+
+	return directionAvailableArr;
+}
+
+unsigned short Field::GetTileCountUntilBlock(FieldPos _pos, Constants::Direction8 _dir)
+{
+	unsigned short tileCount = 0;
+
+	if (false == Utils::IsValidDirection(_dir))
+	{
+		return tileCount;
+	}
+
+	Constants::Direction8Pos dirPos = Constants::c_FIELD_directions[static_cast<int>(_dir)];
+
+	FieldPos checkPos = _pos;
+
+	// 한번 실행할 때마다 한 칸씩 전진해보기
+	do {
+		checkPos += dirPos;
+	} while (true == IsValidPos(checkPos) && ++tileCount);	// 조건에 맞으면 tileCount 증가
+
+	return tileCount;
+}
 
 Tile* Field::GetCell(FieldPos _pos)
 {

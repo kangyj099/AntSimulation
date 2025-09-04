@@ -146,6 +146,8 @@
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="LogManager.ixx" />
     <ClCompile Include="GameObject.ixx" />
+    <ClCompile Include="Movement.cpp" />
+    <ClCompile Include="Movement.ixx" />
     <ClCompile Include="Utils.ixx" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>

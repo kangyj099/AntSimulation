@@ -8,6 +8,7 @@ import movement;
 Ant::Ant(Field& _field) : GameObject(_field)
 {
 	isActive = false;	// 생성해도 바로 배치하지 않음
+	Init();
 }
 
 Ant::~Ant()

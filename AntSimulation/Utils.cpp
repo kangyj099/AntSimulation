@@ -61,6 +61,16 @@ void Utils::FillTile(ConsolePos _pos, Color _color)
 	PrintText("  ", _color);
 }
 
+bool Utils::IsValidDirection(Direction8 _dir)
+{
+	if (Direction8::None >= _dir || Direction8::Count <= _dir)
+	{
+		return false;
+	}
+
+	return true;
+}
+
 ConsolePos Utils::FieldPositionToConsolePos(FieldPos _position)
 {
 	ConsolePos consolePos(_position.x * c_FIELD_toScreenXScale + c_SCREEN_fieldStartX, _position.y + c_SCREEN_fieldStartY);
@@ -74,43 +84,3 @@ void Utils::ClearScreen()
 {
 	system("cls");
 }
-
-Direction8 Utils::GetRandomDirection(std::span<Direction8>& _blockDirections)
-{
-	Direction8 resultDir = Direction8::None;
-
-	int randCount = static_cast<int>(Direction8::Count) - _blockDirections.size();
-	if (0 >= randCount)
-	{
-		// 갈 수 있는 방향 없음
-		return resultDir;
-	}
-
-	// 유효한 방향 추리기
-	bool validDirections[static_cast<int>(Direction8::Count)];
-	std::fill(std::begin(validDirections), std::end(validDirections), true);
-
-	for (Direction8 blockDir : _blockDirections)
-	{
-		validDirections[static_cast<int>(blockDir)] = false;
-	}
-
-	// 유효한 방향 중에서 랜덤 인덱스번째 방향 채택
-	int randIndex = rand() % randCount;
-
-	for (int i = 0; i < static_cast<int>(Direction8::Count); ++i)
-	{
-		if (false == validDirections[i])
-		{
-			continue;
-		}
-		if (0 == randIndex)
-		{
-			resultDir = static_cast<Direction8>(i);
-			break;
-		}
-		--randIndex;
-	}
-
-	return resultDir;
-};

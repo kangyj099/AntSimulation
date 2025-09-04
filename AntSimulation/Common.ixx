@@ -111,12 +111,13 @@ export namespace Constants
 {
 	/////////////////////////////////
 	// 인게임 정보
-	const short c_GAME_antCount = 10;	// 최대 개미 수
+	const short c_GAME_antCount = 10;	// 개미 수
 	const short c_GAME_foodCount = 20;	// 먹이 수
 	const short c_GAME_homeCount = 1;	// 집 수
 	const short c_GAME_obstacleCount = 30;	// 장애물 수
 
-	const float c_GAME_antBaseSpeed = 3.0f;	// 개미 기본 속도 (칸/초)
+	const float c_GAME_antSpeedMin = 1.0f;	// 개미 기본 속도 (칸/초)
+	const float c_GAME_antSpeedMax = 3.0f;
 	const short c_GAME_antWeightMin = 2;	// 개미 무게 최소
 	const short c_GAME_antWeightMax = 7;	// 개미 무게 최대
 
@@ -190,7 +191,7 @@ export namespace Constants
 	typedef FieldPos Direction8Pos;
 
 	// 8방향 좌표 변화량
-	const Direction8Pos c_FIELD_directions[8] = {
+	const inline Direction8Pos c_FIELD_directions[8] = {
 		{ 0, -1 },   // Up
 		{ 1, -1 },   // UpRight
 		{ 1, 0 },    // Right
@@ -201,4 +202,14 @@ export namespace Constants
 		{ -1, -1 }   // UpLeft
 	};
 
+	// 이동 결과
+	enum class MoveResult
+	{
+		None = -1,		// 이동 시도 안함
+		Success = 0,	// 이동 성공
+		BlockWall,		// 이동 실패(막힘)
+		BlockObstacle,		// 이동 실패(범위 벗어남)
+		NotValidPos,	// 출발지나 목적지가 유효한 값이 아님
+		CellObjectProblom,
+	};
 }
