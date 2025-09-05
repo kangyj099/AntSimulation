@@ -22,7 +22,8 @@ void Ant::OnUpdate()
 void Ant::OnDraw()
 {
 	ConsolePos consolePos = Utils::FieldPositionToConsolePos(pos);
-	Utils::FillTile(consolePos, Constants::Color::Magenta);
+	Utils::GotoXY(consolePos);
+	Utils::PrintText("ⓐ");
 }
 
 void Ant::Reset()
