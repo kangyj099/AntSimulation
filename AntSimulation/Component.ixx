@@ -19,7 +19,7 @@ export enum class ComponentType
 export class ComponentBase : public IUpdate
 {
 protected:
-	GameObject* owner;
+	GameObject* owner;	// ♧weck_ptr
 
 public:
 	ComponentBase(GameObject& _owner);

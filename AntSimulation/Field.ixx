@@ -12,7 +12,7 @@ export class GameObject;
 struct Tile
 {
 	FieldPos position;
-	std::vector<GameObject*> objects;
+	std::vector<GameObject*> objects;// ♧weck_ptr
 
 	Tile(short _x, short _y) : position(_x, _y) {}
 
@@ -63,7 +63,7 @@ private:
 	// width*height 타일들. 각 셀이 게임오브젝트를 가지고있음
 	std::vector<std::vector<Tile>> tiles;	//[x][y]
 
-	GameObject* antHome;
+	GameObject* antHome;	// ♧weck_ptr
 
 public:
 	Field();

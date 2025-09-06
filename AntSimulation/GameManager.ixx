@@ -18,12 +18,12 @@ private:
 	std::chrono::steady_clock::time_point startTime;
 
 	// 필드
-	Field field;
+	Field field;	// ♧shared_ptr
 
 	// 오브젝트들
-	std::vector<GameObject*> objects;
+	std::vector<GameObject*> objects;	// ♧shared_ptr
 	// 개미들
-	std::vector<Ant*> ants;
+	std::vector<Ant*> ants;	// ♧shared_ptr
 	// 집
 	// 먹이
 

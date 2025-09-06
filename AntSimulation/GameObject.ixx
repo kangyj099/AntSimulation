@@ -16,7 +16,7 @@ export class GameObject : IUpdate, IDraw
 {
 protected:
 	// 필드
-	Field* field;
+	Field* field;	// ♧weak_ptr 서로 완전 독립적이니까
 
 	// 필드에서의 좌표
 	FieldPos pos;
@@ -32,14 +32,14 @@ protected:
 
 private:
 	// 컴포넌트
-	std::unordered_map<ComponentType, ComponentBase*> allComponents;
-	std::vector<IUpdate*> updateComponents;
-	std::vector<IDraw*> drawComponents;
+	std::unordered_map<ComponentType, ComponentBase*> allComponents;	// ♧shared_ptr
+	std::vector<IUpdate*> updateComponents;	// ♧shared_ptr
+	std::vector<IDraw*> drawComponents;	// ♧shared_ptr
 
 protected:
 	// 컴포넌트 접근
 	template<ComponentDerived T>
-	T* GetComponent(ComponentType type)
+	T* GetComponent(ComponentType type)	// ♧shared_ptr
 	{
 		if (allComponents.end() == allComponents.find(type))
 		{
@@ -70,7 +70,7 @@ public:
 	/// <typeparam name="T">컴포넌트 클래스</typeparam>
 	/// <param name="args"></param>
 	template<ComponentDerived T, typename... Args>
-	T* AddComponent(Args&&... args)
+	T* AddComponent(Args&&... args)	// ♧weak_ptr
 	{
 		// 컴포넌트 생성
 		T* component = new T(*this, std::forward<Args>(args)...);
@@ -98,6 +98,6 @@ public:
 		return component;
 	}
 
-	Field* GetField() { return field; }
+	Field* GetField() { return field; }	// ♧weak_ptr
 	FieldPos GetPos() { return pos; }
 };
