@@ -1,5 +1,4 @@
-﻿// AntSimulation.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
+﻿#include <windows.h>
 import <iostream>;
 
 import common;
@@ -15,6 +14,11 @@ int main()
 	sprintf_s(cmd, "mode con cols=%d lines=%d | title %s"
 		, Constants::c_SCREEN_width, Constants::c_SCREEN_height, "개미 시뮬레이션");
 	system(cmd);
+
+	CONSOLE_CURSOR_INFO consoleCursor = {};
+	GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleCursor);
+	consoleCursor.bVisible = FALSE; //커서 숨기기
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleCursor); //커서 설정
 
 	GameManager gameManager;
 	gameManager.Init();
