@@ -1,6 +1,6 @@
-﻿#include <windows.h>
 import <iostream>;
 
+﻿import console;
 import common;
 import gameManager;
 
@@ -9,16 +9,8 @@ import gameManager;
 
 int main()
 {
-	// 콘솔창 크기 조절, 이름 변경
-	char cmd[100];
-	sprintf_s(cmd, "mode con cols=%d lines=%d | title %s"
-		, Constants::c_SCREEN_width, Constants::c_SCREEN_height, "개미 시뮬레이션");
-	system(cmd);
-
-	CONSOLE_CURSOR_INFO consoleCursor = {};
-	GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleCursor);
-	consoleCursor.bVisible = FALSE; //커서 숨기기
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleCursor); //커서 설정
+	ConsoleSetting(Constants::c_SCREEN_width, Constants::c_SCREEN_height, "개미 시뮬레이션");
+	CursorSetting(0, false);
 
 	GameManager gameManager;
 	gameManager.Init();

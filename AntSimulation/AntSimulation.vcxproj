@@ -134,6 +134,8 @@
     <ClCompile Include="Ant.ixx" />
     <ClCompile Include="AntSimulation.cpp" />
     <ClCompile Include="Common.ixx" />
+    <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Console.ixx" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Field.ixx" />
     <ClCompile Include="Interface.ixx" />

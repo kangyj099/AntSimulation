@@ -59,6 +59,12 @@
     <ClCompile Include="LogManager.ixx">
       <Filter>로그</Filter>
     </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>커먼\콘솔</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.ixx">
+      <Filter>커먼\콘솔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="커먼">
@@ -87,6 +93,9 @@
     </Filter>
     <Filter Include="로그">
       <UniqueIdentifier>{07031434-ab07-4c8c-ac02-8dc1eb050332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="커먼\콘솔">
+      <UniqueIdentifier>{bc2d3fa4-ec8c-43d6-b328-721e05244d69}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
