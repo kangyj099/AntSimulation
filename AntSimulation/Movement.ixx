@@ -25,7 +25,7 @@ private:
 	std::chrono::steady_clock::time_point curMoveStartTime; // 현재 이동 경로의 시작 시각
 
 public:
-	Movement(GameObject& _owner, FieldPos& _ownerPos);
+	Movement(GameObject& _owner, FieldPos& _ownerPos, float _speed);
 	virtual ~Movement();
 
 	virtual void Update() override;

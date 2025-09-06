@@ -11,10 +11,10 @@ import field;
 
 using namespace Constants;
 
-Movement::Movement(GameObject& _owner, FieldPos& _ownerPos)
+Movement::Movement(GameObject& _owner, FieldPos& _ownerPos, float _speed)
 	: ComponentBase(_owner), ownerPos(_ownerPos), isMoving(false)
 	, direction(Direction8::None), targetMoveTileCount(0), curMoveTileCount(0)
-	, speed(c_GAME_antSpeedMax)
+	, speed(_speed)
 {
 }
 

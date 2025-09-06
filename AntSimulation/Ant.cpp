@@ -39,7 +39,7 @@ void Ant::Setting(FieldPos _pos, std::string _name, float _weight)
 
 void Ant::Init()
 {
-	Movement* movement = AddComponent<Movement>(pos);
+	Movement* movement = AddComponent<Movement>(pos, Constants::c_GAME_antSpeedMax);
 	if (nullptr == movement)
 	{
 		__debugbreak();

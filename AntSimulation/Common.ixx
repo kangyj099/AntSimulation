@@ -116,8 +116,8 @@ export namespace Constants
 	const short c_GAME_homeCount = 1;	// 집 수
 	const short c_GAME_obstacleCount = 30;	// 장애물 수
 
-	const float c_GAME_antSpeedMin = 1.0f;	// 개미 기본 속도 (칸/초)
-	const float c_GAME_antSpeedMax = 3.0f;
+	const float c_GAME_antSpeedMin = 1.0f;	// 개미 속도 최소(칸/초)
+	const float c_GAME_antSpeedMax = 3.0f;	// 개미 속도 최대(칸/초)
 	const short c_GAME_antWeightMin = 2;	// 개미 무게 최소
 	const short c_GAME_antWeightMax = 7;	// 개미 무게 최대
 
