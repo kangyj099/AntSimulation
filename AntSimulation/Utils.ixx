@@ -1,18 +1,11 @@
 ﻿export module utils;
 
 import <algorithm>;
-import <string>;
-import <span>;
 
 import common;
 
 export namespace Utils
 {
-	bool GotoXY(ConsolePos _pos);
-	void PrintText(std::string _printText, Constants::Color _bgColor = Constants::c_COLOR_defaultBG, Constants::Color _textColor = Constants::c_COLOR_defaultText);
-	void FillTile(ConsolePos _pos, Constants::Color _color);
-
-
 	/// <summary>
 	/// 유효한 방향값인지 확인
 	/// </summary>
@@ -20,8 +13,6 @@ export namespace Utils
 	/// <returns></returns>
 	bool IsValidDirection(Constants::Direction8 _dir);
 	ConsolePos FieldPositionToConsolePos(FieldPos _position);
-	
-	void ClearScreen();
 
 	/// <summary>
 	/// range에 value가 포함되어 있는지 확인

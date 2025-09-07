@@ -4,10 +4,9 @@ import <iostream>;
 import <vector>;
 
 import common;
-import utils;
+import console;
 
 using namespace Constants;
-using namespace Utils;
 
 LogManager::LogManager()
 {
@@ -45,10 +44,10 @@ void LogManager::PrintLog()
 		default:;
 		}
 
-		PrintText(log->logText.c_str());
+		PrintText(log->logText);
 		if (logList.end()-1 != log)
 		{
-			std::cout << std::endl;
+			PrintText("\n");
 		}
 	}
 }

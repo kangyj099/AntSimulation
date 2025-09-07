@@ -3,7 +3,7 @@
 import <iostream>;
 import <chrono>;
 
-import utils;
+import console;
 import gameObject;	// DELETE: 에디터 빨간줄때문에 추가
 import ant;
 
@@ -19,8 +19,6 @@ GameManager::~GameManager()
 
 void GameManager::Init()
 {
-	Utils::ClearScreen();
-
 	// 게임 시작 틱
 	startTime = std::chrono::steady_clock::now();
 
@@ -81,10 +79,14 @@ bool GameManager::Update()
 
 void GameManager::Draw()
 {
-	// 화면 지우기
-	Utils::ClearScreen();
+	// 게임 화면과 로그 경계 그리기
+	GotoXY({ 0, Constants::c_SCREEN_logStartY - 1 });
+	for (int i = 0; i < Constants::c_SCREEN_width; ++i)
+	{
+		PrintText("=");
+	}
 
-	// 화면 그리기
+	// 게임 화면 그리기
 	for (auto object : objects)
 	{
 		if (nullptr == object)
@@ -99,6 +101,7 @@ void GameManager::Draw()
 	}
 
 	// 로그 출력
-	Utils::GotoXY(logStartPos);
+	// 로그 갱신 있을때만
+	GotoXY(logStartPos);
 	logManager.PrintLog();
 };

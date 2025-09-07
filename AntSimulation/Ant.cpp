@@ -2,6 +2,7 @@
 
 import common;
 import utils;
+import console;
 
 import movement;
 
@@ -22,8 +23,8 @@ void Ant::OnUpdate()
 void Ant::OnDraw()
 {
 	ConsolePos consolePos = Utils::FieldPositionToConsolePos(pos);
-	Utils::GotoXY(consolePos);
-	Utils::PrintText("ⓐ");
+	GotoXY(consolePos);
+	PrintText("ⓐ");
 }
 
 void Ant::Reset()
