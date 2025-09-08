@@ -157,11 +157,6 @@ MoveResult Movement::MoveObjecOneTile(Direction8 _direction)
 
 	Field& field = GetOwnerField();
 	result = field.MoveObject(*owner, ownerPos, destPosition);
-	if (MoveResult::Success == result)
-	{
-		ownerPos = destPosition;
-		result = MoveResult::Success;
-	}
 
 	return result;
 }

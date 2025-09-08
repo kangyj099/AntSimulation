@@ -17,10 +17,6 @@ public:
 	virtual void Reset() override;
 	void Setting(FieldPos _pos, std::string _name, float _weight);
 
+private:
 	void Init();
-
-	void SetPos(short _x, short _y)
-	{
-		pos = {_x, _y};
-	}
 };

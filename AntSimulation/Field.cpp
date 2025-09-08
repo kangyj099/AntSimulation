@@ -2,6 +2,8 @@
 
 import <array>;
 
+import gameObject;
+
 using Constants::Direction8;
 
 Field::Field() : antHome(nullptr)
@@ -61,6 +63,11 @@ Constants::MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, Fie
 		return MoveResult::NotValidPos;
 	}
 
+	if (_from == _to)
+	{
+		return MoveResult::None;	// 이동 시도 안함
+	}
+
 	Tile* fromCell = GetCell(_from);
 	Tile* toCell = GetCell(_to);
 
@@ -92,6 +99,9 @@ Constants::MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, Fie
 
 		return MoveResult::CellObjectProblom;
 	}
+
+	// 이동 성공
+	_object.SetPos(_to);
 
 	return MoveResult::Success;
 }

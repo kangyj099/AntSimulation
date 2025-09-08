@@ -102,4 +102,5 @@ public:
 
 	Field& GetField() { return field; }
 	FieldPos GetPos() { return pos; }
+	FieldPos SetPos(FieldPos _pos) { pos = _pos; return pos; }
 };
