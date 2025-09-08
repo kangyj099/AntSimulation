@@ -46,7 +46,7 @@ public:
 	Constants::MoveResult MoveObjecOneTile(Direction8 _direction);
 
 private:
-	Field* GetOwnerField();
+	Field& GetOwnerField();
 
 	/// <summary>
 /// 막힌 방향 제외한 나머지 방향 중에서 랜덤으로 하나 선택

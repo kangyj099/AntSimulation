@@ -33,20 +33,3 @@ export namespace Utils
 		return true;
 	}
 }
-
-// 많이 쓰일 예정이라 Utils 네임스페이스 밖으로 뺌
-/// <summary>
-/// 포인터 널체크 하고 삭제
-/// </summary>
-/// <param name="_ptr">삭제할 포인터</param>
-/// <returns>삭제 성공 여부, 이미 nullptr이면 삭제 동작 진행 안 했으므로 false</returns>
-export bool SafeDelete(void* _ptr)
-{
-	if (nullptr != _ptr)
-	{
-		delete _ptr;
-		_ptr = nullptr;
-		return true;
-	}
-	return false;
-}

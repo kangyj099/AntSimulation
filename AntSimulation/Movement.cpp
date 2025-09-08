@@ -103,7 +103,7 @@ bool Movement::TrySetRandomMove(std::span<Direction8> _ptrSpanCostumBlockDir)
 	ResetMoveDest();
 
 	// 1. 방향 설정하기
-	std::array<bool, static_cast<int>(Direction8::Count)> directionAvailables = GetOwnerField()->GetDirectionAvailableArray(ownerPos);
+	std::array<bool, static_cast<int>(Direction8::Count)> directionAvailables = GetOwnerField().GetDirectionAvailableArray(ownerPos);
 	// 커스텀 블락 방향 지정
 	for (auto blockDir : _ptrSpanCostumBlockDir)
 	{
@@ -121,7 +121,7 @@ bool Movement::TrySetRandomMove(std::span<Direction8> _ptrSpanCostumBlockDir)
 	}
 
 	// 2. 이동 칸수 설정
-	unsigned short maxMoveCount = GetOwnerField()->GetTileCountUntilBlock(ownerPos, direction);
+	unsigned short maxMoveCount = GetOwnerField().GetTileCountUntilBlock(ownerPos, direction);
 	if (0 == maxMoveCount)
 	{
 		return false;
@@ -155,19 +155,18 @@ MoveResult Movement::MoveObjecOneTile(Direction8 _direction)
 	// Todo: 장애물
 	// result = Movement::BlockObstacle;
 
-	if (Field* field = GetOwnerField())
+	Field& field = GetOwnerField();
+	result = field.MoveObject(*owner, ownerPos, destPosition);
+	if (MoveResult::Success == result)
 	{
-		result = field->MoveObject(*owner, ownerPos, destPosition);
-		if (MoveResult::Success == result)
-		{
-			ownerPos = destPosition;
-			result = MoveResult::Success;
-		}
+		ownerPos = destPosition;
+		result = MoveResult::Success;
 	}
+
 	return result;
 }
 
-Field* Movement::GetOwnerField()
+Field& Movement::GetOwnerField()
 {
 	return owner->GetField();
 }

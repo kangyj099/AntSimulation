@@ -2,9 +2,9 @@
 
 import field;
 
-GameObject::GameObject(Field& _field): field(&_field), isActive(true)
+GameObject::GameObject(Field& _field) : field(_field), isActive(true)
 {
-	field->AddObject(*this, pos);
+	field.AddObject(*this, pos);
 }
 
 GameObject::~GameObject()
@@ -52,10 +52,6 @@ void GameObject::Reset()
 void GameObject::ReleaseAllComponents()
 {
 	// 부착한 컴포넌트 모두 삭제
-	for (auto& component : allComponents)
-	{
-		SafeDelete(component.second);
-	}
 	allComponents.clear();
 	updateComponents.clear();
 	drawComponents.clear();

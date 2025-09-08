@@ -1,5 +1,6 @@
 ﻿export module gameObject;
 
+import <memory>;
 import <string>;
 import <vector>;
 import <unordered_map>;
@@ -16,7 +17,7 @@ export class GameObject : IUpdate, IDraw
 {
 protected:
 	// 필드
-	Field* field;	// ♧weak_ptr 서로 완전 독립적이니까
+	Field& field;
 
 	// 필드에서의 좌표
 	FieldPos pos;
@@ -32,20 +33,20 @@ protected:
 
 private:
 	// 컴포넌트
-	std::unordered_map<ComponentType, ComponentBase*> allComponents;	// ♧shared_ptr
-	std::vector<IUpdate*> updateComponents;	// ♧shared_ptr
-	std::vector<IDraw*> drawComponents;	// ♧shared_ptr
+	std::unordered_map<ComponentType, std::unique_ptr<ComponentBase>> allComponents;
+	std::vector<IUpdate*> updateComponents;
+	std::vector<IDraw*> drawComponents;
 
 protected:
 	// 컴포넌트 접근
 	template<ComponentDerived T>
-	T* GetComponent(ComponentType type)	// ♧shared_ptr
+	T* GetComponent(ComponentType type)
 	{
 		if (allComponents.end() == allComponents.find(type))
 		{
 			return nullptr;
 		}
-		return dynamic_cast<T*>(allComponents[type]);
+		return dynamic_cast<T*>(allComponents[type].get());
 	}
 
 public:
@@ -70,10 +71,11 @@ public:
 	/// <typeparam name="T">컴포넌트 클래스</typeparam>
 	/// <param name="args"></param>
 	template<ComponentDerived T, typename... Args>
-	T* AddComponent(Args&&... args)	// ♧weak_ptr
+	T* AddComponent(Args&&... args)
 	{
 		// 컴포넌트 생성
-		T* component = new T(*this, std::forward<Args>(args)...);
+		auto component = std::make_unique<T>(*this, std::forward<Args>(args)...);
+		auto compPtr = component.get();
 		ComponentType type = component->GetType();
 
 		// 컴포넌트 벡터에 추가
@@ -82,22 +84,22 @@ public:
 			__debugbreak();
 			return nullptr;
 		}
-		allComponents[type] = component;
+		allComponents[type] = std::move(component);
 
 		// 컴파일할 때 유효성 체크, dynamic_cast 대체하여 사용
 		if constexpr (std::is_base_of_v<IUpdate, T>)
 		{
-			updateComponents.push_back(component);
+			updateComponents.push_back(compPtr);
 		}
 
 		if constexpr (std::is_base_of_v<IDraw, T>)
 		{
-			drawComponents.push_back(component);
+			drawComponents.push_back(compPtr);
 		}
 
-		return component;
+		return compPtr;
 	}
 
-	Field* GetField() { return field; }	// ♧weak_ptr
+	Field& GetField() { return field; }
 	FieldPos GetPos() { return pos; }
 };

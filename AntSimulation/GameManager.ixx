@@ -1,5 +1,6 @@
 ﻿export module gameManager;
 
+import <memory>;
 import <array>;
 import <chrono>;
 import <coroutine>;
@@ -18,12 +19,12 @@ private:
 	std::chrono::steady_clock::time_point startTime;
 
 	// 필드
-	Field field;	// ♧shared_ptr
+	Field field;
 
 	// 오브젝트들
-	std::vector<GameObject*> objects;	// ♧shared_ptr
+	std::vector<std::unique_ptr<GameObject>> objects;
 	// 개미들
-	std::vector<Ant*> ants;	// ♧shared_ptr
+	std::vector<Ant*> ants;
 	// 집
 	// 먹이
 

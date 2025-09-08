@@ -30,12 +30,14 @@ void GameManager::Init()
 	// 개미 생성
 	for (int i = 0; i < Constants::c_GAME_antCount; ++i)
 	{
-		Ant* ant = new Ant(field);
-		objects.push_back(ant);
-		ants.push_back(ant);
-		std::string name = "개미";
-		name += '0' + i;
+		auto ant = std::make_unique<Ant>(field);
+		std::string name = "개미" + std::to_string(ants.size());
 		ant->Setting({ 0,0 }, name, 2.0f);
+
+		auto antPtr = ant.get();
+		ants.push_back(antPtr);
+
+		objects.push_back(std::move(ant));
 	}
 	// 개미 활성화 Todo: 코루틴으로 3초간격
 	(*ants.begin())->SetActive(true);
@@ -56,7 +58,7 @@ bool GameManager::Update()
 	//std::cout << "경과 시간(초): " << elapsed << std::endl;
 
 	// 오브젝트 업데이트
-	for (auto object : objects)
+	for (auto& object : objects)
 	{
 		if (nullptr == object)
 		{
@@ -87,7 +89,7 @@ void GameManager::Draw()
 	}
 
 	// 게임 화면 그리기
-	for (auto object : objects)
+	for (auto& object : objects)
 	{
 		if (nullptr == object)
 		{
