@@ -10,11 +10,13 @@ import gameObject;
 import field;
 
 using namespace Constants;
+using namespace std::chrono;
 
 Movement::Movement(GameObject& _owner, FieldPos& _ownerPos, float _speed)
 	: ComponentBase(_owner), ownerPos(_ownerPos), isMoving(false)
 	, direction(Direction8::None), targetMoveTileCount(0), curMoveTileCount(0)
 	, speed(_speed)
+	, durationPerTile(duration_cast<steady_clock::duration>(duration<double>(1.0 / _speed)))
 {
 }
 
@@ -27,23 +29,22 @@ void Movement::Update()
 	// owner 이동
 	if (false == isMoving)
 	{
-		if (false == TrySetRandomMove())
-		{
-			// 이동할 곳이 없음
-			return;
-		}
+		TrySetRandomMove();
+
+		return;
 	}
 
-	// 이동 시간 경과 체크
-	auto now = std::chrono::steady_clock::now();
-	auto elapsed = now - curMoveStartTime;
-	auto elapsedMiliSeconds = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
+	// max가 초기값, 세팅 안된거
+	if (steady_clock::time_point::max() == nextMoveTime)
+	{
+		return;
+	}
 
-	// speed * 경과시간(현재까지 이동했어야 하는 칸 수) > 지금까지 이동 칸 수 일때 이동 시도
 	MoveResult moveResult = MoveResult::None;
-	if (speed * elapsedMiliSeconds > 1000 * curMoveTileCount) // 이동해야하는 거리 밀리세컨드 계산
+	if (steady_clock::now() >= nextMoveTime) // 이동해야할 타이밍 도래했는지?
 	{
 		moveResult = MoveObjecOneTile(direction);
+		nextMoveTime += durationPerTile;
 	}
 
 	switch (moveResult)
@@ -58,12 +59,6 @@ void Movement::Update()
 			// 이동할 곳이 없음
 			ResetMoveDest();
 			return;
-		}
-
-		// 바로 한 칸 움직이기
-		if (MoveResult::Success == MoveObjecOneTile(direction))
-		{
-			++curMoveTileCount;
 		}
 	} break;
 	case MoveResult::BlockObstacle:
@@ -89,8 +84,8 @@ void Movement::Update()
 
 void Movement::ResetMoveDest()
 {
-	// Todo: 이동시작시간, 이동 방향, 이동 목표 거리 초기화. 이동 종료시, 이동세팅 실패시에 사용
-	curMoveStartTime = std::chrono::steady_clock::time_point{};
+	// 이동시작시간, 이동 방향, 이동 목표 거리 초기화. 이동 종료시, 이동세팅 실패시에 사용
+	nextMoveTime = steady_clock::time_point::max();
 	direction = Direction8::None;
 	targetMoveTileCount = 0;
 	curMoveTileCount = 0;
@@ -135,7 +130,7 @@ bool Movement::TrySetRandomMove(std::span<Direction8> _ptrSpanCostumBlockDir)
 		return false;
 	}
 
-	curMoveStartTime = std::chrono::steady_clock::now();
+	nextMoveTime = steady_clock::now() + durationPerTile;
 	isMoving = true;
 
 	return true;
@@ -148,13 +143,7 @@ MoveResult Movement::MoveObjecOneTile(Direction8 _direction)
 	// 목표 좌표 계산
 	FieldPos destPosition = ownerPos + c_FIELD_directions[static_cast<int>(_direction)];		// 방향을 dirPos로 변경
 
-	// 이동 검증
-	// 있는가?
-	result = MoveResult::BlockWall;
-
-	// Todo: 장애물
-	// result = Movement::BlockObstacle;
-
+	// 실제 필드에서 이동시켜보기
 	Field& field = GetOwnerField();
 	result = field.MoveObject(*owner, ownerPos, destPosition);
 

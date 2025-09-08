@@ -21,8 +21,9 @@ private:
 	Direction8 direction;
 	short targetMoveTileCount;	// 목표 이동 칸수
 	short curMoveTileCount;	// 현재 이동 칸수
-	float speed;	// 칸/s (거리1 = 1칸, 대각선 이동은 1.5에 1칸)
-	std::chrono::steady_clock::time_point curMoveStartTime; // 현재 이동 경로의 시작 시각
+	float speed;	// 칸/s (거리1 = 1칸)
+	std::chrono::steady_clock::duration durationPerTile;// 1칸 이동하는데 걸리는 주기(steady_clock 기반)
+	std::chrono::steady_clock::time_point nextMoveTime; // 다음 칸 이동하는 타이밍
 
 public:
 	Movement(GameObject& _owner, FieldPos& _ownerPos, float _speed);
