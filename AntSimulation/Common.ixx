@@ -121,6 +121,8 @@ export namespace Constants
 	const short c_GAME_antWeightMin = 2;	// 개미 무게 최소
 	const short c_GAME_antWeightMax = 7;	// 개미 무게 최대
 
+	const short c_GAME_homeExitAntDurationMs = 2400;	// 집에서 개미 방출하는 주기 밀리세컨드
+
 
 	/////////////////////////////////
 	// 로그

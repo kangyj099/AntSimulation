@@ -4,10 +4,11 @@ import <iostream>;
 import <chrono>;
 
 import console;
+import utils;
 import gameObject;	// DELETE: 에디터 빨간줄때문에 추가
 import ant;
 
-GameManager::GameManager() : logStartPos(Constants::c_SCREEN_logStartX, Constants::c_SCREEN_logStartY)
+GameManager::GameManager() : logStartPos(Constants::c_SCREEN_logStartX, Constants::c_SCREEN_logStartY), antHome(nullptr)
 {
 	using namespace Constants;
 	objects.reserve(c_GAME_antCount + c_GAME_foodCount + c_GAME_homeCount);
@@ -25,7 +26,18 @@ void GameManager::Init()
 	// 게임 초기 세팅
 	// 필드
 
-	// Todo: 집 생성
+	// 집 생성
+	{
+		FieldPos homePos(Utils::Random() % Constants::c_FIELD_width, Utils::Random() % Constants::c_FIELD_height);
+		if (false == field.IsValidPos(homePos))
+		{
+			homePos = { 0,0 };
+		}
+
+		auto home = std::make_unique<AntHome>(field, homePos);
+		antHome = home.get();
+		objects.push_back(std::move(home));
+	}
 
 	// 개미 생성
 	for (int i = 0; i < Constants::c_GAME_antCount; ++i)
@@ -36,11 +48,10 @@ void GameManager::Init()
 
 		auto antPtr = ant.get();
 		ants.push_back(antPtr);
+		antHome->EnterAnt(*antPtr);	// 개미는 집에서 시작함
 
 		objects.push_back(std::move(ant));
 	}
-	// 개미 활성화 Todo: 코루틴으로 3초간격
-	(*ants.begin())->SetActive(true);
 
 	// 로그 초기화
 	logManager.Reset();

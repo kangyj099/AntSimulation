@@ -65,6 +65,12 @@
     <ClCompile Include="Console.ixx">
       <Filter>커먼\콘솔</Filter>
     </ClCompile>
+    <ClCompile Include="AntHome.cpp">
+      <Filter>게임 오브젝트\개미집</Filter>
+    </ClCompile>
+    <ClCompile Include="AntHome.ixx">
+      <Filter>게임 오브젝트\개미집</Filter>
+    </ClCompile>
     <ClCompile Include="Coroutines.ixx">
       <Filter>커먼</Filter>
     </ClCompile>
@@ -99,6 +105,9 @@
     </Filter>
     <Filter Include="커먼\콘솔">
       <UniqueIdentifier>{bc2d3fa4-ec8c-43d6-b328-721e05244d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="게임 오브젝트\개미집">
+      <UniqueIdentifier>{d4defa35-4282-4dc9-9683-71ad4d28e97f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

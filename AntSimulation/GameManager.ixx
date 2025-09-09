@@ -7,6 +7,7 @@ import <coroutine>;
 
 import common;
 import field;
+import antHome;
 import logManager;
 
 export class GameObject;
@@ -26,6 +27,8 @@ private:
 	// 개미들
 	std::vector<Ant*> ants;
 	// 집
+	AntHome* antHome;
+
 	// 먹이
 
 	// 로그

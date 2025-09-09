@@ -132,6 +132,8 @@
   <ItemGroup>
     <ClCompile Include="Ant.cpp" />
     <ClCompile Include="Ant.ixx" />
+    <ClCompile Include="AntHome.cpp" />
+    <ClCompile Include="AntHome.ixx" />
     <ClCompile Include="AntSimulation.cpp" />
     <ClCompile Include="Common.ixx" />
     <ClCompile Include="Console.cpp" />
