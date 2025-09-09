@@ -1,6 +1,7 @@
 ﻿export module utils;
 
 import <algorithm>;
+import <random>;
 
 import common;
 
@@ -32,4 +33,6 @@ export namespace Utils
 
 		return true;
 	}
+
+	std::random_device Random = std::random_device();
 }

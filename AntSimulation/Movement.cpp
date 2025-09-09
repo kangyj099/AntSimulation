@@ -1,7 +1,6 @@
 ﻿module movement;
 
 import <array>;
-import <random>;
 
 import common;
 import utils;
@@ -121,7 +120,7 @@ bool Movement::TrySetRandomMove(std::span<Direction8> _ptrSpanCostumBlockDir)
 	{
 		return false;
 	}
-	targetMoveTileCount = std::random_device()() % maxMoveCount + 1;	//Todo: Random 클래스로 랩핑
+	targetMoveTileCount = Utils::Random() % maxMoveCount + 1;
 
 	// 이동 목표 칸수 설정 실패 - 초기화
 	if (0 == targetMoveTileCount)
