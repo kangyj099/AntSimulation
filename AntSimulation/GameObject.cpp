@@ -59,5 +59,5 @@ void GameObject::ReleaseAllComponents()
 
 void GameObject::SetActive(bool _activeState)
 {
-	isActive = true;
+	isActive = _activeState;
 }
