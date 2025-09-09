@@ -136,6 +136,7 @@
     <ClCompile Include="Common.ixx" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Console.ixx" />
+    <ClCompile Include="Coroutines.ixx" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Field.ixx" />
     <ClCompile Include="Interface.ixx" />

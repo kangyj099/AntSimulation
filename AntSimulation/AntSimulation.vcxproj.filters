@@ -65,6 +65,9 @@
     <ClCompile Include="Console.ixx">
       <Filter>커먼\콘솔</Filter>
     </ClCompile>
+    <ClCompile Include="Coroutines.ixx">
+      <Filter>커먼</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="커먼">
