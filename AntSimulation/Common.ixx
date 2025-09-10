@@ -1,7 +1,5 @@
 ﻿export module common;
 
-/////////////////////////////////
-// 구조체
 /// <summary>
 /// 필드에서의 위치
 /// </summary>
@@ -106,6 +104,57 @@ export struct ConsolePos {
 	}
 };
 
+// 8방향
+export enum class Direction8
+{
+	None = -1,
+
+	Up = 0,    // ↑
+	UpRight,   // ↗
+	Right,     // →
+	DownRight, // ↘
+	Down,      // ↓
+	DownLeft,  // ↙
+	Left,      // ←
+	UpLeft,    // ↖
+
+	Count
+};
+
+// 이동 결과
+export enum class MoveResult
+{
+	None = -1,		// 이동 시도 안함
+	Success = 0,	// 이동 성공
+	BlockWall,		// 이동 실패(막힘)
+	BlockObstacle,		// 이동 실패(범위 벗어남)
+	NotValidPos,	// 출발지나 목적지가 유효한 값이 아님
+	CellObjectProblom,
+};
+
+// 색상 정의
+export enum class Color : unsigned short
+{
+	Black = 0,
+	DarkBlue = 1,
+	DarkGreen = 2,
+	DarkCyan = 3,
+	DarkRed = 4,
+	DarkMagenta = 5,
+	DarkYellow = 6,
+	Gray = 7,
+	DarkGray = 8,
+	Blue = 9,
+	Green = 10,
+	Cyan = 11,
+	Red = 12,
+	Magenta = 13,
+	Yellow = 14,
+	White = 15,
+};
+
+
+/////////////////////////////////
 // 상수
 export namespace Constants
 {
@@ -146,49 +195,12 @@ export namespace Constants
 	const short c_SCREEN_logStartY = c_SCREEN_height - c_LOG_printLine;
 
 	/////////////////////////////////
-	// 색상 정의
-	enum class Color : unsigned short
-	{
-		Black = 0,
-		DarkBlue = 1,
-		DarkGreen = 2,
-		DarkCyan = 3,
-		DarkRed = 4,
-		DarkMagenta = 5,
-		DarkYellow = 6,
-		Gray = 7,
-		DarkGray = 8,
-		Blue = 9,
-		Green = 10,
-		Cyan = 11,
-		Red = 12,
-		Magenta = 13,
-		Yellow = 14,
-		White = 15,
-	};
-
+	// 색상
 	const Color c_COLOR_defaultBG = Color::Black;
 	const Color c_COLOR_defaultText = Color::White;
 
 	/////////////////////////////////
 	// 이동
-	// 8방향
-	enum class Direction8
-	{
-		None = -1,
-
-		Up = 0,    // ↑
-		UpRight,   // ↗
-		Right,     // →
-		DownRight, // ↘
-		Down,      // ↓
-		DownLeft,  // ↙
-		Left,      // ←
-		UpLeft,    // ↖
-
-		Count
-	};
-
 	// 방향
 	typedef FieldPos Direction8Pos;
 
@@ -202,16 +214,5 @@ export namespace Constants
 		{ -1, 1 },   // DownLeft
 		{ -1, 0 },   // Left
 		{ -1, -1 }   // UpLeft
-	};
-
-	// 이동 결과
-	enum class MoveResult
-	{
-		None = -1,		// 이동 시도 안함
-		Success = 0,	// 이동 성공
-		BlockWall,		// 이동 실패(막힘)
-		BlockObstacle,		// 이동 실패(범위 벗어남)
-		NotValidPos,	// 출발지나 목적지가 유효한 값이 아님
-		CellObjectProblom,
 	};
 }

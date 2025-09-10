@@ -78,7 +78,7 @@ void ClearBuffer()
 	WriteConsole(GetBackBuffer(), sequence, (DWORD)strlen(sequence), &written, NULL);
 }
 
-void PrintText(std::string _printText, Constants::Color _bgColor, Constants::Color _textColor)
+void PrintText(std::string _printText, Color _bgColor, Color _textColor)
 {
 	HANDLE consoleHandle = GetBackBuffer();
 

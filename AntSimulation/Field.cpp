@@ -4,8 +4,6 @@ import <array>;
 
 import gameObject;
 
-using Constants::Direction8;
-
 Field::Field() : antHome(nullptr)
 {
 	// 타일 초기화
@@ -54,10 +52,8 @@ bool Field::ReleaseObject(GameObject& _object, FieldPos _tilePos)
 	return cell->ReleaseObject(_object);
 }
 
-Constants::MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
+MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
 {
-	using Constants::MoveResult;
-
 	if (false == IsValidPos(_from) || false == IsValidPos(_to))
 	{
 		return MoveResult::NotValidPos;
@@ -139,7 +135,7 @@ std::array<bool, static_cast<int>(Direction8::Count)> Field::GetDirectionAvailab
 	return directionAvailableArr;
 }
 
-unsigned short Field::GetTileCountUntilBlock(FieldPos _pos, Constants::Direction8 _dir)
+unsigned short Field::GetTileCountUntilBlock(FieldPos _pos, Direction8 _dir)
 {
 	unsigned short tileCount = 0;
 

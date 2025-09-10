@@ -154,7 +154,7 @@ Field& Movement::GetOwnerField()
 	return owner->GetField();
 }
 
-Constants::Direction8 Movement::GetRandomAvailableDirection(std::array<bool, static_cast<int>(Constants::Direction8::Count)>& _directionAvailables)
+Direction8 Movement::GetRandomAvailableDirection(std::array<bool, static_cast<int>(Direction8::Count)>& _directionAvailables)
 {
 	Direction8 resultDir = Direction8::None;
 

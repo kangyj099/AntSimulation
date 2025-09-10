@@ -6,9 +6,6 @@ import <span>;
 import common;
 import component;
 
-
-using Constants::Direction8;
-
 export class Field;
 
 // Todo: 스피드 정보 생성해서 넣는 것 어디서 할지 정하기
@@ -44,7 +41,7 @@ public:
 	bool TrySetRandomMove(std::span<Direction8> _ptrSpanCostumBlockDir = {});
 
 	// 이동
-	Constants::MoveResult MoveObjecOneTile(Direction8 _direction);
+	MoveResult MoveObjecOneTile(Direction8 _direction);
 
 private:
 	Field& GetOwnerField();
@@ -54,5 +51,5 @@ private:
 /// </summary>
 /// <param name="_blockDirections">막힌 방향</param>
 /// <returns>방향 랜덤 추출 결과</returns>
-	Constants::Direction8 GetRandomAvailableDirection(std::array<bool, static_cast<int>(Constants::Direction8::Count)>& _directionAvailables);
+	Direction8 GetRandomAvailableDirection(std::array<bool, static_cast<int>(Direction8::Count)>& _directionAvailables);
 };

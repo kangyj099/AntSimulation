@@ -12,7 +12,7 @@ export namespace Utils
 	/// </summary>
 	/// <param name="_dir">검증 필요한 방향</param>
 	/// <returns></returns>
-	bool IsValidDirection(Constants::Direction8 _dir);
+	bool IsValidDirection(Direction8 _dir);
 	ConsolePos FieldPositionToConsolePos(FieldPos _position);
 
 	/// <summary>

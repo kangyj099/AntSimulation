@@ -30,7 +30,7 @@ void AntHome::OnDraw()
 {
 	ConsolePos consolePos = Utils::FieldPositionToConsolePos(pos);
 	GotoXY(consolePos);
-	PrintText("H", Constants::Color::DarkMagenta, Constants::Color::DarkYellow);
+	PrintText("H", Color::DarkMagenta, Color::DarkYellow);
 }
 
 void AntHome::EnterAnt(Ant& ant)

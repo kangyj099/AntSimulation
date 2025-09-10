@@ -33,4 +33,4 @@ export bool GotoXY(ConsolePos _pos);
 export void SwapScreenBuffer();
 void ClearBuffer();
 
-export void PrintText(std::string _printText, Constants::Color _bgColor = Constants::c_COLOR_defaultBG, Constants::Color _textColor = Constants::c_COLOR_defaultText);
+export void PrintText(std::string _printText, Color _bgColor = Constants::c_COLOR_defaultBG, Color _textColor = Constants::c_COLOR_defaultText);
