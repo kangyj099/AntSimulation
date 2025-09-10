@@ -6,6 +6,7 @@ import <chrono>;
 import console;
 import utils;
 import gameObject;	// DELETE: 에디터 빨간줄때문에 추가
+import antHome;
 import ant;
 
 GameManager::GameManager() : logStartPos(Constants::c_SCREEN_logStartX, Constants::c_SCREEN_logStartY), antHome(nullptr)

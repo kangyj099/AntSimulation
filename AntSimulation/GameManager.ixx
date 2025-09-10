@@ -7,10 +7,10 @@ import <coroutine>;
 
 import common;
 import field;
-import antHome;
 import logManager;
 
 export class GameObject;
+export class AntHome;
 export class Ant;
 
 export class GameManager
