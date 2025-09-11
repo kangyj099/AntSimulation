@@ -69,6 +69,8 @@ public:
 	AntHome(Field& _field, FieldPos _pos);
 	~AntHome();
 
+	virtual ObjectType GetObjectType() override { return ObjectType::AntHome; }
+
 	virtual void OnUpdate() override;
 	virtual void OnDraw() override;
 

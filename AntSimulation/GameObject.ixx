@@ -53,6 +53,8 @@ public:
 	GameObject(Field& _field);
 	virtual ~GameObject();
 
+	virtual ObjectType GetObjectType() = 0;
+
 	virtual void Update() override;
 	virtual void Draw() override;
 

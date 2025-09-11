@@ -153,6 +153,17 @@ export enum class Color : unsigned short
 	White = 15,
 };
 
+// 오브젝트
+export enum class ObjectType
+{
+	None = -1,
+
+	Ant = 0,
+	AntHome,
+	Food,
+
+	Count
+};
 
 /////////////////////////////////
 // 상수
