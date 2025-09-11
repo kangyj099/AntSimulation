@@ -1,9 +1,7 @@
 ﻿export module gameManager;
 
 import <memory>;
-import <array>;
 import <chrono>;
-import <coroutine>;
 
 import common;
 import field;
@@ -53,6 +51,5 @@ public:
 	void Draw();
 
 private:
-	// Task AntSpawn(); Todo: n초마다 한 마리씩 등장하게 코루틴 추가
 };
 

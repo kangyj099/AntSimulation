@@ -84,10 +84,6 @@ bool GameManager::Update()
 		}
 	}
 
-	logManager.AddLog(LogType::None, "논로그");
-	logManager.AddLog(LogType::State, "개미가 먹이를 발견했다.");
-	logManager.AddLog(LogType::Action, "개미가 먹이를 주웠다.");
-	logManager.AddLog(LogType::Outcome, "집에 보관한 먹이 1개");
 	return true;
 };
 
@@ -118,4 +114,4 @@ void GameManager::Draw()
 	// 로그 갱신 있을때만
 	GotoXY(logStartPos);
 	logManager.PrintLog();
-};
+}
