@@ -126,8 +126,8 @@ export enum class MoveResult
 {
 	None = -1,		// 이동 시도 안함
 	Success = 0,	// 이동 성공
-	BlockWall,		// 이동 실패(막힘)
-	BlockObstacle,		// 이동 실패(범위 벗어남)
+	BlockWall,		// 이동 실패(범위 벗어남)
+	BlockObstacle,	// 이동 실패(막힘)
 	NotValidPos,	// 출발지나 목적지가 유효한 값이 아님
 	CellObjectProblom,
 };
@@ -163,6 +163,55 @@ export enum class ObjectType
 	Food,
 
 	Count
+};
+
+export enum class CollisionType
+{
+	None = -1,
+
+	Overlap = 0,
+	Block,
+
+	Count
+};
+
+export class GameObject;
+export struct CollisionInfo {
+	CollisionType type;
+	GameObject* colObject1;
+	GameObject* colObject2;
+
+	CollisionInfo() {
+		type = CollisionType::None;
+		colObject1 = nullptr;
+		colObject2 = nullptr;
+	}
+
+	bool Set(CollisionType _type, GameObject* _colObj1, GameObject* _colObj2)
+	{
+		if (CollisionType::None >= _type || CollisionType::Count <= _type
+			|| nullptr == _colObj1 || nullptr == _colObj2)
+		{
+			return false;
+		}
+
+		type = _type;
+		colObject1 = _colObj1;
+		colObject2 = _colObj2;
+
+		return true;
+	}
+
+	bool IsValidInfo()
+	{
+		if (CollisionType::None >= type || CollisionType::Count <= type
+			|| nullptr == colObject1 || nullptr == colObject2)
+		{
+			return false;
+		}
+
+		return true;
+	}
 };
 
 /////////////////////////////////

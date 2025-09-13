@@ -1,6 +1,7 @@
 ﻿export module field;
 
 import <vector>;
+import <queue>;
 
 import common;
 import utils;
@@ -11,10 +12,13 @@ export class GameObject;
 
 struct Tile
 {
+private:
 	FieldPos position;
 	std::vector<GameObject*> objects;
+	bool isBlocked;
 
-	Tile(short _x, short _y) : position(_x, _y) {}
+public:
+	Tile(short _x, short _y) : position(_x, _y), isBlocked(false) {}
 
 	bool IsContains(GameObject& _object) const
 	{
@@ -27,29 +31,11 @@ struct Tile
 		return iter;
 	}
 
-	bool AddObject(GameObject& _gameObject)
-	{
-		if (true == IsContains(_gameObject))
-		{
-			return false;
-		}
+	int CountObject() const { return objects.size(); }
+	bool IsBlocked() const { return isBlocked; }
 
-		objects.push_back(&_gameObject);
-		return true;
-	}
-
-	bool ReleaseObject(GameObject& _gameObject)
-	{
-		auto iter = FindObjectIterator(_gameObject);
-		if (iter == objects.end())
-		{
-			return false;
-		}
-
-		objects.erase(iter);
-
-		return true;
-	}
+	bool AddObject(GameObject& _gameObject);
+	bool ReleaseObject(GameObject& _gameObject);
 };
 
 export const int c_unfindIndex = -1;
@@ -94,6 +80,24 @@ public:
 	/// <param name="_dir">최대 이동 가능 칸 수 구하고자 하는 방향</param>
 	/// <returns>_pos에서 _dir 방향으로 중간에 막히지 않고 갈 수 있는 최대 칸 수</returns>
 	unsigned short GetTileCountUntilBlock(FieldPos _pos, Direction8 _dir);
+
+
+	// 충돌 이벤트 관련
+	bool IsHaveCollisionEvent() {
+		if (true == collisionInfos.empty())
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	void PushCollisionInfo(CollisionInfo _colInfo);
+	CollisionInfo PopCollisionInfo();
+
 private:
 	Tile* GetCell(FieldPos _pos);
+
+	// 충돌 이벤트 queue
+	std::queue<CollisionInfo> collisionInfos;
 };

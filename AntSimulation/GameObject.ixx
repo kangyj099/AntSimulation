@@ -61,6 +61,11 @@ public:
 	virtual void OnUpdate() = 0;
 	virtual void OnDraw() = 0;
 
+	// 충돌 이벤트 발생시에 호출
+	virtual bool IsOverlappable() { return true; }	// 양쪽 다 true여야 겹침, 아니면 block
+	virtual void OnBlock(GameObject* _other) {}
+	virtual void OnOverlap(GameObject* _other) {}
+
 	virtual void Reset();
 	void ReleaseAllComponents();
 

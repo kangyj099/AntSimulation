@@ -51,5 +51,6 @@ public:
 	void Draw();
 
 private:
+	void ProcessCollision(CollisionInfo& _colInfo);
 };
 

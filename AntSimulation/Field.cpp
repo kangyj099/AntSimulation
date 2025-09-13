@@ -77,7 +77,14 @@ MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
 	if (false == fromCell->IsContains(_object)
 		|| true == toCell->IsContains(_object))
 	{
-		return MoveResult::CellObjectProblom;
+		return MoveResult::BlockWall;
+	}
+
+	// to의 object 혹은 이동하려는 object가 overlappable하지 않은데 겹치는 경우
+	if ((false==_object.IsOverlappable()&&0 < toCell->CountObject())
+		||true == toCell->IsBlocked())
+	{
+		return MoveResult::BlockObstacle;
 	}
 
 	if (false == ReleaseObject(_object, _from))
@@ -156,6 +163,29 @@ unsigned short Field::GetTileCountUntilBlock(FieldPos _pos, Direction8 _dir)
 	return tileCount;
 }
 
+void Field::PushCollisionInfo(CollisionInfo _colInfo)
+{
+	if (false == _colInfo.IsValidInfo())
+	{
+		return;
+	}
+
+	collisionInfos.push(_colInfo);
+}
+
+CollisionInfo Field::PopCollisionInfo()
+{
+	if (true == collisionInfos.empty())
+	{
+		return CollisionInfo();
+	}
+
+	CollisionInfo info = collisionInfos.front();
+	collisionInfos.pop();
+
+	return info;
+}
+
 Tile* Field::GetCell(FieldPos _pos)
 {
 	Tile* cell = nullptr;
@@ -166,4 +196,57 @@ Tile* Field::GetCell(FieldPos _pos)
 
 	cell = &tiles[_pos.x][_pos.y];
 	return cell;
+}
+
+bool Tile::AddObject(GameObject& _gameObject)
+{
+	if (true == IsContains(_gameObject))
+	{
+		return false;
+	}
+
+	if (true == isBlocked)
+	{
+		return false;
+	}
+
+	if (0 < objects.size() && false == _gameObject.IsOverlappable())
+	{
+		return false;
+	}
+
+	if (false == _gameObject.IsOverlappable())
+	{
+		isBlocked = true;
+	}
+
+	objects.push_back(&_gameObject);
+	return true;
+}
+
+bool Tile::ReleaseObject(GameObject& _gameObject)
+{
+	auto iter = FindObjectIterator(_gameObject);
+	if (iter == objects.end())
+	{
+		return false;
+	}
+
+	if (false == (*iter)->IsOverlappable())
+	{
+		isBlocked = false;
+	}
+
+	objects.erase(iter);
+
+	// 이론상 없어야함
+	for (auto object : objects)
+	{
+		if (false == object->IsOverlappable())
+		{
+			__debugbreak();
+		}
+	}
+
+	return true;
 }

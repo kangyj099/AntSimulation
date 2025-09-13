@@ -84,6 +84,22 @@ bool GameManager::Update()
 		}
 	}
 
+	// 충돌 처리
+	while (0 < field.IsHaveCollisionEvent())
+	{
+		CollisionInfo info = field.PopCollisionInfo();
+
+		if (false == info.IsValidInfo())
+		{
+			continue;
+		}
+
+		ProcessCollision(info);
+	}
+	
+
+	// 로그
+
 	return true;
 };
 
@@ -114,4 +130,21 @@ void GameManager::Draw()
 	// 로그 갱신 있을때만
 	GotoXY(logStartPos);
 	logManager.PrintLog();
+}
+
+void GameManager::ProcessCollision(CollisionInfo& _colInfo)
+{
+	switch (_colInfo.type)
+	{
+	case CollisionType::Block: {
+		_colInfo.colObject1->OnBlock(_colInfo.colObject2);
+		_colInfo.colObject2->OnBlock(_colInfo.colObject1);
+	} break;
+	case CollisionType::Overlap: {
+		_colInfo.colObject1->OnOverlap(_colInfo.colObject2);
+		_colInfo.colObject2->OnOverlap(_colInfo.colObject1);
+	} break;
+	default:
+		break;
+	}
 }
