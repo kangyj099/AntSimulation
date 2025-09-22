@@ -35,7 +35,7 @@ public:
 	bool IsBlocked() const { return isBlocked; }
 
 	bool AddObject(GameObject& _gameObject);
-	bool ReleaseObject(GameObject& _gameObject);
+	bool RemoveObject(GameObject& _gameObject);
 };
 
 export const int c_unfindIndex = -1;
@@ -56,7 +56,7 @@ public:
 	~Field();
 
 	bool AddObject(GameObject& _object, FieldPos _tilePos);
-	bool ReleaseObject(GameObject& _object, FieldPos _tilePos);
+	bool RemoveObject(GameObject& _object, FieldPos _tilePos);
 	MoveResult MoveObject(GameObject& _object, FieldPos _from, FieldPos _to);
 
 	/// <summary>

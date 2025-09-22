@@ -37,7 +37,7 @@ bool Field::AddObject(GameObject& _object, FieldPos _tilePos)
 	return cell->AddObject(_object);
 }
 
-bool Field::ReleaseObject(GameObject& _object, FieldPos _tilePos)
+bool Field::RemoveObject(GameObject& _object, FieldPos _tilePos)
 {
 	// 정상적인 필드 위치가 아니면 안됨
 	Tile* cell = GetCell(_tilePos);
@@ -49,7 +49,7 @@ bool Field::ReleaseObject(GameObject& _object, FieldPos _tilePos)
 	// Todo: 오브젝트 정보 캐싱
 
 	// 오브젝트 셀에서 제외
-	return cell->ReleaseObject(_object);
+	return cell->RemoveObject(_object);
 }
 
 MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
@@ -87,7 +87,8 @@ MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
 		return MoveResult::BlockObstacle;
 	}
 
-	if (false == ReleaseObject(_object, _from))
+	// 이동 진행
+	if (false == RemoveObject(_object, _from))
 	{
 		return MoveResult::CellObjectProblom;
 	}
@@ -224,7 +225,7 @@ bool Tile::AddObject(GameObject& _gameObject)
 	return true;
 }
 
-bool Tile::ReleaseObject(GameObject& _gameObject)
+bool Tile::RemoveObject(GameObject& _gameObject)
 {
 	auto iter = FindObjectIterator(_gameObject);
 	if (iter == objects.end())
