@@ -44,6 +44,13 @@ void GameObject::Draw()
 	}
 }
 
+void GameObject::Setting(FieldPos _pos, std::string _name, float _weight)
+{
+	pos = _pos;
+	name = _name;
+	weightMG = _weight;
+}
+
 void GameObject::Reset()
 {
 	ReleaseAllComponents();

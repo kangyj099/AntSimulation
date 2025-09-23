@@ -17,7 +17,6 @@ public:
 	virtual void OnDraw() override;
 
 	virtual void Reset() override;
-	void Setting(FieldPos _pos, std::string _name, float _weight);
 
 private:
 	void Init();

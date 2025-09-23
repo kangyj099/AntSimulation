@@ -31,13 +31,6 @@ void Ant::Reset()
 {
 }
 
-void Ant::Setting(FieldPos _pos, std::string _name, float _weight)
-{
-	pos = _pos;
-	name = _name;
-	weightMG = _weight;
-}
-
 void Ant::Init()
 {
 	Movement* movement = AddComponent<Movement>(pos, Constants::c_GAME_antSpeedMax);
