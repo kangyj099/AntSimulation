@@ -66,6 +66,7 @@ private:
 	int foodCount; // 집에 축적된 먹이 개수
 
 public:
+	// 붙박이로 존재해야하므로 특수하게 _pos를 반드시 받게 함
 	AntHome(Field& _field, FieldPos _pos);
 	~AntHome();
 

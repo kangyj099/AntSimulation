@@ -73,7 +73,7 @@ MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
 		return MoveResult::NotValidPos;
 	}
 
-	//from에 실제로 _object가 있는지 확인 후 from에서 to로 move
+	//from에 실제로 _object가 있는지 확인
 	if (false == fromCell->IsContains(_object)
 		|| true == toCell->IsContains(_object))
 	{

@@ -178,26 +178,26 @@ export enum class CollisionType
 export class GameObject;
 export struct CollisionInfo {
 	CollisionType type;
-	GameObject* colObject1;
-	GameObject* colObject2;
+	GameObject* occupantObject;	// 박힌 돌
+	GameObject* visitorObject;	// 들어온 돌
 
 	CollisionInfo() {
 		type = CollisionType::None;
-		colObject1 = nullptr;
-		colObject2 = nullptr;
+		occupantObject = nullptr;
+		visitorObject = nullptr;
 	}
 
-	bool Set(CollisionType _type, GameObject* _colObj1, GameObject* _colObj2)
+	bool Set(CollisionType _type, GameObject* _occupantObj, GameObject* _visitorObj)
 	{
 		if (CollisionType::None >= _type || CollisionType::Count <= _type
-			|| nullptr == _colObj1 || nullptr == _colObj2)
+			|| nullptr == _occupantObj || nullptr == _visitorObj)
 		{
 			return false;
 		}
 
 		type = _type;
-		colObject1 = _colObj1;
-		colObject2 = _colObj2;
+		occupantObject = _occupantObj;
+		visitorObject = _visitorObj;
 
 		return true;
 	}
@@ -205,7 +205,7 @@ export struct CollisionInfo {
 	bool IsValidInfo()
 	{
 		if (CollisionType::None >= type || CollisionType::Count <= type
-			|| nullptr == colObject1 || nullptr == colObject2)
+			|| nullptr == occupantObject || nullptr == visitorObject)
 		{
 			return false;
 		}

@@ -137,12 +137,12 @@ void GameManager::ProcessCollision(CollisionInfo& _colInfo)
 	switch (_colInfo.type)
 	{
 	case CollisionType::Block: {
-		_colInfo.colObject1->OnBlock(_colInfo.colObject2);
-		_colInfo.colObject2->OnBlock(_colInfo.colObject1);
+		_colInfo.occupantObject->OnBlock(_colInfo.visitorObject);
+		_colInfo.visitorObject->OnBlock(_colInfo.occupantObject);
 	} break;
 	case CollisionType::Overlap: {
-		_colInfo.colObject1->OnOverlap(_colInfo.colObject2);
-		_colInfo.colObject2->OnOverlap(_colInfo.colObject1);
+		_colInfo.occupantObject->OnOverlap(_colInfo.visitorObject);
+		_colInfo.visitorObject->OnOverlap(_colInfo.occupantObject);
 	} break;
 	default:
 		break;

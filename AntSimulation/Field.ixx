@@ -25,7 +25,7 @@ public:
 		return Utils::Contains(objects, &_object);
 	}
 
-	auto FindObjectIterator(GameObject& _object)
+	auto FindObjectIterator(GameObject& _object) const
 	{
 		auto iter = std::find(objects.begin(), objects.end(), &_object);
 		return iter;
