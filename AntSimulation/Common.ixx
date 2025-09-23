@@ -129,7 +129,7 @@ export enum class MoveResult
 	BlockWall,		// 이동 실패(범위 벗어남)
 	BlockObstacle,	// 이동 실패(막힘)
 	NotValidPos,	// 출발지나 목적지가 유효한 값이 아님
-	CellObjectProblom,
+	TileObjectProblom,
 };
 
 // 색상 정의

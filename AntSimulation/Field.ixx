@@ -96,7 +96,7 @@ public:
 	CollisionInfo PopCollisionInfo();
 
 private:
-	Tile* GetCell(FieldPos _pos);
+	Tile* GetTile(FieldPos _pos);
 
 	// 충돌 이벤트 queue
 	std::queue<CollisionInfo> collisionInfos;

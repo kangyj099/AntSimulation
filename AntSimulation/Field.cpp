@@ -28,20 +28,20 @@ Field::~Field()
 bool Field::AddObject(GameObject& _object, FieldPos _tilePos)
 {
 	// 정상적인 필드 위치가 아니면 안됨
-	Tile* cell = GetCell(_tilePos);
-	if (nullptr == cell)
+	Tile* tile = GetTile(_tilePos);
+	if (nullptr == tile)
 	{
 		return false;
 	}
 
-	return cell->AddObject(_object);
+	return tile->AddObject(_object);
 }
 
 bool Field::RemoveObject(GameObject& _object, FieldPos _tilePos)
 {
 	// 정상적인 필드 위치가 아니면 안됨
-	Tile* cell = GetCell(_tilePos);
-	if (nullptr == cell)
+	Tile* tile = GetTile(_tilePos);
+	if (nullptr == tile)
 	{
 		return false;
 	}
@@ -49,7 +49,7 @@ bool Field::RemoveObject(GameObject& _object, FieldPos _tilePos)
 	// Todo: 오브젝트 정보 캐싱
 
 	// 오브젝트 셀에서 제외
-	return cell->RemoveObject(_object);
+	return tile->RemoveObject(_object);
 }
 
 MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
@@ -64,25 +64,25 @@ MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
 		return MoveResult::None;	// 이동 시도 안함
 	}
 
-	Tile* fromCell = GetCell(_from);
-	Tile* toCell = GetCell(_to);
+	Tile* fromTile = GetTile(_from);
+	Tile* toTile = GetTile(_to);
 
 	// 정상적인 필드 위치가 아니면 안됨
-	if (nullptr == fromCell || nullptr == toCell)
+	if (nullptr == fromTile || nullptr == toTile)
 	{
 		return MoveResult::NotValidPos;
 	}
 
 	//from에 실제로 _object가 있는지 확인
-	if (false == fromCell->IsContains(_object)
-		|| true == toCell->IsContains(_object))
+	if (false == fromTile->IsContains(_object)
+		|| true == toTile->IsContains(_object))
 	{
 		return MoveResult::BlockWall;
 	}
 
 	// to의 object 혹은 이동하려는 object가 overlappable하지 않은데 겹치는 경우
-	if ((false==_object.IsOverlappable()&&0 < toCell->CountObject())
-		||true == toCell->IsBlocked())
+	if ((false == _object.IsOverlappable() && 0 < toTile->CountObject())
+		|| true == toTile->IsBlocked())
 	{
 		return MoveResult::BlockObstacle;
 	}
@@ -90,7 +90,7 @@ MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
 	// 이동 진행
 	if (false == RemoveObject(_object, _from))
 	{
-		return MoveResult::CellObjectProblom;
+		return MoveResult::TileObjectProblom;
 	}
 
 	if (false == AddObject(_object, _to))
@@ -101,7 +101,7 @@ MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
 			// Todo: 이동 취소 실패하면 집으로 돌려보내기
 		}
 
-		return MoveResult::CellObjectProblom;
+		return MoveResult::TileObjectProblom;
 	}
 
 	// 이동 성공
@@ -187,16 +187,16 @@ CollisionInfo Field::PopCollisionInfo()
 	return info;
 }
 
-Tile* Field::GetCell(FieldPos _pos)
+Tile* Field::GetTile(FieldPos _pos)
 {
-	Tile* cell = nullptr;
+	Tile* tile = nullptr;
 	if (false == IsValidPos(_pos))
 	{
-		return cell;
+		return tile;
 	}
 
-	cell = &tiles[_pos.x][_pos.y];
-	return cell;
+	tile = &tiles[_pos.x][_pos.y];
+	return tile;
 }
 
 bool Tile::AddObject(GameObject& _gameObject)
