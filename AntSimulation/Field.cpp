@@ -129,7 +129,7 @@ MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
 	return MoveResult::Success;
 }
 
-bool Field::IsValidPos(FieldPos _pos)
+bool Field::IsValidPos(FieldPos _pos) const
 {
 	if (_pos.x < 0 || _pos.x >= Constants::c_FIELD_width
 		|| _pos.y < 0 || _pos.y >= Constants::c_FIELD_height)

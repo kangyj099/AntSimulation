@@ -68,7 +68,7 @@ public:
 	/// </summary>
 	/// <param name="_pos">검증 필요한 위치</param>
 	/// <returns></returns>
-	bool IsValidPos(FieldPos _pos);
+	bool IsValidPos(FieldPos _pos) const;
 
 	/// <summary>
 	/// 인접한 8방향 대상으로 이동 가능한 방향은 true, 이동 불가능한 방향은 false를 담은 array 반환

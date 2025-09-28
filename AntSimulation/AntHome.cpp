@@ -98,19 +98,16 @@ void AntHome::ExitAntRoutine()
 			// 내보내고 초기화
 			ExitAnt();	// 실제로 내보내는 부분
 			antExitWaitData.Reset();
-		}
-		break;
+		} break;
 		case ExitStatus::InvalidAnt: {
 			// 개미 달라졌으니 유효하지 않음, 초기화
 			__debugbreak();
 			antExitWaitData.Reset();
-		}
-		break;
+		} break;
 		case ExitStatus::Waiting:
 		default: {
 			// 걍 계속 대기
-		}
-		break;
+		} break;
 		}
 	}
 }
