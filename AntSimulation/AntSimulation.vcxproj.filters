@@ -74,6 +74,12 @@
     <ClCompile Include="Coroutines.ixx">
       <Filter>커먼</Filter>
     </ClCompile>
+    <ClCompile Include="Food.cpp">
+      <Filter>게임 오브젝트\음식</Filter>
+    </ClCompile>
+    <ClCompile Include="Food.ixx">
+      <Filter>게임 오브젝트\음식</Filter>
+    </ClCompile>
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>게임 오브젝트</Filter>
     </ClCompile>
@@ -111,6 +117,9 @@
     </Filter>
     <Filter Include="게임 오브젝트\개미집">
       <UniqueIdentifier>{d4defa35-4282-4dc9-9683-71ad4d28e97f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="게임 오브젝트\음식">
+      <UniqueIdentifier>{4dc1c7f3-bdf1-43b4-be12-0c79fc480e38}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

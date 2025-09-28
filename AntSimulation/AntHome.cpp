@@ -47,6 +47,8 @@ void AntHome::EnterAnt(Ant& ant)
 {
 	// 개미 집에 들어감
 	ant.SetActive(false);
+	field.MoveObject(ant, ant.GetPos(), pos);
+
 	waitingAnts.push(&ant);
 }
 

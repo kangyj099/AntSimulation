@@ -7,6 +7,7 @@ import common;
 import utils;
 
 export class GameObject;
+export class Ant;
 
 //Todo: 오브젝트 Add, Release 실패 이유 세분화하여 enum 만들기
 
@@ -98,6 +99,9 @@ public:
 	CollisionType GetCollisionType(GameObject& _object, FieldPos _pos);
 	void PushCollisionInfo(CollisionInfo _colInfo);
 	CollisionInfo PopCollisionInfo();
+
+	// Ant에게 Food 쥐여주는 함수.. 이게 최선인가?
+	bool AntPickUpObject(Ant& _ant, GameObject& _pickedObject);
 
 private:
 	Tile* GetTile(FieldPos _pos);

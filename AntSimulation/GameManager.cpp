@@ -8,6 +8,7 @@ import utils;
 import gameObject;	// DELETE: 에디터 빨간줄때문에 추가
 import antHome;
 import ant;
+import food;
 
 GameManager::GameManager() : logStartPos(Constants::c_SCREEN_logStartX, Constants::c_SCREEN_logStartY), antHome(nullptr)
 {
@@ -60,6 +61,14 @@ void GameManager::Init()
 		antHome->EnterAnt(*ant);	// 개미는 집에서 시작함
 	}
 
+
+	// Food
+	for (int i = 0; i < 10; ++i)
+	{
+		std::string name = "음식" + std::to_string(foods.size());
+		FieldPos pos(static_cast<short>(i), static_cast<short>(i));
+
+		CreateObject(ObjectType::Food, pos, name);
 	}
 
 	// 로그 초기화
@@ -191,6 +200,9 @@ bool GameManager::CreateObject(ObjectType _objType, FieldPos _pos, std::string _
 	} break;
 	case ObjectType::AntHome: {
 		antHome = dynamic_cast<AntHome*>(objectPtr);
+	} break;
+	case ObjectType::Food: {
+		foods.push_back(dynamic_cast<Food*>(objectPtr));
 	} break;
 	default:;
 	}

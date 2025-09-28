@@ -3,6 +3,7 @@
 import <array>;
 
 import gameObject;
+import ant;
 
 Field::Field() : antHome(nullptr)
 {
@@ -219,6 +220,38 @@ CollisionInfo Field::PopCollisionInfo()
 	collisionInfos.pop();
 
 	return info;
+}
+
+bool Field::AntPickUpObject(Ant& _ant, GameObject& _pickedObject)
+{
+	if (true == _ant.IsCarringObject())
+	{
+		return false;
+	}
+
+	// 내가 나를 들면 안됨
+	if (&_ant == &_pickedObject)
+	{
+		return false;
+	}
+
+	// 같은 좌표에 있어야만 주울 수 있음
+	FieldPos antPos = _ant.GetPos();
+	if (antPos != _pickedObject.GetPos())
+	{
+		return false;
+	}
+
+	Tile* tile = GetTile(antPos);
+
+	if (false == tile->IsContains(_ant) || false == tile->IsContains(_pickedObject))
+	{
+		return false;
+	}
+
+	bool removeResult = tile->RemoveObject(_pickedObject);
+
+	return removeResult;
 }
 
 Tile* Field::GetTile(FieldPos _pos)

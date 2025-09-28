@@ -10,6 +10,7 @@ import logManager;
 export class GameObject;
 export class AntHome;
 export class Ant;
+export class Food;
 
 export class GameManager
 {
@@ -26,8 +27,8 @@ private:
 	std::vector<Ant*> ants;
 	// 집
 	AntHome* antHome;
-
 	// 먹이
+	std::vector<Food*> foods;
 
 	// 로그
 	LogManager logManager;

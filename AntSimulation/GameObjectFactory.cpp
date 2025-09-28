@@ -16,6 +16,7 @@ std::unique_ptr<GameObject> CreateGameObject(ObjectType _objType, Field& _field)
 	{
 	case ObjectType::Ant: return std::make_unique<Ant>(_field);  break;
 	case ObjectType::AntHome:  return std::make_unique<AntHome>(_field); break;
+	case ObjectType::Food: return std::make_unique<Food>(_field); break;
 
 	default: return nullptr;
 	}
