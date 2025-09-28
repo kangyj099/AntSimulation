@@ -34,6 +34,15 @@ bool Field::AddObject(GameObject& _object, FieldPos _tilePos)
 		return false;
 	}
 
+	auto colInfos = tile->GetCollisionInfos(_object);
+
+	// 이벤트 push
+	while (false == colInfos.empty())
+	{
+		PushCollisionInfo(colInfos.front());
+		colInfos.pop();
+	}
+
 	return tile->AddObject(_object);
 }
 
@@ -77,13 +86,22 @@ MoveResult Field::MoveObject(GameObject& _object, FieldPos _from, FieldPos _to)
 	if (false == fromTile->IsContains(_object)
 		|| true == toTile->IsContains(_object))
 	{
-		return MoveResult::BlockWall;
+		return MoveResult::TileObjectProblom;
 	}
 
-	// to의 object 혹은 이동하려는 object가 overlappable하지 않은데 겹치는 경우
-	if ((false == _object.IsOverlappable() && 0 < toTile->CountObject())
-		|| true == toTile->IsBlocked())
+	CollisionType colType = toTile->GetCollisionType(_object);
+
+	// 블록됨
+	if (CollisionType::Block == colType)
 	{
+		auto tmpColInfoQueue = toTile->GetCollisionInfos(_object);
+
+		// 이벤트 push
+		while (false == tmpColInfoQueue.empty())
+		{
+			PushCollisionInfo(tmpColInfoQueue.front());
+			tmpColInfoQueue.pop();
+		}
 		return MoveResult::BlockObstacle;
 	}
 
@@ -164,6 +182,22 @@ unsigned short Field::GetTileCountUntilBlock(FieldPos _pos, Direction8 _dir)
 	return tileCount;
 }
 
+CollisionType Field::GetCollisionType(GameObject& _object, FieldPos _pos)
+{
+	if (false == IsValidPos(_pos))
+	{
+		return CollisionType::None;
+	}
+
+	Tile* tile = GetTile(_pos);
+	if (nullptr == tile)
+	{
+		return CollisionType::None;
+	}
+
+	return tile->GetCollisionType(_object);
+}
+
 void Field::PushCollisionInfo(CollisionInfo _colInfo)
 {
 	if (false == _colInfo.IsValidInfo())
@@ -197,6 +231,53 @@ Tile* Field::GetTile(FieldPos _pos)
 
 	tile = &tiles[_pos.x][_pos.y];
 	return tile;
+}
+
+CollisionType Tile::GetCollisionType(GameObject& _object) const
+{
+	if (true == IsBlocked())
+	{
+		return CollisionType::Block;
+	}
+
+	if (0 < CountObject())
+	{
+		if (false == _object.IsOverlappable())
+		{
+			return CollisionType::Block;
+		}
+
+		return CollisionType::Overlap;
+	}
+
+	return CollisionType::None;
+}
+
+std::queue<CollisionInfo> Tile::GetCollisionInfos(GameObject& _gameObject)
+{
+	std::queue<CollisionInfo> resultQueue;
+
+	CollisionType type = CollisionType::Overlap;
+
+	if (true == IsBlocked() || false == _gameObject.IsOverlappable())
+	{
+		type = CollisionType::Block;
+	}
+
+	for (auto object : objects)
+	{
+		if (IsBlocked() == object->IsOverlappable())
+		{
+			continue;
+		}
+
+		CollisionInfo info;
+		info.Set(type, object, &_gameObject);
+
+		resultQueue.push(info);
+	}
+
+	return resultQueue;
 }
 
 bool Tile::AddObject(GameObject& _gameObject)

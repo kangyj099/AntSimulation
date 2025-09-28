@@ -7,10 +7,9 @@ import field;
 import ant;
 
 
-AntHome::AntHome(Field& _field, FieldPos _pos) : GameObject(_field)
+AntHome::AntHome(Field& _field) : GameObject(_field)
 {
-	pos = _pos;
-	name = "AntHome";
+	name = "HomeSweetHome";
 	weightMG = 0.0f;	// 집은 무게 없음
 	isActive = true;
 }
@@ -31,6 +30,17 @@ void AntHome::OnDraw()
 	ConsolePos consolePos = Utils::FieldPositionToConsolePos(pos);
 	GotoXY(consolePos);
 	PrintText("H", Color::DarkMagenta, Color::DarkYellow);
+}
+
+// name, weight는 기본값만을 사용함, 인자 넣어도 사용하지 않음
+void AntHome::Setting(FieldPos _pos, std::string _name, float _weight)
+{
+	if (false == field.IsValidPos(_pos))
+	{
+		_pos = { 0,0 };
+	}
+
+	pos = _pos;
 }
 
 void AntHome::EnterAnt(Ant& ant)

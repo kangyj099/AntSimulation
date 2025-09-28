@@ -35,23 +35,31 @@ void GameManager::Init()
 			homePos = { 0,0 };
 		}
 
-		auto home = std::make_unique<AntHome>(field, homePos);
-		antHome = home.get();
-		objects.push_back(std::move(home));
+		if (false == CreateObject(ObjectType::AntHome, homePos))
+		{
+			__debugbreak();
+		}
 	}
 
 	// 개미 생성
 	for (int i = 0; i < Constants::c_GAME_antCount; ++i)
 	{
-		auto ant = std::make_unique<Ant>(field);
 		std::string name = "개미" + std::to_string(ants.size());
-		ant->Setting({ 0,0 }, name, 2.0f);
+		if (false == CreateObject(ObjectType::Ant, { 0,0 }, name))
+		{
+			continue;
+		}
+	}
+	for (auto ant : ants)
+	{
+		if (nullptr == ant)
+		{
+			continue;
+		}
 
-		auto antPtr = ant.get();
-		ants.push_back(antPtr);
-		antHome->EnterAnt(*antPtr);	// 개미는 집에서 시작함
+		antHome->EnterAnt(*ant);	// 개미는 집에서 시작함
+	}
 
-		objects.push_back(std::move(ant));
 	}
 
 	// 로그 초기화
@@ -147,4 +155,47 @@ void GameManager::ProcessCollision(CollisionInfo& _colInfo)
 	default:
 		break;
 	}
+}
+
+bool GameManager::CreateObject(ObjectType _objType, FieldPos _pos, std::string _name)
+{
+	//생성 : 오브젝트 생성 -> 충돌 판정 -> 필드에 배치 -> 판정 push
+	//이동: 충돌 판정->오브젝트 기존 위치 삭제->필드에 배치->판정 push
+
+	// 유효하지 않은 위치면 생성 ㄴㄴ
+	if (false == field.IsValidPos(_pos))
+	{
+		return false;
+	}
+
+	auto gameObject = CreateGameObject(_objType, field);
+	if (nullptr == gameObject)
+	{
+		return false;
+	}
+
+	// 배치하고자 하는 위치에 놓으면 Block되므로 생성 자체를 안 함
+	if (CollisionType::Block == field.GetCollisionType(*gameObject, _pos))
+	{
+		return false;
+	}
+
+	gameObject->Setting(_pos, _name, 2.0f);
+	field.AddObject(*gameObject, _pos);
+
+	auto objectPtr = gameObject.get();
+	switch (gameObject->GetObjectType())
+	{
+	case ObjectType::Ant: {
+		ants.push_back(dynamic_cast<Ant*>(objectPtr));
+	} break;
+	case ObjectType::AntHome: {
+		antHome = dynamic_cast<AntHome*>(objectPtr);
+	} break;
+	default:;
+	}
+
+	objects.push_back(std::move(gameObject));
+
+	return true;
 }

@@ -141,6 +141,7 @@
     <ClCompile Include="Coroutines.ixx" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Field.ixx" />
+    <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="Interface.ixx" />
     <ClCompile Include="Component.ixx" />
     <ClCompile Include="ComponentBase.cpp" />

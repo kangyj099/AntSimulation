@@ -34,6 +34,9 @@ public:
 	int CountObject() const { return objects.size(); }
 	bool IsBlocked() const { return isBlocked; }
 
+	CollisionType GetCollisionType(GameObject& _object) const;
+	std::queue<CollisionInfo> GetCollisionInfos(GameObject& _gameObject);
+
 	bool AddObject(GameObject& _gameObject);
 	bool RemoveObject(GameObject& _gameObject);
 };
@@ -92,6 +95,7 @@ public:
 		return true;
 	}
 
+	CollisionType GetCollisionType(GameObject& _object, FieldPos _pos);
 	void PushCollisionInfo(CollisionInfo _colInfo);
 	CollisionInfo PopCollisionInfo();
 

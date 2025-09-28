@@ -74,6 +74,9 @@
     <ClCompile Include="Coroutines.ixx">
       <Filter>커먼</Filter>
     </ClCompile>
+    <ClCompile Include="GameObjectFactory.cpp">
+      <Filter>게임 오브젝트</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="커먼">

@@ -113,3 +113,5 @@ public:
 	FieldPos GetPos() { return pos; }
 	FieldPos SetPos(FieldPos _pos) { pos = _pos; return pos; }
 };
+
+export std::unique_ptr<GameObject> CreateGameObject(ObjectType _objType, Field& field);

@@ -66,14 +66,16 @@ private:
 	int foodCount; // 집에 축적된 먹이 개수
 
 public:
-	// 붙박이로 존재해야하므로 특수하게 _pos를 반드시 받게 함
-	AntHome(Field& _field, FieldPos _pos);
+	AntHome(Field& _field);
 	~AntHome();
 
 	virtual ObjectType GetObjectType() override { return ObjectType::AntHome; }
 
 	virtual void OnUpdate() override;
 	virtual void OnDraw() override;
+
+	// name, weight는 기본값만을 사용함, 인자 넣어도 사용하지 않음
+	virtual void Setting(FieldPos _pos, std::string _name = "HomeSweetHome", float _weight = 0.0f) override;
 
 	// 개미
 	void EnterAnt(Ant& ant); // 개미가 집에 들어감

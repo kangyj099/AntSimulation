@@ -52,5 +52,6 @@ public:
 
 private:
 	void ProcessCollision(CollisionInfo& _colInfo);
+	bool CreateObject(ObjectType _objType, FieldPos _pos, std::string _name = "");
 };
 
