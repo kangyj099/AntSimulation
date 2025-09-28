@@ -81,6 +81,11 @@ void Movement::Update()
 	}
 }
 
+Field& Movement::GetOwnerField()
+{
+	return owner->GetField();
+}
+
 void Movement::ResetMoveDest()
 {
 	// 이동시작시간, 이동 방향, 이동 목표 거리 초기화. 이동 종료시, 이동세팅 실패시에 사용
@@ -147,11 +152,6 @@ MoveResult Movement::MoveObjecOneTile(Direction8 _direction)
 	result = field.MoveObject(*owner, ownerPos, destPosition);
 
 	return result;
-}
-
-Field& Movement::GetOwnerField()
-{
-	return owner->GetField();
 }
 
 Direction8 Movement::GetRandomAvailableDirection(std::array<bool, static_cast<int>(Direction8::Count)>& _directionAvailables)
