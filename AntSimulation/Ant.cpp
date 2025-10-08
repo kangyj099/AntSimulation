@@ -26,7 +26,14 @@ void Ant::OnDraw()
 {
 	ConsolePos consolePos = Utils::FieldPositionToConsolePos(pos);
 	GotoXY(consolePos);
-	PrintText("ⓐ");
+
+	Color drawtextColor = textColor;
+
+	if (true == IsCarringObject())
+	{
+		drawtextColor = carringObject->GetTextColor();
+	}
+	PrintText("ⓐ", bgColor, drawtextColor);
 }
 
 void Ant::OnOverlap(GameObject* _other)
