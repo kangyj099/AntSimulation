@@ -31,6 +31,9 @@ protected:
 	// 현재 활동중인지
 	bool isActive;
 
+	Color bgColor;
+	Color textColor;
+
 private:
 	// 컴포넌트
 	std::unordered_map<ComponentType, std::unique_ptr<ComponentBase>> allComponents;
@@ -116,6 +119,8 @@ public:
 	Field& GetField() { return field; }
 	FieldPos GetPos() { return pos; }
 	FieldPos SetPos(FieldPos _pos) { pos = _pos; return pos; }
+	Color GetBGColor() { return bgColor; }
+	Color GetTextColor() { return textColor; }
 };
 
 export std::unique_ptr<GameObject> CreateGameObject(ObjectType _objType, Field& field);

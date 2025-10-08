@@ -3,6 +3,7 @@
 import field;
 
 GameObject::GameObject(Field& _field) : field(_field), isActive(true)
+, bgColor(Constants::c_COLOR_defaultBG), textColor(Constants::c_COLOR_defaultText)
 {
 	field.AddObject(*this, pos);
 }

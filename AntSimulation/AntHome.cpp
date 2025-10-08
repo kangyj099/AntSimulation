@@ -27,7 +27,7 @@ void AntHome::OnDraw()
 {
 	ConsolePos consolePos = Utils::FieldPositionToConsolePos(pos);
 	GotoXY(consolePos);
-	PrintText("H", Color::DarkMagenta, Color::DarkYellow);
+	PrintText("H", bgColor, textColor);
 }
 
 // name, weight는 기본값만을 사용함, 인자 넣어도 사용하지 않음
@@ -115,4 +115,6 @@ void AntHome::Init()
 	name = "HomeSweetHome";
 	weightMG = 0.0f;	// 집은 무게 없음
 
+	bgColor = Color::DarkMagenta;
+	textColor = Color::DarkYellow;
 }
