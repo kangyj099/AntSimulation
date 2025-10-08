@@ -9,9 +9,7 @@ import ant;
 
 AntHome::AntHome(Field& _field) : GameObject(_field)
 {
-	name = "HomeSweetHome";
-	weightMG = 0.0f;	// 집은 무게 없음
-	isActive = true;
+	Init();
 }
 
 AntHome::~AntHome()
@@ -112,3 +110,9 @@ void AntHome::ExitAntRoutine()
 	}
 }
 
+void AntHome::Init()
+{
+	name = "HomeSweetHome";
+	weightMG = 0.0f;	// 집은 무게 없음
+
+}

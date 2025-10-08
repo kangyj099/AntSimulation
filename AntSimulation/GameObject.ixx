@@ -74,6 +74,10 @@ public:
 	void SetActive(bool _activeState);
 	bool IsActive() { return isActive; };
 
+private:
+	virtual void Init() {}
+
+public:
 	/// <summary>
 	/// 컴포넌트 추가, 구현 기능에 따라서 각 벡터에도 추가
 	/// </summary>

@@ -11,7 +11,6 @@ import movement;
 
 Ant::Ant(Field& _field) : GameObject(_field), carringObject(nullptr)
 {
-	isActive = false;	// 생성해도 바로 배치하지 않음
 	Init();
 }
 
@@ -98,6 +97,8 @@ bool Ant::IsCarringObject()
 
 void Ant::Init()
 {
+	isActive = false;	// 생성해도 바로 배치하지 않음
+
 	Movement* movement = AddComponent<Movement>(pos, Constants::c_GAME_antSpeedMax);
 	if (nullptr == movement)
 	{

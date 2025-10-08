@@ -85,4 +85,7 @@ public:
 	// 먹이
 	int GetFoodCount() const { return foodCount; }
 	void AddFood(int count) { foodCount += count; } // 먹이 추가
+
+private:
+	virtual void Init() override;
 };

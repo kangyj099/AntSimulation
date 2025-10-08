@@ -27,5 +27,5 @@ public:
 	bool IsCarringObject();
 
 private:
-	void Init();
+	virtual void Init() override;
 };

@@ -15,4 +15,7 @@ public:
 	virtual void OnDraw() override;
 
 	virtual void OnOverlap(GameObject* _other) override;
+
+private:
+	virtual void Init() override;
 };

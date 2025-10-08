@@ -5,6 +5,7 @@ import console;
 
 Food::Food(Field& _field) : GameObject(_field)
 {
+	Init();
 }
 
 void Food::OnUpdate()
@@ -19,5 +20,9 @@ void Food::OnDraw()
 }
 
 void Food::OnOverlap(GameObject* _other)
+{
+}
+
+void Food::Init()
 {
 }
