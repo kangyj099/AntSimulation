@@ -7,6 +7,11 @@ import common;
 
 export namespace Utils
 {
+	bool IsSameSign(short _a, short _b);
+	bool IsSameSign(int _a, int _b);
+	bool IsSameSign(float _a, float _b);
+	bool IsSameSign(double _a, double _b);
+
 	/// <summary>
 	/// 유효한 방향값인지 확인
 	/// </summary>
