@@ -16,7 +16,7 @@ private:
 
 	bool isMoving;	// 이동 중인지
 	Direction8 direction;
-	short targetMoveTileCount;	// 목표 이동 칸수
+	short targetTileCount;	// 목표 이동 칸수
 	short curMoveTileCount;	// 현재 이동 칸수
 	float speed;	// 칸/s (거리1 = 1칸)
 	std::chrono::steady_clock::duration durationPerTile;// 1칸 이동하는데 걸리는 주기(steady_clock 기반)
@@ -34,14 +34,14 @@ public:
 private:
 	Field& GetOwnerField();
 
-	void ResetMoveDest();
+	void ResetMove();
 
 	/// <summary>
 	/// 이동 방향, 칸수 랜덤 설정
 	/// </summary>
 	/// <param name="_ptrSpanCostumBlockDir">방향 랜덤설정할 때 추가적으로 제외되어야 할 방향 목록(경로지정 상황에 따라 유턴방향 등을 막음)</_ptrSpanCostumBlockDir>
 	/// <returns>이동 랜덤 설정 성공 여부</returns>
-	bool TrySetRandomMove(std::span<Direction8> _ptrSpanCostumBlockDir = {});
+	bool SetDirAndTileCountRandom(std::span<Direction8> _ptrSpanCostumBlockDir = {});
 
 	// 이동
 	MoveResult MoveObjecOneTile(Direction8 _direction);

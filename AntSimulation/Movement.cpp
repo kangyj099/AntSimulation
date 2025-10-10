@@ -13,7 +13,7 @@ using namespace std::chrono;
 
 Movement::Movement(GameObject& _owner, FieldPos& _ownerPos, float _speed)
 	: ComponentBase(_owner), ownerPos(_ownerPos), isMoving(false)
-	, direction(Direction8::None), targetMoveTileCount(0), curMoveTileCount(0)
+	, direction(Direction8::None), targetTileCount(0), curMoveTileCount(0)
 	, speed(_speed)
 	, durationPerTile(duration_cast<steady_clock::duration>(duration<double>(1.0 / _speed)))
 {
@@ -28,7 +28,7 @@ void Movement::Update()
 	// owner 이동
 	if (false == isMoving)
 	{
-		TrySetRandomMove();
+		SetDirAndTileCountRandom();
 
 		return;
 	}
@@ -53,10 +53,10 @@ void Movement::Update()
 		// 이동 경로 재설정 후 바로 다시 움직이기
 		// 방금 막힌 방향, 유턴 방향 제외
 		std::array<Direction8, 2> blockedDir = { direction, static_cast<Direction8>((static_cast<int>(direction) + static_cast<int>(Direction8::Count) / 2) % static_cast<int>(Direction8::Count)) };
-		if (false == TrySetRandomMove(blockedDir))
+		if (false == SetDirAndTileCountRandom(blockedDir))
 		{
 			// 이동할 곳이 없음
-			ResetMoveDest();
+			ResetMove();
 			return;
 		}
 	} break;
@@ -68,12 +68,12 @@ void Movement::Update()
 	case MoveResult::Success:
 	{
 		++curMoveTileCount;
-		if (curMoveTileCount >= targetMoveTileCount)
+		if (curMoveTileCount >= targetTileCount)
 		{
 			// 목표 칸수 도달, 이동경로 재설성
 			// 가던 방향, 유턴 제외
 			std::array<Direction8, 2> blockedDir = { direction, static_cast<Direction8>((static_cast<int>(direction) + static_cast<int>(Direction8::Count) / 2) % static_cast<int>(Direction8::Count)) };
-			TrySetRandomMove(blockedDir);
+			SetDirAndTileCountRandom(blockedDir);
 		}
 	}
 	break;
@@ -86,20 +86,20 @@ Field& Movement::GetOwnerField()
 	return owner->GetField();
 }
 
-void Movement::ResetMoveDest()
+void Movement::ResetMove()
 {
 	// 이동시작시간, 이동 방향, 이동 목표 거리 초기화. 이동 종료시, 이동세팅 실패시에 사용
 	nextMoveTime = steady_clock::time_point::max();
 	direction = Direction8::None;
-	targetMoveTileCount = 0;
+	targetTileCount = 0;
 	curMoveTileCount = 0;
 	isMoving = false;
 }
 
-bool Movement::TrySetRandomMove(std::span<Direction8> _ptrSpanCostumBlockDir)
+bool Movement::SetDirAndTileCountRandom(std::span<Direction8> _ptrSpanCostumBlockDir)
 {
 	// 초기화 먼저 하기
-	ResetMoveDest();
+	ResetMove();
 
 	// 1. 방향 설정하기
 	std::array<bool, static_cast<int>(Direction8::Count)> directionAvailables = GetOwnerField().GetDirectionAvailableArray(ownerPos);
@@ -115,7 +115,7 @@ bool Movement::TrySetRandomMove(std::span<Direction8> _ptrSpanCostumBlockDir)
 	// 방향 지정 실패 - 초기화
 	if (false == Utils::IsValidDirection(direction))
 	{
-		ResetMoveDest();
+		ResetMove();
 		return false;
 	}
 
@@ -125,12 +125,12 @@ bool Movement::TrySetRandomMove(std::span<Direction8> _ptrSpanCostumBlockDir)
 	{
 		return false;
 	}
-	targetMoveTileCount = Utils::Random() % maxMoveCount + 1;
+	targetTileCount = Utils::Random() % maxMoveCount + 1;
 
 	// 이동 목표 칸수 설정 실패 - 초기화
-	if (0 == targetMoveTileCount)
+	if (0 == targetTileCount)
 	{
-		ResetMoveDest();
+		ResetMove();
 		return false;
 	}
 
