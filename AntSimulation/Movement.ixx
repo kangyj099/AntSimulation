@@ -22,6 +22,19 @@ private:
 	std::chrono::steady_clock::duration durationPerTile;// 1칸 이동하는데 걸리는 주기(steady_clock 기반)
 	std::chrono::steady_clock::time_point nextMoveTime; // 다음 칸 이동하는 타이밍
 
+	// 이동모드 : 목적지 관련
+	bool isDestMove;	// 목적지 향해서 이동 모드인지?
+	FieldPos destPos;
+
+	// 이동 방향 및 칸수 재설정 이유
+	enum class SetReason
+	{
+		MoveStart,
+		Blocked,
+		Obstacle,
+		ReachedTarget
+	};
+
 public:
 	Movement(GameObject& _owner, FieldPos& _ownerPos, float _speed);
 	virtual ~Movement();
@@ -31,17 +44,21 @@ public:
 	virtual ComponentType GetType() override { return ComponentType::Movement; }
 	bool IsMoving() const { return isMoving; }
 
+	bool SetDestMove(FieldPos _destPos);
+
 private:
 	Field& GetOwnerField();
 
 	void ResetMove();
 
+	bool SetDirAndTileCount(SetReason reason);
 	/// <summary>
 	/// 이동 방향, 칸수 랜덤 설정
 	/// </summary>
 	/// <param name="_ptrSpanCostumBlockDir">방향 랜덤설정할 때 추가적으로 제외되어야 할 방향 목록(경로지정 상황에 따라 유턴방향 등을 막음)</_ptrSpanCostumBlockDir>
 	/// <returns>이동 랜덤 설정 성공 여부</returns>
 	bool SetDirAndTileCountRandom(std::span<Direction8> _ptrSpanCostumBlockDir = {});
+	bool SetDirAndTileCountToDest();
 
 	// 이동
 	MoveResult MoveObjecOneTile(Direction8 _direction);

@@ -6,6 +6,7 @@ import movement;
 export class Ant : public GameObject
 {
 private:
+	FieldPos antHomePos;
 	GameObject* carringObject;
 
 public:
@@ -21,6 +22,7 @@ public:
 
 	virtual void Reset() override;
 
+	bool SetHomePos(FieldPos _antHome);
 	bool SetCarringObject(GameObject& _object);
 	bool DropCarringObject();
 

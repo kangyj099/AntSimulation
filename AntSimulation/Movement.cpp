@@ -12,7 +12,7 @@ using namespace Constants;
 using namespace std::chrono;
 
 Movement::Movement(GameObject& _owner, FieldPos& _ownerPos, float _speed)
-	: ComponentBase(_owner), ownerPos(_ownerPos), isMoving(false)
+	: ComponentBase(_owner), ownerPos(_ownerPos), destPos({ -1,-1 }), isMoving(false), isDestMove(false)
 	, direction(Direction8::None), targetTileCount(0), curMoveTileCount(0)
 	, speed(_speed)
 	, durationPerTile(duration_cast<steady_clock::duration>(duration<double>(1.0 / _speed)))
@@ -28,7 +28,7 @@ void Movement::Update()
 	// owner 이동
 	if (false == isMoving)
 	{
-		SetDirAndTileCountRandom();
+		SetDirAndTileCount(SetReason::MoveStart);
 
 		return;
 	}
@@ -49,36 +49,38 @@ void Movement::Update()
 	switch (moveResult)
 	{
 	case MoveResult::BlockWall:
-	{
-		// 이동 경로 재설정 후 바로 다시 움직이기
-		// 방금 막힌 방향, 유턴 방향 제외
-		std::array<Direction8, 2> blockedDir = { direction, static_cast<Direction8>((static_cast<int>(direction) + static_cast<int>(Direction8::Count) / 2) % static_cast<int>(Direction8::Count)) };
-		if (false == SetDirAndTileCountRandom(blockedDir))
-		{
-			// 이동할 곳이 없음
-			ResetMove();
-			return;
-		}
-	} break;
+		SetDirAndTileCount(SetReason::Blocked);
+		break;
 	case MoveResult::BlockObstacle:
-	{
-		// 이동 경로 재설정
-		// Todo: 장애물 방향 제외
-	} break;
+		SetDirAndTileCount(SetReason::Obstacle);
+		break;
 	case MoveResult::Success:
-	{
 		++curMoveTileCount;
 		if (curMoveTileCount >= targetTileCount)
 		{
-			// 목표 칸수 도달, 이동경로 재설성
-			// 가던 방향, 유턴 제외
-			std::array<Direction8, 2> blockedDir = { direction, static_cast<Direction8>((static_cast<int>(direction) + static_cast<int>(Direction8::Count) / 2) % static_cast<int>(Direction8::Count)) };
-			SetDirAndTileCountRandom(blockedDir);
+			SetDirAndTileCount(SetReason::ReachedTarget);
 		}
+		break;
+	default:
+		break;
 	}
-	break;
-	default: {}
+}
+
+bool Movement::SetDestMove(FieldPos _destPos)
+{
+	if (false == GetOwnerField().IsValidPos(_destPos))
+	{
+		// 유효하지 않은 위치
+		isDestMove = false;
+		return false;
 	}
+
+	ResetMove();
+
+	// 목적지 이동 모드로 설정
+	destPos = _destPos;
+	isDestMove = true;
+	return true;
 }
 
 Field& Movement::GetOwnerField()
@@ -94,6 +96,23 @@ void Movement::ResetMove()
 	targetTileCount = 0;
 	curMoveTileCount = 0;
 	isMoving = false;
+}
+
+bool Movement::SetDirAndTileCount(SetReason reason)
+{
+	if (true == isDestMove)
+	{
+		return SetDirAndTileCountToDest();
+	}
+
+	std::array<Direction8, 2> blockedDir = {};
+	if (reason == SetReason::Blocked || reason == SetReason::ReachedTarget)
+	{
+		// 현재 방향과 유턴 방향을 제외
+		blockedDir = { direction, static_cast<Direction8>((static_cast<int>(direction) + static_cast<int>(Direction8::Count) / 2) % static_cast<int>(Direction8::Count)) };
+	}
+
+	return SetDirAndTileCountRandom(blockedDir);
 }
 
 bool Movement::SetDirAndTileCountRandom(std::span<Direction8> _ptrSpanCostumBlockDir)
@@ -133,6 +152,161 @@ bool Movement::SetDirAndTileCountRandom(std::span<Direction8> _ptrSpanCostumBloc
 		ResetMove();
 		return false;
 	}
+
+	nextMoveTime = steady_clock::now() + durationPerTile;
+	isMoving = true;
+
+	return true;
+}
+
+bool Movement::SetDirAndTileCountToDest()
+{
+	// 목적지 이동이 아니거나, 이미 도착한 경우
+	if (false == isDestMove || false == GetOwnerField().IsValidPos(destPos)
+		|| ownerPos == destPos)
+	{
+		return false;
+	}
+
+	// 초기화 먼저 하기
+	ResetMove();
+
+	// 목적지까지 도달하기 위한 총 필요 방향과 거리
+	FieldPos toDest = destPos - ownerPos;
+
+	// 방향 설정하기 ({0,0}인 경우는 도착한 경우로 위에서 제외함)
+	// 직선
+	if (toDest.x == 0 || toDest.y == 0)
+	{
+		if (toDest.x == 0) // 수직
+		{
+			if (toDest.y > 0)
+			{
+				direction = Direction8::Down;
+				targetTileCount = toDest.y;
+			}
+			else
+			{
+				direction = Direction8::Up;
+				targetTileCount = -toDest.y;
+			}
+		}
+		else // 수평
+		{
+			if (toDest.x > 0)
+			{
+				direction = Direction8::Right;
+				targetTileCount = toDest.x;
+			}
+			else
+			{
+				direction = Direction8::Left;
+				targetTileCount = -toDest.x;
+			}
+		}
+	}//END 직선
+	else if (abs(toDest.x) == abs(toDest.y)) // 대각선
+	{
+		if (toDest.x > 0) // 우측
+		{
+			if (toDest.y > 0)
+			{
+				direction = Direction8::DownRight;
+			}
+			else
+			{
+				direction = Direction8::UpRight;
+			}
+			targetTileCount = toDest.x;
+		}
+		else // 좌측
+		{
+			if (toDest.y > 0)
+			{
+				direction = Direction8::DownLeft;
+			}
+			else
+			{
+				direction = Direction8::UpLeft;
+			}
+			targetTileCount = -toDest.x;
+		}
+	}//END 대각선
+	else // 대각선 직선 혼합, 랜덤 채택
+	{
+		// 0:대각선, 1:직선
+		if (0 == Utils::Random() % 2)	// 대각선 우선
+		{
+			if (toDest.x > 0) // 우측
+			{
+				direction = (toDest.y > 0) ? Direction8::DownRight : Direction8::UpRight;
+				targetTileCount = toDest.x;
+			}
+			else // 좌측
+			{
+				direction = (toDest.y > 0) ? Direction8::DownLeft : Direction8::UpLeft;
+				targetTileCount = -toDest.x;
+			}
+		}
+		else // 직선 우선
+		{
+			if (true == Utils::IsSameSign(toDest.x, toDest.y)) // 부호가 같음
+			{
+				if (0 < toDest.x)
+				{
+					if (0 < toDest.x - toDest.y) // x 방향으로 더 멀리
+					{
+						direction = (toDest.x > 0) ? Direction8::Right : Direction8::Left;
+						targetTileCount = toDest.x - toDest.y;
+					}
+					else // y 방향으로 더 멀리
+					{
+						direction = (toDest.y > 0) ? Direction8::Down : Direction8::Up;
+						targetTileCount = toDest.y - toDest.x;
+					}
+				}
+				else // 음수
+				{
+					if (0 < -toDest.x + toDest.y) // x 방향으로 더 멀리
+					{
+						direction = (toDest.x > 0) ? Direction8::Right : Direction8::Left;
+						targetTileCount = -toDest.x + toDest.y;
+					}
+					else // y 방향으로 더 멀리
+					{
+						direction = (toDest.y > 0) ? Direction8::Down : Direction8::Up;
+						targetTileCount = -toDest.y + toDest.x;
+					}
+				}
+			}
+			else if (0 < toDest.x) // 부호가 다름, x가 양수
+			{
+				if (0 < toDest.x + toDest.y) // y가 -이지만 절대값이 더 작음, x 방향으로 더 멀리
+				{
+					direction = (toDest.x > 0) ? Direction8::Right : Direction8::Left;
+					targetTileCount = toDest.x + toDest.y;
+				}
+				else // y 방향으로 더 멀리
+				{
+					direction = (toDest.y > 0) ? Direction8::Down : Direction8::Up;
+					targetTileCount = -toDest.x - toDest.y;
+				}
+			}
+			else // 부호가 다름, x가 음수
+			{
+				if (0 < -toDest.x - toDest.y) // y가 +이지만 절대값이 더 작음, x 방향으로 더 멀리
+				{
+					direction = (toDest.x > 0) ? Direction8::Right : Direction8::Left;
+					targetTileCount = -toDest.x - toDest.y;
+				}
+				else // y 방향으로 더 멀리
+				{
+					direction = (toDest.y > 0) ? Direction8::Down : Direction8::Up;
+					targetTileCount = toDest.x + toDest.y;
+				}
+			}
+		}//END 직선우선이동
+	}//END 목적지 대각선직선혼합이동
 
 	nextMoveTime = steady_clock::now() + durationPerTile;
 	isMoving = true;

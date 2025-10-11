@@ -62,6 +62,12 @@ void Ant::Reset()
 {
 }
 
+bool Ant::SetHomePos(FieldPos _antHomePos)
+{
+	antHomePos = _antHomePos;
+	return true;
+}
+
 bool Ant::SetCarringObject(GameObject& _object)
 {
 	// 내가 나를 들면 안됨
@@ -82,6 +88,16 @@ bool Ant::SetCarringObject(GameObject& _object)
 	if (true == _object.IsActive())
 	{
 		_object.SetActive(false);
+	}
+
+	Movement* movement = GetComponent<Movement>(ComponentType::Movement);
+	if (nullptr != movement)
+	{
+		movement->SetDestMove(antHomePos);
+	}
+	else
+	{
+		__debugbreak();
 	}
 
 	return true;

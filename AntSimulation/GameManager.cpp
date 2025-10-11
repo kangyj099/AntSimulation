@@ -58,6 +58,7 @@ void GameManager::Init()
 			continue;
 		}
 
+		ant->SetHomePos(antHome->GetPos());	// 집 위치 각인
 		antHome->EnterAnt(*ant);	// 개미는 집에서 시작함
 	}
 
