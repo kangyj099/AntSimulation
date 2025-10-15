@@ -83,6 +83,9 @@
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>게임 오브젝트</Filter>
     </ClCompile>
+    <ClCompile Include="Singleton.ixx">
+      <Filter>커먼\싱글톤</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="커먼">
@@ -120,6 +123,9 @@
     </Filter>
     <Filter Include="게임 오브젝트\음식">
       <UniqueIdentifier>{4dc1c7f3-bdf1-43b4-be12-0c79fc480e38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="커먼\싱글톤">
+      <UniqueIdentifier>{3d7df922-c40c-4c06-81a2-8ccccb798bff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
