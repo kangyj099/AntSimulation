@@ -178,7 +178,7 @@ bool GameManager::CreateObject(ObjectType _objType, FieldPos _pos, std::string _
 		return false;
 	}
 
-	auto gameObject = CreateGameObject(_objType, field);
+	auto gameObject = CreateInstanceGameObject(_objType, field);
 	if (nullptr == gameObject)
 	{
 		return false;

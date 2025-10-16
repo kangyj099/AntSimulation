@@ -123,4 +123,4 @@ public:
 	Color GetTextColor() { return textColor; }
 };
 
-export std::unique_ptr<GameObject> CreateGameObject(ObjectType _objType, Field& field);
+export std::unique_ptr<GameObject> CreateInstanceGameObject(ObjectType _objType, Field& field);
