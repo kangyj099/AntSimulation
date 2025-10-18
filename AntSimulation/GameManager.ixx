@@ -3,16 +3,16 @@
 import <memory>;
 import <chrono>;
 
+import singleton;
 import common;
 import field;
-import logManager;
 
 export class GameObject;
 export class AntHome;
 export class Ant;
 export class Food;
 
-export class GameManager
+export class GameManager : public Singleton<GameManager>
 {
 private:
 	// 게임 시작 시간
@@ -31,12 +31,11 @@ private:
 	std::vector<Food*> foods;
 
 	// 로그
-	LogManager logManager;
 	ConsolePos logStartPos;
 
 public:
 	GameManager();
-	~GameManager();
+	~GameManager() override;
 
 	void Init();
 

@@ -4,6 +4,7 @@ export module logManager;
 import <string>;
 import <vector>;
 
+import singleton;
 import common;
 
 // 개미 로그 종류
@@ -28,13 +29,13 @@ struct Log {
 };
 
 // 개미 로그 출력 매니저
-export class LogManager
+export class LogManager : public Singleton<LogManager>
 {
 	std::vector<Log> logList;
 
 public:
 	LogManager();
-	~LogManager();
+	~LogManager() override;
 
 	/// <summary>
 	/// 로그 리스트에 로그 추가 (최대 개수 제한됨)

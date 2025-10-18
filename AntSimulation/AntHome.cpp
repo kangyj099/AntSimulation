@@ -3,6 +3,7 @@
 import common;
 import utils;
 import console;
+import logManager;
 import field;
 import ant;
 
@@ -41,7 +42,7 @@ void AntHome::Setting(FieldPos _pos, std::string _name, float _weight)
 	pos = _pos;
 }
 
-void AntHome::EnterAnt(Ant& ant)
+void AntHome::EnterAnt(Ant& ant, bool isPrintLog)
 {
 	// 개미 집에 들어감
 	ant.SetActive(false);
@@ -50,7 +51,7 @@ void AntHome::EnterAnt(Ant& ant)
 	waitingAnts.push(&ant);
 }
 
-void AntHome::ExitAnt()
+void AntHome::ExitAnt(bool isPrintLog)
 {
 	if (true == waitingAnts.empty())
 	{
@@ -66,6 +67,11 @@ void AntHome::ExitAnt()
 	// 집 나온 개미 집 위치에서부터 시작
 	field.MoveObject(*ant, ant->GetPos(), pos);
 	ant->SetActive(true);
+
+	if (true == isPrintLog)
+	{
+		LogManager::GetInstance().AddLog(LogType::State, std::format("{} 집에서 나옴", ant->GetName()));
+	}
 }
 
 void AntHome::ExitAntRoutine()

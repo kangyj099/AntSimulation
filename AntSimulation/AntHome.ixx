@@ -78,8 +78,8 @@ public:
 	virtual void Setting(FieldPos _pos, std::string _name = "HomeSweetHome", float _weight = 0.0f) override;
 
 	// 개미
-	void EnterAnt(Ant& ant); // 개미가 집에 들어감
-	void ExitAnt(); // 개미가 집에서 나감
+	void EnterAnt(Ant& ant, bool isPrintLog = true); // 개미가 집에 들어감
+	void ExitAnt(bool isPrintLog = true); // 개미가 집에서 나감
 	void ExitAntRoutine();	// 집에 있는 개미 내보낼지 말지 확인
 
 	// 먹이

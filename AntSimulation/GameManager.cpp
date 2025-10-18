@@ -5,6 +5,7 @@ import <chrono>;
 
 import console;
 import utils;
+import logManager;
 import gameObject;	// DELETE: 에디터 빨간줄때문에 추가
 import antHome;
 import ant;
@@ -59,9 +60,8 @@ void GameManager::Init()
 		}
 
 		ant->SetHomePos(antHome->GetPos());	// 집 위치 각인
-		antHome->EnterAnt(*ant);	// 개미는 집에서 시작함
+		antHome->EnterAnt(*ant, false);	// 개미는 집에서 시작함
 	}
-
 
 	// Food
 	for (int i = 0; i < 10; ++i)
@@ -73,10 +73,10 @@ void GameManager::Init()
 	}
 
 	// 로그 초기화
-	logManager.Reset();
+	LogManager::GetInstance().Reset();
 
 	// test
-	logManager.AddLog(LogType::State, "게임 시작");
+	LogManager::GetInstance().AddLog(LogType::State, "게임 시작");
 };
 
 bool GameManager::Update()
@@ -147,7 +147,7 @@ void GameManager::Draw()
 	// 로그 출력
 	// 로그 갱신 있을때만
 	GotoXY(logStartPos);
-	logManager.PrintLog();
+	LogManager::GetInstance().PrintLog();
 }
 
 void GameManager::ProcessCollision(CollisionInfo& _colInfo)
