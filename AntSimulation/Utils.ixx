@@ -39,5 +39,6 @@ export namespace Utils
 		return true;
 	}
 
-	std::random_device Random = std::random_device();
+	int GetRandomInt(int _min, int _max);
+	float GetRandomFloat(float _min, float _max);
 }

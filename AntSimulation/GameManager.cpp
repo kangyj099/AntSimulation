@@ -31,7 +31,7 @@ void GameManager::Init()
 
 	// 집 생성
 	{
-		FieldPos homePos(Utils::Random() % Constants::c_FIELD_width, Utils::Random() % Constants::c_FIELD_height);
+		FieldPos homePos(Utils::GetRandomInt(0, Constants::c_FIELD_width), Utils::GetRandomInt(0, Constants::c_FIELD_height));
 		if (false == field.IsValidPos(homePos))
 		{
 			homePos = { 0,0 };

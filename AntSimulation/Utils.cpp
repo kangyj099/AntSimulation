@@ -39,3 +39,20 @@ ConsolePos Utils::FieldPositionToConsolePos(FieldPos _position)
 	ConsolePos consolePos(_position.x * c_FIELD_toScreenXScale + c_SCREEN_fieldStartX, _position.y + c_SCREEN_fieldStartY);
 	return consolePos;
 }
+
+std::mt19937 randEngine(std::random_device{}());
+
+int Utils::GetRandomInt(int _min, int _max)
+{
+	std::uniform_int_distribution dist(_min, _max);
+	int randomvalue = dist(randEngine);
+
+	return randomvalue;
+}
+
+float Utils::GetRandomFloat(float _min, float _max)
+{
+	std::uniform_real_distribution<float> dist(_min, _max);
+	return dist(randEngine);
+}
+

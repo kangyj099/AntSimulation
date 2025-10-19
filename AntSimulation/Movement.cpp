@@ -144,7 +144,7 @@ bool Movement::SetDirAndTileCountRandom(std::span<Direction8> _ptrSpanCostumBloc
 	{
 		return false;
 	}
-	targetTileCount = Utils::Random() % maxMoveCount + 1;
+	targetTileCount = Utils::GetRandomInt(1, maxMoveCount);
 
 	// 이동 목표 칸수 설정 실패 - 초기화
 	if (0 == targetTileCount)
@@ -235,7 +235,7 @@ bool Movement::SetDirAndTileCountToDest()
 	else // 대각선 직선 혼합, 랜덤 채택
 	{
 		// 0:대각선, 1:직선
-		if (0 == Utils::Random() % 2)	// 대각선 우선
+		if (0 == Utils::GetRandomInt(0, 1))	// 대각선 우선
 		{
 			if (toDest.x > 0) // 우측
 			{
