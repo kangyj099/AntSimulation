@@ -23,12 +23,8 @@ private:
 
 	// 오브젝트들
 	std::vector<std::unique_ptr<GameObject>> objects;
-	// 개미들
-	std::vector<Ant*> ants;
 	// 집
 	AntHome* antHome;
-	// 먹이
-	std::vector<Food*> foods;
 
 	// 로그
 	ConsolePos logStartPos;

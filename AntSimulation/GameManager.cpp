@@ -46,19 +46,28 @@ void GameManager::Init()
 	// 개미 생성
 	for (int i = 0; i < Constants::c_GAME_antCount; ++i)
 	{
-		std::string name = "개미" + std::to_string(ants.size());
+		std::string name = "개미" + std::to_string(i);
 		float weight = Utils::GetRandomFloat(Constants::c_GAME_antWeightMin, Constants::c_GAME_antWeightMax);
 		if (false == CreateObject(ObjectType::Ant, { 0,0 }, name, weight))
 		{
 			continue;
 		}
 	}
-	for (auto ant : ants)
+
+	// 개미 전용 세팅
+	for (auto& object : objects)
 	{
-		if (nullptr == ant)
+		if (nullptr == object)
 		{
 			continue;
 		}
+
+		if (ObjectType::Ant != object->GetObjectType())
+		{
+			continue;
+		}
+
+		Ant* ant = dynamic_cast<Ant*>(object.get());
 
 		ant->SetHomePos(antHome->GetPos());	// 집 위치 각인
 		antHome->EnterAnt(*ant, false);	// 개미는 집에서 시작함
@@ -192,22 +201,16 @@ bool GameManager::CreateObject(ObjectType _objType, FieldPos _pos, std::string _
 		return false;
 	}
 
-	field.AddObject(*gameObject, _pos);
 	gameObject->Setting(_pos, _name, _weight);
-
-	auto objectPtr = gameObject.get();
-	switch (gameObject->GetObjectType())
+	if (false == field.AddObject(*gameObject, _pos))
 	{
-	case ObjectType::Ant: {
-		ants.push_back(dynamic_cast<Ant*>(objectPtr));
-	} break;
-	case ObjectType::AntHome: {
+		return false;
+	}
+
+	if (ObjectType::AntHome == gameObject->GetObjectType())
+	{
+		auto objectPtr = gameObject.get();
 		antHome = dynamic_cast<AntHome*>(objectPtr);
-	} break;
-	case ObjectType::Food: {
-		foods.push_back(dynamic_cast<Food*>(objectPtr));
-	} break;
-	default:;
 	}
 
 	objects.push_back(std::move(gameObject));
