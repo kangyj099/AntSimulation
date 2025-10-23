@@ -47,7 +47,8 @@ void GameManager::Init()
 	for (int i = 0; i < Constants::c_GAME_antCount; ++i)
 	{
 		std::string name = "개미" + std::to_string(ants.size());
-		if (false == CreateObject(ObjectType::Ant, { 0,0 }, name))
+		float weight = Utils::GetRandomFloat(Constants::c_GAME_antWeightMin, Constants::c_GAME_antWeightMax);
+		if (false == CreateObject(ObjectType::Ant, { 0,0 }, name, weight))
 		{
 			continue;
 		}
@@ -66,10 +67,11 @@ void GameManager::Init()
 	// Food
 	for (int i = 0; i < 10; ++i)
 	{
-		std::string name = "음식" + std::to_string(foods.size());
 		FieldPos pos(static_cast<short>(i), static_cast<short>(i));
+		float weight = Utils::GetRandomFloat(Constants::c_GAME_foodWeightMin, Constants::c_GAME_foodWeightMax);
+		std::string name = "음식" + std::to_string(weight);
 
-		CreateObject(ObjectType::Food, pos, name);
+		CreateObject(ObjectType::Food, pos, name, weight);
 	}
 
 	// 로그 초기화
@@ -167,7 +169,7 @@ void GameManager::ProcessCollision(CollisionInfo& _colInfo)
 	}
 }
 
-bool GameManager::CreateObject(ObjectType _objType, FieldPos _pos, std::string _name)
+bool GameManager::CreateObject(ObjectType _objType, FieldPos _pos, std::string _name, float _weight)
 {
 	//생성 : 오브젝트 생성 -> 충돌 판정 -> 필드에 배치 -> 판정 push
 	//이동: 충돌 판정->오브젝트 기존 위치 삭제->필드에 배치->판정 push
@@ -190,8 +192,8 @@ bool GameManager::CreateObject(ObjectType _objType, FieldPos _pos, std::string _
 		return false;
 	}
 
-	gameObject->Setting(_pos, _name, 2.0f);
 	field.AddObject(*gameObject, _pos);
+	gameObject->Setting(_pos, _name, _weight);
 
 	auto objectPtr = gameObject.get();
 	switch (gameObject->GetObjectType())

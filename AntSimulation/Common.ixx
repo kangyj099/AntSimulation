@@ -227,8 +227,15 @@ export namespace Constants
 
 	const float c_GAME_antSpeedMin = 1.0f;	// 개미 속도 최소(칸/초)
 	const float c_GAME_antSpeedMax = 3.0f;	// 개미 속도 최대(칸/초)
-	const short c_GAME_antWeightMin = 2;	// 개미 무게 최소
-	const short c_GAME_antWeightMax = 7;	// 개미 무게 최대
+	const float c_GAME_antWeightMin = 2.0f;	// 개미 무게 최소
+	const float c_GAME_antWeightMax = 7.0f;	// 개미 무게 최대
+	
+	const float c_GAME_foodWeightMin = 5.0f;	// 먹이 무게 최소
+	const float c_GAME_foodWeightMax = 20.0f;	// 먹이 무게 최대
+
+	const float c_GAME_defaultWeightMG = 2.0f;	// 기본 무게 밀리그람
+
+	const float c_GAME_antCarryFoodWeightRatio = 4.0f; // 개미가 본인 무게당 들 수 있는 먹이 무게 비율
 
 	const short c_GAME_homeExitAntDurationMs = 2400;	// 집에서 개미 방출하는 주기 밀리세컨드
 
