@@ -1,0 +1,158 @@
+유형	기호	목적
+확장	<|--	계층 구조에서 클래스의 특수화. 상속
+구현	<|..	클래스에 의한 인터페이스의 실현
+컴포지션	*--	부분이 전체 없이는 존재할 수 없음. LogManager없이 Log 존재 못함.
+집합	o--	부분이 전체와 독립적으로 존재할 수 있음. Field 없어도 Ant는 존재
+의존성	-->	객체가 다른 객체를 사용함. 멤버 변수로 다른 클래스와 연관이 있을 때
+약한 의존성	..>	더 약한 형태의 의존성. 파라미터나 반환에 사용되는 클래스 관계를 나타낼 때(로컬 변수, 파라미터, 반환 값으로 호출되는 메소드가 실행되는 동안에만 유지가 될 때)
+
+has, own등의 용어로 영어번역 가능
+
+
+@startuml 클래스 구조도
+title 클래스 구조도
+class Singleton{
+    + GetInstance()
+}
+
+interface IUpdate{
+    + Update()
+}
+
+interface IDraw{
+    + Draw()
+}
+
+struct FieldPos{
+    + x : short
+    + y : short
+}
+
+class GameObject{
+    # name : string
+    # pos : FieldPos
+    # field : Field&
+    - allComponents
+    : unordered_map<ComponentType, std::unique_ptr<ComponentBase>>
+}
+
+class ComponentBase{
+
+    # owner : GameObject&
+    + GetType() : ComponentType
+}
+
+struct CollisionInfo{
+    + type : CollisionType
+    + occupantObject : GameObject*
+    + visitorObject : GameObject*
+}
+
+struct Tile{
+    - pos : FieldPos
+    - objects : vector<GameObject*> <<raw pointer>>
+
+    + IsContains(GameObject&) : bool
+    + IsContains(GameObject&) : queue<CollisionInfo>
+    + AddObject(GameObject&)
+    + RemoveObject(GameObject&)
+}
+
+class Field{
+    - tiles : vector<vector<Tile>>
+    - collisionInfos : queue<CollisionInfo>
+    
+    + AddObject(GameObject&, FieldPos)
+    + RemoveObject(GameObject&, FieldPos)
+    + MoveObject(GameObject&, FieldPos from, FieldPos to)
+    + PopCollisionInfo() : CollisionInfo
+}
+
+class GameManager{
+    - field : Field
+    - objects : vector<unique_ptr<GameObject>>
+    - steady_clock::timePoint startTime
+
+    + Update()
+    + Draw()
+    + CreateObject()
+    + ProcessRemoveReserved()
+    + ProcessCollision()
+}
+
+class LogManager{
+    - logList : vector<Log>
+
+    + AddLog(LogType, string)
+    + PrintLog()
+    + ResetLog()
+}
+
+struct Log{
+    + type : LogType
+    + text : string
+}
+
+'/////// 상속, 구현
+Singleton <|-- LogManager
+Singleton <|-- GameManager
+
+IUpdate <|.. GameObject
+IUpdate <|.. ComponentBase
+
+IDraw <|.. GameObject
+
+
+'/////// 소유, 참조
+GameManager *-- Field : 소유(값)
+GameManager *-- GameObject : 소유\nunique_ptr<GameObject>
+GameManager ..> CollisionInfo : 참조(from Field)\nProcessCollision()
+
+GameObject *-- ComponentBase : 소유\nunique_ptr<ComponentBase>
+GameObject *- FieldPos : 소유(값)
+Field <- GameObject : 참조\n(from GameManager)
+
+Field *-- Tile : 소유, 그리드\nvector<std::vector<Tile>>
+Field *-- CollisionInfo : 소유\nqueue<CollisionInfo>
+
+Tile *-- FieldPos : 소유(값)
+
+Log -* LogManager  : 소유\nvector<Log>
+note as N1
+LogManager
+- 프로젝트 전반에 걸쳐 접근 가능(LogManager::GetInstance())
+- 게임매니저, 오브젝트 등에서 접근 사용
+- AddLog() 함수로 로그 축적
+- PrintLog() 함수로 로그 출력
+end note
+
+N1 -- LogManager
+
+note top of GameManager : main에서 동작
+
+@enduml
+
+@startuml 이동, 충돌 시퀀스
+GameManager -> GameObject : Update()
+loop For each object
+    GameObject -> Component : Update()
+    Component -> Field : MoveTile()
+    Field -> Field : MoveObject()
+    Field -> Field : RemoveObject(GameObject&, fromTile)
+    Field -> Field : AddOboject(GameObject&, toTile)
+    Field -> Tile : GetCollisionInfos()
+    Field -> Tile : AddObject(GameObject&)
+    alt Collision Detected
+        Component -> GameObject : OnCollision()
+        GameObject -> Component : OnCollisoin()
+    end
+end
+
+GameManager -> GameManager : RemoveReservedObject()
+@enduml
+
+@startuml 오브젝트 생성
+User -> GameManager : CreateObject(Type)
+GameManager -> GameObject : new GameObject()
+GameManager -> GameManager : objects.push_back(unique_ptr<GameObject>)
+@enduml
