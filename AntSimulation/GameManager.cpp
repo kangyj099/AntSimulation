@@ -126,8 +126,8 @@ bool GameManager::Update()
 		ProcessCollision(info);
 	}
 
-
-	// 로그
+	// 삭제 대기 오브젝트 삭제
+	ProcessRemoveReserved();
 
 	return true;
 };
@@ -214,6 +214,34 @@ bool GameManager::CreateObject(ObjectType _objType, FieldPos _pos, std::string _
 	}
 
 	objects.push_back(std::move(gameObject));
+
+	return true;
+}
+
+bool GameManager::ProcessRemoveReserved()
+{
+	if (true == objects.empty())
+	{
+		return true;
+	}
+
+	objects.erase(
+		std::remove_if(objects.begin(),
+			objects.end(),
+			[](std::unique_ptr<GameObject>& object)
+			{
+				if (true == object->IsReserveRemove())
+				{
+					object->Remove();
+
+					return true;
+				}
+
+				return false;
+			}
+		),
+		objects.end()
+	);
 
 	return true;
 }

@@ -2,7 +2,7 @@
 
 import field;
 
-GameObject::GameObject(Field& _field) : field(_field), isActive(true)
+GameObject::GameObject(Field& _field) : field(_field), isActive(true), isReserveRemove(false)
 , bgColor(Constants::c_COLOR_defaultBG), textColor(Constants::c_COLOR_defaultText)
 {
 	field.AddObject(*this, pos);
@@ -43,6 +43,13 @@ void GameObject::Draw()
 	{
 		component->Draw();
 	}
+}
+
+void GameObject::Remove()
+{
+	OnRemove();
+
+	field.RemoveObject(*this, GetPos());
 }
 
 void GameObject::Setting(FieldPos _pos, std::string _name, float _weight)

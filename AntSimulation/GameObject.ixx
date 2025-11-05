@@ -30,6 +30,8 @@ protected:
 
 	// 현재 활동중인지
 	bool isActive;
+	// 오브젝트 삭제 예약
+	bool isReserveRemove;
 
 	Color bgColor;
 	Color textColor;
@@ -63,6 +65,7 @@ public:
 
 	virtual void OnUpdate() = 0;
 	virtual void OnDraw() = 0;
+	virtual void Remove();
 
 	virtual void Setting(FieldPos _pos, std::string _name, float _weight);
 
@@ -76,9 +79,12 @@ public:
 
 	void SetActive(bool _activeState);
 	bool IsActive() { return isActive; };
+	bool IsReserveRemove() { return isReserveRemove; }
+	void ReserveRemove() { isReserveRemove = true; }
 
 private:
 	virtual void Init() {}
+	virtual void OnRemove(){};
 
 public:
 	/// <summary>
