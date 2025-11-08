@@ -62,9 +62,6 @@ public:
 
 	virtual void Update() override;
 	virtual void Draw() override;
-
-	virtual void OnUpdate() = 0;
-	virtual void OnDraw() = 0;
 	virtual void Remove();
 
 	virtual void Setting(FieldPos _pos, std::string _name, float _weight);
@@ -79,11 +76,18 @@ public:
 
 	void SetActive(bool _activeState);
 	bool IsActive() { return isActive; };
+	Field& GetField() { return field; }
+	FieldPos GetPos() { return pos; }
+	FieldPos SetPos(FieldPos _pos) { pos = _pos; return pos; }
+	Color GetBGColor() { return bgColor; }
+	Color GetTextColor() { return textColor; }
 	bool IsReserveRemove() { return isReserveRemove; }
 	void ReserveRemove() { isReserveRemove = true; }
 
 private:
 	virtual void Init() {}
+	virtual void OnUpdate() = 0;
+	virtual void OnDraw() = 0;
 	virtual void OnRemove(){};
 
 public:
@@ -121,12 +125,6 @@ public:
 
 		return compPtr;
 	}
-
-	Field& GetField() { return field; }
-	FieldPos GetPos() { return pos; }
-	FieldPos SetPos(FieldPos _pos) { pos = _pos; return pos; }
-	Color GetBGColor() { return bgColor; }
-	Color GetTextColor() { return textColor; }
 };
 
 export std::unique_ptr<GameObject> CreateInstanceGameObject(ObjectType _objType, Field& field);

@@ -15,9 +15,6 @@ public:
 
 	virtual ObjectType GetObjectType() override { return ObjectType::Ant; }
 
-	virtual void OnUpdate() override;
-	virtual void OnDraw() override;
-
 	virtual void OnOverlap(GameObject* _other) override;
 
 	virtual void Reset() override;
@@ -30,4 +27,6 @@ public:
 
 private:
 	virtual void Init() override;
+	virtual void OnUpdate() override;
+	virtual void OnDraw() override;
 };

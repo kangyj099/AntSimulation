@@ -63,7 +63,7 @@ private:
 	ExitAntWaitData antExitWaitData;
 
 	// 먹이
-	int foodCount; // 집에 축적된 먹이 개수
+	float stockFoodWeight; // 집에 축적된 먹이 개수
 
 public:
 	AntHome(Field& _field);
@@ -83,8 +83,8 @@ public:
 	void ExitAntRoutine();	// 집에 있는 개미 내보낼지 말지 확인
 
 	// 먹이
-	int GetFoodCount() const { return foodCount; }
-	void AddFood(int count) { foodCount += count; } // 먹이 추가
+	int GetFoodCount() const { return stockFoodWeight; }
+	void AddFood(float _weight); // 먹이 추가
 
 private:
 	virtual void Init() override;

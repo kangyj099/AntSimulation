@@ -7,7 +7,6 @@ import logManager;
 import field;
 import ant;
 
-
 AntHome::AntHome(Field& _field) : GameObject(_field)
 {
 	Init();
@@ -114,6 +113,11 @@ void AntHome::ExitAntRoutine()
 		} break;
 		}
 	}
+}
+
+void AntHome::AddFood(float _weight)
+{
+	stockFoodWeight += _weight;
 }
 
 void AntHome::Init()

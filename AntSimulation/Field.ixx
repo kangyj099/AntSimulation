@@ -52,6 +52,8 @@ export class Field
 private:
 	// width*height 타일들. 각 셀이 게임오브젝트를 가지고있음
 	std::vector<std::vector<Tile>> tiles;	//[x][y]
+	// 충돌 이벤트 queue
+	std::queue<CollisionInfo> collisionInfos;
 
 	GameObject* antHome;
 
@@ -97,7 +99,6 @@ public:
 	}
 
 	CollisionType GetCollisionType(GameObject& _object, FieldPos _pos);
-	void PushCollisionInfo(CollisionInfo _colInfo);
 	CollisionInfo PopCollisionInfo();
 
 	// Ant에게 Food 쥐여주는 함수.. 이게 최선인가?
@@ -106,6 +107,5 @@ public:
 private:
 	Tile* GetTile(FieldPos _pos);
 
-	// 충돌 이벤트 queue
-	std::queue<CollisionInfo> collisionInfos;
+	void PushCollisionInfo(CollisionInfo _colInfo);
 };

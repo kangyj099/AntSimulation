@@ -18,24 +18,6 @@ Ant::~Ant()
 {
 }
 
-void Ant::OnUpdate()
-{
-}
-
-void Ant::OnDraw()
-{
-	ConsolePos consolePos = Utils::FieldPositionToConsolePos(pos);
-	GotoXY(consolePos);
-
-	Color drawtextColor = textColor;
-
-	if (true == IsCarringObject())
-	{
-		drawtextColor = carringObject->GetTextColor();
-	}
-	PrintText("ⓐ", bgColor, drawtextColor);
-}
-
 void Ant::OnOverlap(GameObject* _other)
 {
 	if (nullptr == _other)
@@ -54,7 +36,7 @@ void Ant::OnOverlap(GameObject* _other)
 			SetCarringObject(*_other);
 		}
 	}break;
-	default:{}
+	default: {}
 	}
 }
 
@@ -127,4 +109,31 @@ void Ant::Init()
 	{
 		__debugbreak();
 	}
+}
+
+void Ant::OnUpdate()
+{
+	if (true == IsRest())
+	{
+		return;
+	}
+}
+
+void Ant::OnDraw()
+{
+	if (true == IsRest())
+	{
+		return;
+	}
+
+	ConsolePos consolePos = Utils::FieldPositionToConsolePos(pos);
+	GotoXY(consolePos);
+
+	Color drawtextColor = textColor;
+
+	if (true == IsCarringFood())
+	{
+		drawtextColor = Color::Cyan;
+	}
+	PrintText("ⓐ", bgColor, drawtextColor);
 }

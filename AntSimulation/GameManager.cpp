@@ -54,7 +54,7 @@ void GameManager::Init()
 		}
 	}
 
-	// 개미 전용 세팅
+	// 개미 초기 세팅
 	for (auto& object : objects)
 	{
 		if (nullptr == object)

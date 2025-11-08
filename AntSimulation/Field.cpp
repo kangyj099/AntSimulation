@@ -199,16 +199,6 @@ CollisionType Field::GetCollisionType(GameObject& _object, FieldPos _pos)
 	return tile->GetCollisionType(_object);
 }
 
-void Field::PushCollisionInfo(CollisionInfo _colInfo)
-{
-	if (false == _colInfo.IsValidInfo())
-	{
-		return;
-	}
-
-	collisionInfos.push(_colInfo);
-}
-
 CollisionInfo Field::PopCollisionInfo()
 {
 	if (true == collisionInfos.empty())
@@ -266,6 +256,16 @@ Tile* Field::GetTile(FieldPos _pos)
 	return tile;
 }
 
+void Field::PushCollisionInfo(CollisionInfo _colInfo)
+{
+	if (false == _colInfo.IsValidInfo())
+	{
+		return;
+	}
+
+	collisionInfos.push(_colInfo);
+}
+
 CollisionType Tile::GetCollisionType(GameObject& _object) const
 {
 	if (true == IsBlocked())
@@ -315,12 +315,12 @@ std::queue<CollisionInfo> Tile::GetCollisionInfos(GameObject& _gameObject)
 
 bool Tile::AddObject(GameObject& _gameObject)
 {
-	if (true == IsContains(_gameObject))
+	if (true == isBlocked)
 	{
 		return false;
 	}
 
-	if (true == isBlocked)
+	if (true == IsContains(_gameObject))
 	{
 		return false;
 	}

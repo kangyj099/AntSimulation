@@ -18,13 +18,13 @@ export enum class LogType
 
 // 개미 로그
 struct Log {
-	LogType logType;
-	std::string logText;
+	LogType type;
+	std::string text;
 
 	void SetLog(LogType _logType, std::string _logText)
 	{
-		logType = _logType;
-		logText = _logText;
+		type = _logType;
+		text = _logText;
 	}
 };
 

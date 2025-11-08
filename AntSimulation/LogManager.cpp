@@ -34,7 +34,7 @@ void LogManager::PrintLog()
 {
 	for (auto log = logList.begin(); log != logList.end(); ++log)
 	{
-		switch (log->logType)
+		switch (log->type)
 		{
 		case LogType::State: PrintText("◎ ", c_COLOR_defaultBG, Color::Blue); break;
 		case LogType::Action: PrintText("■ ", c_COLOR_defaultBG, Color::Yellow); break;
@@ -44,7 +44,7 @@ void LogManager::PrintLog()
 		default:;
 		}
 
-		PrintText(log->logText);
+		PrintText(log->text);
 		if (logList.end()-1 != log)
 		{
 			PrintText("\n");

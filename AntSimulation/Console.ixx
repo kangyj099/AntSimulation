@@ -6,6 +6,9 @@ import common;
 /// <summary>
 /// 콘솔창 크기 조절, 이름 변경
 /// </summary>
+/// <param name="_consoleWidth">콘솔창 가로크기</param>
+/// <param name="_consoleHeight">콘솔창 세로크기</param>
+/// <param name="_title">창 이름</param>
 export void ConsoleSetting(int _consoleWidth, int _consoleHeight, std::string _title);
 /// <summary>
 /// 콘솔 커서 세팅
