@@ -1,8 +1,11 @@
 ﻿module ant;
 
+import <format>;
+
 import common;
 import utils;
 import console;
+import logManager;
 
 import field;
 import antHome;
@@ -94,6 +97,7 @@ float Ant::LiftFood(float _foodWeight)
 	}
 
 	carringFoodWeight += addWeight;
+	LogManager::GetInstance().AddLog(LogType::Action, std::format("{} 음식 {} 들어올림 (현재 {})", GetName(), addWeight, carringFoodWeight));
 
 	Movement* movement = GetComponent<Movement>(ComponentType::Movement);
 	if (nullptr != movement)
@@ -112,6 +116,7 @@ float Ant::DownFood()
 {
 	float downFoodWeight = carringFoodWeight;
 	carringFoodWeight = 0;
+	LogManager::GetInstance().AddLog(LogType::Action, std::format("{} 음식 {} 내려둠", GetName(), downFoodWeight));
 
 	Movement* movement = GetComponent<Movement>(ComponentType::Movement);
 	if (nullptr != movement)
