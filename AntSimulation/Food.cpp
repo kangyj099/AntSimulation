@@ -16,7 +16,7 @@ void Food::OnDraw()
 {
 	ConsolePos consolePos = Utils::FieldPositionToConsolePos(pos);
 	GotoXY(consolePos);
-	PrintText("F", bgColor, textColor);
+	PrintText("F ", bgColor, textColor);
 }
 
 void Food::OnOverlap(GameObject* _other)
