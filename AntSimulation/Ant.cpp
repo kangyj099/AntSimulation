@@ -9,7 +9,7 @@ import food;
 
 import movement;
 
-Ant::Ant(Field& _field) : GameObject(_field), carringObject(nullptr)
+Ant::Ant(Field& _field) : GameObject(_field), carringFoodWeight(0.0f), isRest(false)
 {
 	Init();
 }
@@ -66,11 +66,6 @@ bool Ant::SetCarringObject(GameObject& _object)
 
 	carringObject = &_object;
 	
-	// 들고있는 동안 짐은 활성화 끈다
-	if (true == _object.IsActive())
-	{
-		_object.SetActive(false);
-	}
 
 	Movement* movement = GetComponent<Movement>(ComponentType::Movement);
 	if (nullptr != movement)
@@ -102,8 +97,6 @@ bool Ant::IsCarringObject()
 
 void Ant::Init()
 {
-	isActive = false;	// 생성해도 바로 배치하지 않음
-
 	Movement* movement = AddComponent<Movement>(pos, Constants::c_GAME_antSpeedMax);
 	if (nullptr == movement)
 	{

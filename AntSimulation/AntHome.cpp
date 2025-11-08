@@ -44,7 +44,6 @@ void AntHome::Setting(FieldPos _pos, std::string _name, float _weight)
 void AntHome::EnterAnt(Ant& ant, bool isPrintLog)
 {
 	// 개미 집에 들어감
-	ant.SetActive(false);
 	field.MoveObject(ant, ant.GetPos(), pos);
 
 	waitingAnts.push(&ant);
@@ -65,7 +64,7 @@ void AntHome::ExitAnt(bool isPrintLog)
 
 	// 집 나온 개미 집 위치에서부터 시작
 	field.MoveObject(*ant, ant->GetPos(), pos);
-	ant->SetActive(true);
+	ant->ExitRest();
 
 	if (true == isPrintLog)
 	{

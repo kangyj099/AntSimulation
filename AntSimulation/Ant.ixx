@@ -9,6 +9,8 @@ private:
 	FieldPos antHomePos;
 	GameObject* carringObject;
 
+	bool isRest;
+
 public:
 	Ant(Field& _field);
 	~Ant() override;
@@ -24,6 +26,9 @@ public:
 	bool DropCarringObject();
 
 	bool IsCarringObject();
+	void EnterRest() { isRest = true; }
+	void ExitRest() { isRest = false; }
+	bool IsRest() { return isRest; }
 
 private:
 	virtual void Init() override;

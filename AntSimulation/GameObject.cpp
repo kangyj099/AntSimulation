@@ -2,7 +2,7 @@
 
 import field;
 
-GameObject::GameObject(Field& _field) : field(_field), isActive(true), isReserveRemove(false)
+GameObject::GameObject(Field& _field) : field(_field), isReserveRemove(false)
 , bgColor(Constants::c_COLOR_defaultBG), textColor(Constants::c_COLOR_defaultText)
 {
 	field.AddObject(*this, pos);
@@ -15,11 +15,6 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
-	if (false == IsActive())
-	{
-		return;
-	}
-
 	OnUpdate();
 
 	// 컴포넌트 업데이트
@@ -31,11 +26,6 @@ void GameObject::Update()
 
 void GameObject::Draw()
 {
-	if (false == IsActive())
-	{
-		return;
-	}
-
 	OnDraw();
 
 	// 컴포넌트 그리기
@@ -70,9 +60,4 @@ void GameObject::ReleaseAllComponents()
 	allComponents.clear();
 	updateComponents.clear();
 	drawComponents.clear();
-}
-
-void GameObject::SetActive(bool _activeState)
-{
-	isActive = _activeState;
 }

@@ -28,8 +28,6 @@ protected:
 	// 무게(밀리그람단위)
 	float weightMG;
 
-	// 현재 활동중인지
-	bool isActive;
 	// 오브젝트 삭제 예약
 	bool isReserveRemove;
 
@@ -74,8 +72,6 @@ public:
 	virtual void Reset();
 	void ReleaseAllComponents();
 
-	void SetActive(bool _activeState);
-	bool IsActive() { return isActive; };
 	Field& GetField() { return field; }
 	FieldPos GetPos() { return pos; }
 	FieldPos SetPos(FieldPos _pos) { pos = _pos; return pos; }

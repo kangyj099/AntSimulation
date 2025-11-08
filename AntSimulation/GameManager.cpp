@@ -71,6 +71,7 @@ void GameManager::Init()
 
 		ant->SetHomePos(antHome->GetPos());	// 집 위치 각인
 		antHome->EnterAnt(*ant, false);	// 개미는 집에서 시작함
+		ant->EnterRest();
 	}
 
 	// Food
@@ -107,10 +108,7 @@ bool GameManager::Update()
 			continue;
 		}
 
-		if (true == object->IsActive())
-		{
-			object->Update();
-		}
+		object->Update();
 	}
 
 	// 충돌 처리
@@ -149,10 +147,7 @@ void GameManager::Draw()
 			__debugbreak();
 		}
 
-		if (true == object->IsActive())
-		{
-			object->Draw();
-		}
+		object->Draw();
 	}
 
 	// 로그 출력
