@@ -75,6 +75,8 @@ public:
 	Field& GetField() { return field; }
 	FieldPos GetPos() { return pos; }
 	FieldPos SetPos(FieldPos _pos) { pos = _pos; return pos; }
+	std::string GetName() { return name; }
+	float GetWeight() { return weightMG; }
 	Color GetBGColor() { return bgColor; }
 	Color GetTextColor() { return textColor; }
 	bool IsReserveRemove() { return isReserveRemove; }

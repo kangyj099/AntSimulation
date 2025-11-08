@@ -101,9 +101,6 @@ public:
 	CollisionType GetCollisionType(GameObject& _object, FieldPos _pos);
 	CollisionInfo PopCollisionInfo();
 
-	// Ant에게 Food 쥐여주는 함수.. 이게 최선인가?
-	bool AntPickUpObject(Ant& _ant, GameObject& _pickedObject);
-
 private:
 	Tile* GetTile(FieldPos _pos);
 

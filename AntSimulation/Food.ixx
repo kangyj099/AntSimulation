@@ -16,6 +16,8 @@ public:
 
 	virtual void OnOverlap(GameObject* _other) override;
 
+	float PickedUp(float _weightMG);
+
 private:
 	virtual void Init() override;
 };

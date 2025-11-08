@@ -5,6 +5,7 @@ import utils;
 import console;
 
 import field;
+import antHome;
 import food;
 
 import movement;
@@ -25,15 +26,43 @@ void Ant::OnOverlap(GameObject* _other)
 		return;
 	}
 
+	if (true == IsRest())
+	{
+		return;
+	}
+
 	switch (_other->GetObjectType())
 	{
+	case ObjectType::AntHome:
+	{
+		// 내려놓기
+		if (true == IsCarringFood())
+		{
+			AntHome* antHome = dynamic_cast<AntHome*>(_other);
+			// 보유량 차감 먼저 하고 집에 넣기
+			float weight = DownFood();
+			antHome->AddFood(weight);
+
+			// 개미가 집에 들어옴
+			antHome->EnterAnt(*this);
+
+			EnterRest();
+		}
+	}break;
 	case ObjectType::Food:
 	{
 		// 줍기
-		if (nullptr == carringObject)
+		if (GetMaxCarringFoodWeight() >= carringFoodWeight)
 		{
-			GetField().AntPickUpObject(*this, *_other);
-			SetCarringObject(*_other);
+			Food* food = dynamic_cast<Food*>(_other);
+			// 자원 차감 먼저 하고 들기
+			float pickWeight = food->PickedUp(GetMaxCarringFoodWeight() - carringFoodWeight);
+			float liftWeight = LiftFood(pickWeight);
+
+			if (pickWeight != liftWeight)
+			{
+				__debugbreak();
+			}
 		}
 	}break;
 	default: {}
@@ -50,22 +79,21 @@ bool Ant::SetHomePos(FieldPos _antHomePos)
 	return true;
 }
 
-bool Ant::SetCarringObject(GameObject& _object)
+float Ant::LiftFood(float _foodWeight)
 {
-	// 내가 나를 들면 안됨
-	if (this == &_object)
+	float addWeight = _foodWeight;
+	if (GetMaxCarringFoodWeight() < carringFoodWeight + addWeight)
 	{
-		return false;
+		addWeight = GetMaxCarringFoodWeight() - carringFoodWeight;
 	}
 
-	// 손이 없음
-	if (true == IsCarringObject())
+	if (addWeight > _foodWeight)
 	{
-		return false;
+		__debugbreak();
+		return 0.0f;
 	}
 
-	carringObject = &_object;
-	
+	carringFoodWeight += addWeight;
 
 	Movement* movement = GetComponent<Movement>(ComponentType::Movement);
 	if (nullptr != movement)
@@ -77,17 +105,29 @@ bool Ant::SetCarringObject(GameObject& _object)
 		__debugbreak();
 	}
 
-	return true;
+	return addWeight;
 }
 
-bool Ant::DropCarringObject()
+float Ant::DownFood()
 {
-	return true;
+	float downFoodWeight = carringFoodWeight;
+	carringFoodWeight = 0;
+
+	Movement* movement = GetComponent<Movement>(ComponentType::Movement);
+	if (nullptr != movement)
+	{
+	}
+	else
+	{
+		__debugbreak();
+	}
+
+	return downFoodWeight;
 }
 
-bool Ant::IsCarringObject()
+bool Ant::IsCarringFood()
 {
-	if (nullptr != carringObject)
+	if (0.0f < carringFoodWeight)
 	{
 		return true;
 	}

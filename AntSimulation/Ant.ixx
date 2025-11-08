@@ -7,7 +7,7 @@ export class Ant : public GameObject
 {
 private:
 	FieldPos antHomePos;
-	GameObject* carringObject;
+	float carringFoodWeight;
 
 	bool isRest;
 
@@ -22,10 +22,10 @@ public:
 	virtual void Reset() override;
 
 	bool SetHomePos(FieldPos _antHome);
-	bool SetCarringObject(GameObject& _object);
-	bool DropCarringObject();
 
-	bool IsCarringObject();
+	bool IsCarringFood();
+	float GetMaxCarringFoodWeight() { return weightMG * Constants::c_GAME_antCarryFoodWeightRatio; }
+
 	void EnterRest() { isRest = true; }
 	void ExitRest() { isRest = false; }
 	bool IsRest() { return isRest; }
@@ -34,4 +34,7 @@ private:
 	virtual void Init() override;
 	virtual void OnUpdate() override;
 	virtual void OnDraw() override;
+
+	float LiftFood(float _foodWeight);
+	float DownFood();
 };

@@ -47,6 +47,11 @@ void AntHome::EnterAnt(Ant& ant, bool isPrintLog)
 	field.MoveObject(ant, ant.GetPos(), pos);
 
 	waitingAnts.push(&ant);
+
+	if (true == isPrintLog)
+	{
+		LogManager::GetInstance().AddLog(LogType::State, std::format("{}이(가) 집에 들어감", ant.GetName()));
+	}
 }
 
 void AntHome::ExitAnt(bool isPrintLog)
@@ -117,6 +122,7 @@ void AntHome::ExitAntRoutine()
 void AntHome::AddFood(float _weight)
 {
 	stockFoodWeight += _weight;
+	LogManager::GetInstance().AddLog(LogType::Outcome, std::format("집에 먹이 {} 축적. 현재 저장량 {}", _weight, stockFoodWeight));
 }
 
 void AntHome::Init()
