@@ -83,6 +83,14 @@ bool Movement::SetDestMove(FieldPos _destPos)
 	return true;
 }
 
+bool Movement::SetRandomMove()
+{
+	// 유효하지 않은 위치
+	destPos = { -1,-1 };
+	isDestMove = false;
+	return true;
+}
+
 Field& Movement::GetOwnerField()
 {
 	return owner->GetField();

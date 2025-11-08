@@ -116,6 +116,7 @@ float Ant::DownFood()
 	Movement* movement = GetComponent<Movement>(ComponentType::Movement);
 	if (nullptr != movement)
 	{
+		movement->SetRandomMove();
 	}
 	else
 	{

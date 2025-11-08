@@ -45,6 +45,7 @@ public:
 	bool IsMoving() const { return isMoving; }
 
 	bool SetDestMove(FieldPos _destPos);
+	bool SetRandomMove();
 
 private:
 	Field& GetOwnerField();
