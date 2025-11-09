@@ -16,6 +16,7 @@ export void ConsoleSetting(int _consoleWidth, int _consoleHeight, std::string _t
 /// <param name="_size">콘솔 커서 크기</param>
 /// <param name="_isVisible">콘솔 커서 보이게 할지</param>
 export void CursorSetting(int _size, bool _isVisible);
+export void OffQuickEditMode();
 /// <summary>
 /// 콘솔 스크린버퍼 세팅
 /// </summary>

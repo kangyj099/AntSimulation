@@ -30,6 +30,16 @@ void CursorSetting(int _size, bool _isVisible)
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleCursor);
 }
 
+void OffQuickEditMode()
+{
+	HANDLE handle = GetStdHandle(STD_INPUT_HANDLE);
+	DWORD mode = 0;
+	GetConsoleMode(handle, &mode);
+	mode &= ~ENABLE_QUICK_EDIT_MODE;
+	mode |= ENABLE_EXTENDED_FLAGS | ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
+	SetConsoleMode(handle, mode);
+}
+
 bool GotoXY(ConsolePos _pos)
 {
 	if (0 > _pos.x || Constants::c_SCREEN_width <= _pos.x
