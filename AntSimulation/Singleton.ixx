@@ -3,7 +3,7 @@
 export template <typename T>
 class Singleton
 {
-	public:
+public:
 	static T& GetInstance()
 	{
 		static T instance;

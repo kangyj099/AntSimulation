@@ -80,7 +80,7 @@ void GameManager::Init()
 
 	// test
 	LogManager::GetInstance().AddLog(LogType::State, "게임 시작");
-};
+}
 
 bool GameManager::Update()
 {
@@ -280,7 +280,7 @@ bool GameManager::ProcessRemoveReserved()
 			}
 		),
 		objects.end()
-	);
+				);	//END erase
 
 	return true;
 }

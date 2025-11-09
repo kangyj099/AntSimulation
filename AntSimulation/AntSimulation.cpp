@@ -16,7 +16,7 @@ int main()
 	bool isRun = true;
 	do
 	{
-		InputManager::GetInstance(). SwapQueues();
+		InputManager::GetInstance().SwapQueues();
 		isRun = GameManager::GetInstance().Update();
 		GameManager::GetInstance().Draw();
 
@@ -24,4 +24,3 @@ int main()
 		
 	} while (isRun);
 }
-
