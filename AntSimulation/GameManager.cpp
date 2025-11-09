@@ -75,16 +75,6 @@ void GameManager::Init()
 		ant->EnterRest();
 	}
 
-	// Food
-	for (int i = 0; i < 10; ++i)
-	{
-		FieldPos pos(static_cast<short>(i), static_cast<short>(i));
-		float weight = Utils::GetRandomFloat(Constants::c_GAME_foodWeightMin, Constants::c_GAME_foodWeightMax);
-		std::string name = "음식" + std::to_string(weight);
-
-		CreateObject(ObjectType::Food, pos, name, weight);
-	}
-
 	// 로그 초기화
 	LogManager::GetInstance().Reset();
 
@@ -205,6 +195,11 @@ void GameManager::ProcessInputEvent()
 					break;
 				}
 
+				// 클릭 위치에 음식 소환
+				float weight = Utils::GetRandomFloat(Constants::c_GAME_foodWeightMin, Constants::c_GAME_foodWeightMax);
+				std::string name = "음식" + std::to_string(weight);
+
+				CreateObject(ObjectType::Food, pos, name, weight);
 			} break;
 			case KeyCode::MouseRight:
 			{
