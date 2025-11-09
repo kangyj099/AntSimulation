@@ -19,6 +19,7 @@ export namespace Utils
 	/// <returns></returns>
 	bool IsValidDirection(Direction8 _dir);
 	ConsolePos FieldPositionToConsolePos(FieldPos _position);
+	FieldPos ConsolePositionToFieldPos(ConsolePos _position);
 
 	/// <summary>
 	/// range에 value가 포함되어 있는지 확인

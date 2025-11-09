@@ -40,6 +40,13 @@ ConsolePos Utils::FieldPositionToConsolePos(FieldPos _position)
 	return consolePos;
 }
 
+FieldPos Utils::ConsolePositionToFieldPos(ConsolePos _position)
+{
+	FieldPos fieldPos(_position.x / c_FIELD_toScreenXScale - c_SCREEN_fieldStartX, _position.y - c_SCREEN_fieldStartY);
+
+	return fieldPos;
+}
+
 std::mt19937 randEngine(std::random_device{}());
 
 int Utils::GetRandomInt(int _min, int _max)
