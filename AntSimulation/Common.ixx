@@ -175,6 +175,26 @@ export enum class CollisionType
 	Count
 };
 
+export enum class InputType
+{
+	None = -1,
+
+	ButtonDown = 0,
+
+	Count
+};
+
+export enum class KeyCode
+{
+	None = -1,
+	
+	MouseLeft,
+	MouseRight,
+	MouseWheel,
+
+	Count
+};
+
 export class GameObject;
 export struct CollisionInfo {
 	CollisionType type;

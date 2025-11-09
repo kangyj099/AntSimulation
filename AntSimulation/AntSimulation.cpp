@@ -1,6 +1,7 @@
 ﻿import console;
 import common;
 import gameManager;
+import inputManager;
 
 int main()
 {
@@ -15,8 +16,9 @@ int main()
 	bool isRun = true;
 	do
 	{
-		isRun = gameManager.Update();
-		gameManager.Draw();
+		InputManager::GetInstance(). SwapQueues();
+		isRun = GameManager::GetInstance().Update();
+		GameManager::GetInstance().Draw();
 
 		SwapScreenBuffer();
 		

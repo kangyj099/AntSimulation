@@ -86,6 +86,12 @@
     <ClCompile Include="Singleton.ixx">
       <Filter>커먼\싱글톤</Filter>
     </ClCompile>
+    <ClCompile Include="InputManager.ixx">
+      <Filter>인풋매니저</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>인풋매니저</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="커먼">
@@ -126,6 +132,9 @@
     </Filter>
     <Filter Include="커먼\싱글톤">
       <UniqueIdentifier>{3d7df922-c40c-4c06-81a2-8ccccb798bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="인풋매니저">
+      <UniqueIdentifier>{6140d83c-6c5c-435a-adda-b2df2f0a0dcc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

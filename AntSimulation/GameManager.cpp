@@ -5,6 +5,7 @@ import <chrono>;
 
 import console;
 import utils;
+import inputManager;
 import logManager;
 import gameObject;	// DELETE: 에디터 빨간줄때문에 추가
 import antHome;
@@ -111,6 +112,9 @@ bool GameManager::Update()
 		object->Update();
 	}
 
+	// 인풋 이벤트 처리
+	ProcessInputEvent();
+
 	// 충돌 처리
 	while (0 < field.IsHaveCollisionEvent())
 	{
@@ -170,6 +174,51 @@ void GameManager::ProcessCollision(CollisionInfo& _colInfo)
 	} break;
 	default:
 		break;
+	}
+}
+
+void GameManager::ProcessInputEvent()
+{
+	auto& inputEvents = InputManager::GetInstance().GetInputEvetQueue();
+
+	while (false == inputEvents.empty())
+	{
+		InputEvent input = inputEvents.front();
+		inputEvents.pop();
+
+		if (false == input.IsValidEvent())
+		{
+			continue;
+		}
+
+		switch (input.GetType())
+		{
+		case InputType::ButtonDown:
+		{
+			switch (input.GetCode())
+			{
+			case KeyCode::MouseLeft:
+			{
+				FieldPos pos = Utils::ConsolePositionToFieldPos(input.GetPos());
+				if (false == field.IsValidPos(pos))
+				{
+					break;
+				}
+
+			} break;
+			case KeyCode::MouseRight:
+			{
+
+			} break;
+			case KeyCode::MouseWheel:
+			{
+
+			} break;
+			default: {}
+			}
+		} break;
+		default: {}
+		}
 	}
 }
 
