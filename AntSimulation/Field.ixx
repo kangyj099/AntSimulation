@@ -3,11 +3,10 @@
 import <vector>;
 import <queue>;
 
-import common;
+import core;
 import utils;
-
-export class GameObject;
-export class Ant;
+import field_common;
+import collision_common;
 
 //Todo: 오브젝트 Add, Release 실패 이유 세분화하여 enum 만들기
 

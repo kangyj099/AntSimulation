@@ -1,6 +1,6 @@
-﻿import console;
-import common;
-import interface;
+﻿import core;
+import console;
+import interfaces;
 import inputManager;
 
 int main()

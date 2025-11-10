@@ -1,7 +1,5 @@
 ﻿module utils;
 
-import common;
-
 using namespace Constants;
 
 bool Utils::IsSameSign(short _a, short _b)

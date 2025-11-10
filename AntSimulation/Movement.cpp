@@ -2,8 +2,6 @@
 
 import <array>;
 
-import common;
-import gameManager;
 import utils;
 import gameObject;
 import field;

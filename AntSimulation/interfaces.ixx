@@ -1,6 +1,6 @@
-﻿export module interface;
+﻿export module interfaces;
 
-import common;
+import core;
 
 export struct IUpdate {
 	virtual bool Update() = 0;

@@ -5,7 +5,6 @@ import <string>;
 import <vector>;
 
 import singleton;
-import common;
 
 // 개미 로그 종류
 export enum class LogType

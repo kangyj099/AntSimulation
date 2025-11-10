@@ -1,6 +1,6 @@
 ﻿export module food;
 
-import common;
+import core;
 import gameObject;
 
 export class Food : public GameObject

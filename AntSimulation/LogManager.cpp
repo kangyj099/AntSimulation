@@ -3,7 +3,7 @@
 import <iostream>;
 import <vector>;
 
-import common;
+import core;
 import console;
 
 using namespace Constants;

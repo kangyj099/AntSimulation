@@ -1,7 +1,7 @@
 ﻿export module console;
 
 import <string>;
-import common;
+import core;
 
 /// <summary>
 /// 콘솔창 크기 조절, 이름 변경

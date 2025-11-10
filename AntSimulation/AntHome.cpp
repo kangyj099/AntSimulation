@@ -1,6 +1,5 @@
 ﻿module antHome;
 
-import common;
 import utils;
 import console;
 import logManager;

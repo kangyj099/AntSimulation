@@ -3,7 +3,8 @@
 import <algorithm>;
 import <random>;
 
-import common;
+import core;
+import field_common;
 
 export namespace Utils
 {

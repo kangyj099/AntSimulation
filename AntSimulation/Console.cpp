@@ -4,7 +4,6 @@
 module console;
 
 import <string>;
-import common;
 
 HANDLE GameScreenBuffers[2]; int curGameBufferIndex = 0;
 HANDLE& GetBackBuffer()

@@ -3,13 +3,10 @@
   <ItemGroup>
     <ClCompile Include="AntSimulation.cpp" />
     <ClCompile Include="Utils.ixx">
-      <Filter>커먼\유틸</Filter>
+      <Filter>커먼&amp;유틸리티\유틸</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
-      <Filter>커먼\유틸</Filter>
-    </ClCompile>
-    <ClCompile Include="Common.ixx">
-      <Filter>커먼</Filter>
+      <Filter>커먼&amp;유틸리티\유틸</Filter>
     </ClCompile>
     <ClCompile Include="ComponentBase.cpp">
       <Filter>게임 오브젝트\기능</Filter>
@@ -21,7 +18,7 @@
       <Filter>필드</Filter>
     </ClCompile>
     <ClCompile Include="Concepts.ixx">
-      <Filter>커먼</Filter>
+      <Filter>커먼&amp;유틸리티</Filter>
     </ClCompile>
     <ClCompile Include="Component.ixx">
       <Filter>게임 오브젝트\기능</Filter>
@@ -57,10 +54,10 @@
       <Filter>로그</Filter>
     </ClCompile>
     <ClCompile Include="Console.cpp">
-      <Filter>커먼\콘솔</Filter>
+      <Filter>커먼&amp;유틸리티\콘솔</Filter>
     </ClCompile>
     <ClCompile Include="Console.ixx">
-      <Filter>커먼\콘솔</Filter>
+      <Filter>커먼&amp;유틸리티\콘솔</Filter>
     </ClCompile>
     <ClCompile Include="AntHome.cpp">
       <Filter>게임 오브젝트\개미집</Filter>
@@ -69,7 +66,7 @@
       <Filter>게임 오브젝트\개미집</Filter>
     </ClCompile>
     <ClCompile Include="Coroutines.ixx">
-      <Filter>커먼</Filter>
+      <Filter>커먼&amp;유틸리티</Filter>
     </ClCompile>
     <ClCompile Include="Food.cpp">
       <Filter>게임 오브젝트\음식</Filter>
@@ -81,7 +78,7 @@
       <Filter>게임 오브젝트</Filter>
     </ClCompile>
     <ClCompile Include="Singleton.ixx">
-      <Filter>커먼\싱글톤</Filter>
+      <Filter>커먼&amp;유틸리티\패턴\싱글톤</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.ixx">
       <Filter>인풋매니저</Filter>
@@ -89,20 +86,26 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>인풋매니저</Filter>
     </ClCompile>
-    <ClCompile Include="Interface.ixx">
-      <Filter>커먼\인터페이스</Filter>
+    <ClCompile Include="Input_common.ixx">
+      <Filter>커먼&amp;유틸리티\커먼</Filter>
     </ClCompile>
-    <ClCompile Include="Interface.cpp">
-      <Filter>커먼\인터페이스</Filter>
+    <ClCompile Include="Collision_common.ixx">
+      <Filter>커먼&amp;유틸리티\커먼</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.ixx">
+      <Filter>커먼&amp;유틸리티</Filter>
+    </ClCompile>
+    <ClCompile Include="Field_common.ixx">
+      <Filter>커먼&amp;유틸리티\커먼</Filter>
+    </ClCompile>
+    <ClCompile Include="interfaces.ixx">
+      <Filter>커먼&amp;유틸리티\인터페이스</Filter>
+    </ClCompile>
+    <ClCompile Include="interfaces.cpp">
+      <Filter>커먼&amp;유틸리티\인터페이스</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="커먼">
-      <UniqueIdentifier>{eb90f8fd-09f4-4790-9658-6c7eb5a72cc3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="커먼\유틸">
-      <UniqueIdentifier>{439504e0-2a02-4324-b0d9-ef0598d22503}</UniqueIdentifier>
-    </Filter>
     <Filter Include="게임 오브젝트">
       <UniqueIdentifier>{473cb720-b485-49c8-8807-56d0916ad8f5}</UniqueIdentifier>
     </Filter>
@@ -124,22 +127,34 @@
     <Filter Include="로그">
       <UniqueIdentifier>{07031434-ab07-4c8c-ac02-8dc1eb050332}</UniqueIdentifier>
     </Filter>
-    <Filter Include="커먼\콘솔">
-      <UniqueIdentifier>{bc2d3fa4-ec8c-43d6-b328-721e05244d69}</UniqueIdentifier>
-    </Filter>
     <Filter Include="게임 오브젝트\개미집">
       <UniqueIdentifier>{d4defa35-4282-4dc9-9683-71ad4d28e97f}</UniqueIdentifier>
     </Filter>
     <Filter Include="게임 오브젝트\음식">
       <UniqueIdentifier>{4dc1c7f3-bdf1-43b4-be12-0c79fc480e38}</UniqueIdentifier>
     </Filter>
-    <Filter Include="커먼\싱글톤">
-      <UniqueIdentifier>{3d7df922-c40c-4c06-81a2-8ccccb798bff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="인풋매니저">
       <UniqueIdentifier>{6140d83c-6c5c-435a-adda-b2df2f0a0dcc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="커먼\인터페이스">
+    <Filter Include="커먼&amp;유틸리티">
+      <UniqueIdentifier>{eb90f8fd-09f4-4790-9658-6c7eb5a72cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="커먼&amp;유틸리티\유틸">
+      <UniqueIdentifier>{439504e0-2a02-4324-b0d9-ef0598d22503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="커먼&amp;유틸리티\콘솔">
+      <UniqueIdentifier>{bc2d3fa4-ec8c-43d6-b328-721e05244d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="커먼&amp;유틸리티\커먼">
+      <UniqueIdentifier>{43af1279-2667-413e-a1be-297f01679e96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="커먼&amp;유틸리티\패턴">
+      <UniqueIdentifier>{908a127b-d1c4-4c70-880b-b60c154123ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="커먼&amp;유틸리티\패턴\싱글톤">
+      <UniqueIdentifier>{3d7df922-c40c-4c06-81a2-8ccccb798bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="커먼&amp;유틸리티\인터페이스">
       <UniqueIdentifier>{941b0cea-0b82-4fa1-ac97-10826d37e8af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

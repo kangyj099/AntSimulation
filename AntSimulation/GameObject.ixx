@@ -5,11 +5,12 @@ import <string>;
 import <vector>;
 import <unordered_map>;
 
-import common;
+import core;
+import field_common;
 import utils;
-import concepts;
-import interface;
 import component;
+import concepts;
+import interfaces;
 
 export class GameObject : IUpdate, IDraw
 {

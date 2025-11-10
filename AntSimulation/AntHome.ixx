@@ -3,9 +3,9 @@
 import <chrono>;
 import <queue>;
 
+import core;
+import field_common;
 import gameObject;
-
-export class Ant;
 
 // 개미가 집에 들어갈 수 있다. (집이 개미를 보유)
 // 집에 있는 개미는 n초에 한 마리씩 들어온 순서대로 밖으로 내보낸다.

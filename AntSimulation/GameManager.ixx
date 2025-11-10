@@ -3,12 +3,12 @@
 import <memory>;
 import <chrono>;
 
+import collision_common;
+import field_common;
 import singleton;
-import interface;
+import interfaces;
 import field;
 import gameObject;
-
-export class AntHome;
 
 export class GameManager : public IGameManager, public Singleton<GameManager>
 {

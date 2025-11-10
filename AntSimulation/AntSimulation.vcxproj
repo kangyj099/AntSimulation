@@ -135,9 +135,10 @@
     <ClCompile Include="AntHome.cpp" />
     <ClCompile Include="AntHome.ixx" />
     <ClCompile Include="AntSimulation.cpp" />
-    <ClCompile Include="Common.ixx" />
+    <ClCompile Include="Collision_common.ixx" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Console.ixx" />
+    <ClCompile Include="Core.ixx" />
     <ClCompile Include="Coroutines.ixx" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Field.ixx" />
@@ -146,8 +147,7 @@
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InputManager.ixx" />
-    <ClCompile Include="Interface.cpp" />
-    <ClCompile Include="Interface.ixx" />
+    <ClCompile Include="Input_common.ixx" />
     <ClCompile Include="Component.ixx" />
     <ClCompile Include="ComponentBase.cpp" />
     <ClCompile Include="Concepts.ixx" />
@@ -160,6 +160,9 @@
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="Movement.ixx" />
     <ClCompile Include="Singleton.ixx" />
+    <ClCompile Include="Field_common.ixx" />
+    <ClCompile Include="interfaces.cpp" />
+    <ClCompile Include="interfaces.ixx" />
     <ClCompile Include="Utils.ixx" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>

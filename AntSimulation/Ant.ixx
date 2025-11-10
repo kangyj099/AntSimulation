@@ -1,5 +1,6 @@
 ﻿export module ant;
 
+import field_common;
 import gameObject;
 import movement;
 

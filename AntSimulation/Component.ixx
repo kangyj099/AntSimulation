@@ -1,9 +1,7 @@
 ﻿export module component;
 
-import common;
-import interface;
-
-export class GameObject;
+import core;
+import interfaces;
 
 /////////////////////////////////
 // 컴포넌트

@@ -3,7 +3,6 @@
 import <array>;
 
 import gameObject;
-import ant;
 
 Field::Field() : antHome(nullptr)
 {
@@ -148,7 +147,7 @@ std::array<bool, static_cast<int>(Direction8::Count)> Field::GetDirectionAvailab
 
 	for (int i = 0; i < static_cast<int>(Direction8::Count); ++i)
 	{
-		auto dirPos = Constants::c_FIELD_directions[i];
+		auto dirPos = c_FIELD_directions[i];
 
 		if (false == IsValidPos(_centerPos + dirPos))
 		{
@@ -171,7 +170,7 @@ unsigned short Field::GetTileCountUntilBlock(FieldPos _pos, Direction8 _dir)
 		return tileCount;
 	}
 
-	Constants::Direction8Pos dirPos = Constants::c_FIELD_directions[static_cast<int>(_dir)];
+	Direction8Pos dirPos = c_FIELD_directions[static_cast<int>(_dir)];
 
 	FieldPos checkPos = _pos;
 
