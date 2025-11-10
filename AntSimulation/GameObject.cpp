@@ -12,7 +12,7 @@ GameObject::~GameObject()
 	ReleaseAllComponents();
 }
 
-void GameObject::Update()
+bool GameObject::Update()
 {
 	OnUpdate();
 
@@ -21,6 +21,8 @@ void GameObject::Update()
 	{
 		component->Update();
 	}
+
+	return true;
 }
 
 void GameObject::Draw()

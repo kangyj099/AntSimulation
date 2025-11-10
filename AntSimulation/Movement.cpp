@@ -5,7 +5,6 @@ import <array>;
 import common;
 import gameManager;
 import utils;
-import component;
 import gameObject;
 import field;
 
@@ -24,20 +23,20 @@ Movement::~Movement()
 {
 }
 
-void Movement::Update()
+bool Movement::Update()
 {
 	// owner 이동
 	if (false == isMoving)
 	{
 		SetDirAndTileCount(SetReason::MoveStart);
 
-		return;
+		return true;
 	}
 
 	// max가 초기값, 세팅 안된거
 	if (steady_clock::time_point::max() == nextMoveTime)
 	{
-		return;
+		return true;
 	}
 
 	MoveResult moveResult = MoveResult::None;
@@ -65,6 +64,8 @@ void Movement::Update()
 	default:
 		break;
 	}
+
+	return true;
 }
 
 bool Movement::SetDestMove(FieldPos _destPos)

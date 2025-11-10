@@ -53,8 +53,8 @@ public:
 
 	virtual ObjectType GetObjectType() = 0;
 
-	virtual void Update() override;
-	virtual void Draw() override;
+	bool Update() override;
+	void Draw() override;
 	virtual void Remove();
 
 	virtual void Setting(FieldPos _pos, std::string _name, float _weight);

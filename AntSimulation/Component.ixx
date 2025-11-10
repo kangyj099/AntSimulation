@@ -25,7 +25,5 @@ public:
 	ComponentBase(GameObject& _owner);
 	virtual ~ComponentBase() {}
 
-	virtual void Update() override = 0;
-
 	virtual ComponentType GetType() = 0;
 };

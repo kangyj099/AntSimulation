@@ -39,7 +39,7 @@ public:
 	Movement(GameObject& _owner, FieldPos& _ownerPos, float _speed);
 	virtual ~Movement();
 
-	virtual void Update() override;
+	bool Update() override;
 
 	virtual ComponentType GetType() override { return ComponentType::Movement; }
 	bool IsMoving() const { return isMoving; }
