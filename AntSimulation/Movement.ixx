@@ -41,7 +41,7 @@ public:
 
 	bool Update() override;
 
-	virtual ComponentType GetType() override { return ComponentType::Movement; }
+	ComponentType GetType() override { return ComponentType::Movement; }
 	bool IsMoving() const { return isMoving; }
 
 	bool SetDestMove(FieldPos _destPos);

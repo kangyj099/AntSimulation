@@ -15,11 +15,11 @@ public:
 	Ant();
 	~Ant() override;
 
-	virtual ObjectType GetObjectType() override { return ObjectType::Ant; }
+	ObjectType GetObjectType() override { return ObjectType::Ant; }
 
-	virtual void OnOverlap(GameObject* _other) override;
+	void OnOverlap(GameObject* _other) override;
 
-	virtual void Reset() override;
+	void Reset() override;
 
 	bool SetHomePos(FieldPos _antHome);
 
@@ -31,9 +31,9 @@ public:
 	bool IsRest() { return isRest; }
 
 private:
-	virtual void Init() override;
-	virtual void OnUpdate() override;
-	virtual void OnDraw() override;
+	void Init() override;
+	void OnUpdate() override;
+	void OnDraw() override;
 
 	float LiftFood(float _foodWeight);
 	float DownFood();

@@ -68,13 +68,13 @@ public:
 	AntHome();
 	~AntHome();
 
-	virtual ObjectType GetObjectType() override { return ObjectType::AntHome; }
+	ObjectType GetObjectType() override { return ObjectType::AntHome; }
 
-	virtual void OnUpdate() override;
-	virtual void OnDraw() override;
+	void OnUpdate() override;
+	void OnDraw() override;
 
 	// name, weight는 기본값만을 사용함, 인자 넣어도 사용하지 않음
-	virtual void Setting(FieldPos _pos, std::string _name = "HomeSweetHome", float _weight = 0.0f) override;
+	void Setting(FieldPos _pos, std::string _name = "HomeSweetHome", float _weight = 0.0f) override;
 
 	// 개미
 	void EnterAnt(Ant& ant, bool isPrintLog = true); // 개미가 집에 들어감
@@ -86,5 +86,5 @@ public:
 	void AddFood(float _weight); // 먹이 추가
 
 private:
-	virtual void Init() override;
+	void Init() override;
 };

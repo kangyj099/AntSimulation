@@ -6,18 +6,18 @@ import gameObject;
 export class Food : public GameObject
 {
 private:
-	virtual ObjectType GetObjectType() { return ObjectType::Food; }
+	ObjectType GetObjectType() override { return ObjectType::Food; }
 
 public:
 	Food();
 
-	virtual void OnUpdate() override;
-	virtual void OnDraw() override;
+	void OnUpdate() override;
+	void OnDraw() override;
 
-	virtual void OnOverlap(GameObject* _other) override;
+	void OnOverlap(GameObject* _other) override;
 
 	float PickedUp(float _weightMG);
 
 private:
-	virtual void Init() override;
+	void Init() override;
 };
