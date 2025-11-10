@@ -142,7 +142,8 @@ bool Ant::IsCarringFood()
 
 void Ant::Init()
 {
-	Movement* movement = AddComponent<Movement>(pos, Constants::c_GAME_antSpeedMax);
+	float speed = Utils::GetRandomFloat(Constants::c_GAME_antSpeedMin, Constants::c_GAME_antSpeedMax, 2);
+	Movement* movement = AddComponent<Movement>(pos, speed);
 	if (nullptr == movement)
 	{
 		__debugbreak();
