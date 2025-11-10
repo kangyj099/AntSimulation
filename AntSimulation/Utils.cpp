@@ -55,9 +55,15 @@ int Utils::GetRandomInt(int _min, int _max)
 	return randomvalue;
 }
 
-float Utils::GetRandomFloat(float _min, float _max)
+float Utils::GetRandomFloat(float _min, float _max, int decimalPlaces)
 {
 	std::uniform_real_distribution<float> dist(_min, _max);
-	return dist(randEngine);
+	float randomValue = dist(randEngine);
+
+	// 소수점 자리수 맞추기
+	float factor = std::pow(10.0f, decimalPlaces);
+	randomValue = std::round(randomValue * factor) / factor;
+
+	return randomValue;
 }
 

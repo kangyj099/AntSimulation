@@ -42,5 +42,5 @@ export namespace Utils
 	}
 
 	int GetRandomInt(int _min, int _max);
-	float GetRandomFloat(float _min, float _max);
+	float GetRandomFloat(float _min, float _max, int decimalPlaces = 1);
 }
