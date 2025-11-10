@@ -47,9 +47,11 @@ bool Movement::Update()
 	switch (moveResult)
 	{
 	case MoveResult::BlockWall:
+	case MoveResult::NotValidPos:            // 필드 범위 벗어남을 막힘으로 취급
 		SetDirAndTileCount(SetReason::Blocked);
 		break;
 	case MoveResult::BlockObstacle:
+	case MoveResult::TileObjectProblom:     // 타일 오브젝트 문제는 장애물로 취급
 		SetDirAndTileCount(SetReason::Obstacle);
 		break;
 	case MoveResult::Success:
@@ -245,15 +247,31 @@ bool Movement::SetDirAndTileCountToDest()
 		// 0:대각선, 1:직선
 		if (0 == Utils::GetRandomInt(0, 1))	// 대각선 우선
 		{
-			if (toDest.x > 0) // 우측
+			if (abs(toDest.x) > abs(toDest.y)) // 가로가 긴 대각선
 			{
-				direction = (toDest.y > 0) ? Direction8::DownRight : Direction8::UpRight;
-				targetTileCount = toDest.x;
+				if (toDest.y > 0) // 하측
+				{
+					direction = (toDest.x > 0) ? Direction8::DownRight : Direction8::DownLeft;
+					targetTileCount = toDest.y;
+				}
+				else // 상측
+				{
+					direction = (toDest.x > 0) ? Direction8::UpRight : Direction8::UpLeft;
+					targetTileCount = -toDest.y;
+				}
 			}
-			else // 좌측
+			else // 세로가 긴 대각선
 			{
-				direction = (toDest.y > 0) ? Direction8::DownLeft : Direction8::UpLeft;
-				targetTileCount = -toDest.x;
+				if (toDest.x > 0) // 우측
+				{
+					direction = (toDest.y > 0) ? Direction8::DownRight : Direction8::UpRight;
+					targetTileCount = toDest.x;
+				}
+				else // 좌측
+				{
+					direction = (toDest.y > 0) ? Direction8::DownLeft : Direction8::UpLeft;
+					targetTileCount = -toDest.x;
+				}
 			}
 		}
 		else // 직선 우선
