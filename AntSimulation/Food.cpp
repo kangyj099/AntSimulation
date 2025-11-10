@@ -3,7 +3,7 @@
 import utils;
 import console;
 
-Food::Food(Field& _field) : GameObject(_field)
+Food::Food()
 {
 	Init();
 }

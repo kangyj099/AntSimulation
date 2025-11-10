@@ -44,6 +44,8 @@ public:
 	/// </summary>
 	void Draw();
 
+	Field& GetField() { return field; };
+
 private:
 	void ProcessCollision(CollisionInfo& _colInfo);
 	void ProcessInputEvent();

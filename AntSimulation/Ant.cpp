@@ -13,7 +13,7 @@ import food;
 
 import movement;
 
-Ant::Ant(Field& _field) : GameObject(_field), carringFoodWeight(0.0f), isRest(false)
+Ant::Ant() : carringFoodWeight(0.0f), isRest(false)
 {
 	Init();
 }

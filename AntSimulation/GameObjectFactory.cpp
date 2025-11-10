@@ -10,13 +10,13 @@ import food;
 /// <param name="_objType">생성할 오브젝트 타입</param>
 /// <param name="_field">오브젝트가 위치한 필드</param>
 /// <returns>생성한 오브젝트 유니크포인터</returns>
-std::unique_ptr<GameObject> CreateInstanceGameObject(ObjectType _objType, Field& _field)
+std::unique_ptr<GameObject> CreateInstanceGameObject(ObjectType _objType)
 {
 	switch (_objType)
 	{
-	case ObjectType::Ant: return std::make_unique<Ant>(_field);  break;
-	case ObjectType::AntHome:  return std::make_unique<AntHome>(_field); break;
-	case ObjectType::Food: return std::make_unique<Food>(_field); break;
+	case ObjectType::Ant: return std::make_unique<Ant>();  break;
+	case ObjectType::AntHome:  return std::make_unique<AntHome>(); break;
+	case ObjectType::Food: return std::make_unique<Food>(); break;
 
 	default: return nullptr;
 	}

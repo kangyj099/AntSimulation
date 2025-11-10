@@ -5,7 +5,6 @@ import <queue>;
 
 import gameObject;
 
-export class Field;
 export class Ant;
 
 // 개미가 집에 들어갈 수 있다. (집이 개미를 보유)
@@ -66,7 +65,7 @@ private:
 	float stockFoodWeight; // 집에 축적된 먹이 개수
 
 public:
-	AntHome(Field& _field);
+	AntHome();
 	~AntHome();
 
 	virtual ObjectType GetObjectType() override { return ObjectType::AntHome; }

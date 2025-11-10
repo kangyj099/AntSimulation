@@ -48,7 +48,7 @@ public:
 	bool SetRandomMove();
 
 private:
-	Field& GetOwnerField();
+	Field& GetField();
 
 	void ResetMove();
 

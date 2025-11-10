@@ -11,14 +11,9 @@ import concepts;
 import interface;
 import component;
 
-export class Field;
-
 export class GameObject : IUpdate, IDraw
 {
 protected:
-	// 필드
-	Field& field;
-
 	// 필드에서의 좌표
 	FieldPos pos;
 
@@ -53,7 +48,7 @@ protected:
 	}
 
 public:
-	GameObject(Field& _field);
+	GameObject();
 	virtual ~GameObject();
 
 	virtual ObjectType GetObjectType() = 0;
@@ -72,7 +67,6 @@ public:
 	virtual void Reset();
 	void ReleaseAllComponents();
 
-	Field& GetField() { return field; }
 	FieldPos GetPos() { return pos; }
 	FieldPos SetPos(FieldPos _pos) { pos = _pos; return pos; }
 	std::string GetName() { return name; }
@@ -125,4 +119,4 @@ public:
 	}
 };
 
-export std::unique_ptr<GameObject> CreateInstanceGameObject(ObjectType _objType, Field& field);
+export std::unique_ptr<GameObject> CreateInstanceGameObject(ObjectType _objType);

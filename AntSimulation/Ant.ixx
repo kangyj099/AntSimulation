@@ -12,7 +12,7 @@ private:
 	bool isRest;
 
 public:
-	Ant(Field& _field);
+	Ant();
 	~Ant() override;
 
 	virtual ObjectType GetObjectType() override { return ObjectType::Ant; }

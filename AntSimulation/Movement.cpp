@@ -3,6 +3,7 @@
 import <array>;
 
 import common;
+import gameManager;
 import utils;
 import component;
 import gameObject;
@@ -68,7 +69,7 @@ void Movement::Update()
 
 bool Movement::SetDestMove(FieldPos _destPos)
 {
-	if (false == GetOwnerField().IsValidPos(_destPos))
+	if (false == GetField().IsValidPos(_destPos))
 	{
 		// 유효하지 않은 위치
 		isDestMove = false;
@@ -91,9 +92,9 @@ bool Movement::SetRandomMove()
 	return true;
 }
 
-Field& Movement::GetOwnerField()
+Field& Movement::GetField()
 {
-	return owner->GetField();
+	return GameManager::GetInstance().GetField();
 }
 
 void Movement::ResetMove()
@@ -129,7 +130,7 @@ bool Movement::SetDirAndTileCountRandom(std::span<Direction8> _ptrSpanCostumBloc
 	ResetMove();
 
 	// 1. 방향 설정하기
-	std::array<bool, static_cast<int>(Direction8::Count)> directionAvailables = GetOwnerField().GetDirectionAvailableArray(ownerPos);
+	std::array<bool, static_cast<int>(Direction8::Count)> directionAvailables = GetField().GetDirectionAvailableArray(ownerPos);
 	// 커스텀 블락 방향 지정
 	for (auto blockDir : _ptrSpanCostumBlockDir)
 	{
@@ -147,7 +148,7 @@ bool Movement::SetDirAndTileCountRandom(std::span<Direction8> _ptrSpanCostumBloc
 	}
 
 	// 2. 이동 칸수 설정
-	unsigned short maxMoveCount = GetOwnerField().GetTileCountUntilBlock(ownerPos, direction);
+	unsigned short maxMoveCount = GetField().GetTileCountUntilBlock(ownerPos, direction);
 	if (0 == maxMoveCount)
 	{
 		return false;
@@ -170,7 +171,7 @@ bool Movement::SetDirAndTileCountRandom(std::span<Direction8> _ptrSpanCostumBloc
 bool Movement::SetDirAndTileCountToDest()
 {
 	// 목적지 이동이 아니거나, 이미 도착한 경우
-	if (false == isDestMove || false == GetOwnerField().IsValidPos(destPos)
+	if (false == isDestMove || false == GetField().IsValidPos(destPos)
 		|| ownerPos == destPos)
 	{
 		return false;
@@ -330,7 +331,7 @@ MoveResult Movement::MoveObjecOneTile(Direction8 _direction)
 	FieldPos destPosition = ownerPos + c_FIELD_directions[static_cast<int>(_direction)];		// 방향을 dirPos로 변경
 
 	// 실제 필드에서 이동시켜보기
-	Field& field = GetOwnerField();
+	Field& field = GetField();
 	result = field.MoveObject(*owner, ownerPos, destPosition);
 
 	return result;

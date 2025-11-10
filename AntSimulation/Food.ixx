@@ -9,7 +9,7 @@ private:
 	virtual ObjectType GetObjectType() { return ObjectType::Food; }
 
 public:
-	Food(Field& _field);
+	Food();
 
 	virtual void OnUpdate() override;
 	virtual void OnDraw() override;

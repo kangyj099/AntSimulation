@@ -1,8 +1,8 @@
 ﻿module gameObject;
 
-import field;
+import gameManager;
 
-GameObject::GameObject(Field& _field) : field(_field), isReserveRemove(false)
+GameObject::GameObject() : isReserveRemove(false)
 , bgColor(Constants::c_COLOR_defaultBG), textColor(Constants::c_COLOR_defaultText)
 {
 }
@@ -38,7 +38,7 @@ void GameObject::Remove()
 {
 	OnRemove();
 
-	field.RemoveObject(*this, GetPos());
+	GameManager::GetInstance().GetField().RemoveObject(*this, GetPos());
 }
 
 void GameObject::Setting(FieldPos _pos, std::string _name, float _weight)
