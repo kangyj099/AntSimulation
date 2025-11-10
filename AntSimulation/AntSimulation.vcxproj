@@ -146,6 +146,7 @@
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InputManager.ixx" />
+    <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Interface.ixx" />
     <ClCompile Include="Component.ixx" />
     <ClCompile Include="ComponentBase.cpp" />

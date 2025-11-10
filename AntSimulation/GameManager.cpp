@@ -7,7 +7,6 @@ import console;
 import utils;
 import inputManager;
 import logManager;
-import gameObject;	// DELETE: 에디터 빨간줄때문에 추가
 import antHome;
 import ant;
 import food;

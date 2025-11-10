@@ -4,8 +4,8 @@ import common;
 import utils;
 import console;
 import logManager;
-import gameManager;
 import ant;
+import field;
 
 AntHome::AntHome()
 {
@@ -33,7 +33,7 @@ void AntHome::OnDraw()
 // name, weight는 기본값만을 사용함, 인자 넣어도 사용하지 않음
 void AntHome::Setting(FieldPos _pos, std::string _name, float _weight)
 {
-	if (false == GameManager::GetInstance().GetField().IsValidPos(_pos))
+	if (false == IGameManager::GetInstance().GetField().IsValidPos(_pos))
 	{
 		_pos = { 0,0 };
 	}
@@ -44,7 +44,7 @@ void AntHome::Setting(FieldPos _pos, std::string _name, float _weight)
 void AntHome::EnterAnt(Ant& ant, bool isPrintLog)
 {
 	// 개미 집에 들어감
-	GameManager::GetInstance().GetField().MoveObject(ant, ant.GetPos(), pos);
+	IGameManager::GetInstance().GetField().MoveObject(ant, ant.GetPos(), pos);
 
 	waitingAnts.push(&ant);
 
@@ -68,7 +68,7 @@ void AntHome::ExitAnt(bool isPrintLog)
 		return;
 
 	// 집 나온 개미 집 위치에서부터 시작
-	GameManager::GetInstance().GetField().MoveObject(*ant, ant->GetPos(), pos);
+	IGameManager::GetInstance().GetField().MoveObject(*ant, ant->GetPos(), pos);
 	ant->ExitRest();
 
 	if (true == isPrintLog)

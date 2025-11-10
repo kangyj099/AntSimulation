@@ -1,5 +1,9 @@
 ﻿export module common;
 
+// 자주 쓰이는 class 전방선언
+export class Field;
+export class GameObject;
+
 /// <summary>
 /// 필드에서의 위치
 /// </summary>
@@ -195,7 +199,6 @@ export enum class KeyCode
 	Count
 };
 
-export class GameObject;
 export struct CollisionInfo {
 	CollisionType type;
 	GameObject* occupantObject;	// 박힌 돌

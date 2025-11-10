@@ -1,6 +1,6 @@
 ﻿import console;
 import common;
-import gameManager;
+import interface;
 import inputManager;
 
 int main()
@@ -11,7 +11,7 @@ int main()
 	OffQuickEditMode();
 
 	// 게임 매니저 초기화
-	GameManager::GetInstance().Init();
+	IGameManager::GetInstance().Init();
 
 	// 인풋 매니저 초기화
 	InputManager::GetInstance().Init();
@@ -20,8 +20,8 @@ int main()
 	do
 	{
 		InputManager::GetInstance().SwapQueues();
-		isRun = GameManager::GetInstance().Update();
-		GameManager::GetInstance().Draw();
+		isRun = IGameManager::GetInstance().Update();
+		IGameManager::GetInstance().Draw();
 
 		SwapScreenBuffer();
 		

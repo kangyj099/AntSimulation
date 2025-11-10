@@ -4,15 +4,13 @@ import <memory>;
 import <chrono>;
 
 import singleton;
-import common;
+import interface;
 import field;
+import gameObject;
 
-export class GameObject;
 export class AntHome;
-export class Ant;
-export class Food;
 
-export class GameManager : public Singleton<GameManager>
+export class GameManager : public IGameManager, public Singleton<GameManager>
 {
 private:
 	// 게임 시작 시간
@@ -30,21 +28,21 @@ private:
 	ConsolePos logStartPos;
 
 public:
-	void Init();
+	void Init() override;
 	void Release();
 
 	/// <summary>
 	/// 게임 메인 로직 업데이트
 	/// </summary>
 	/// <returns>true: 평시, false: 종료</returns>
-	bool Update();
+	bool Update() override;
 
 	/// <summary>
 	/// 게임 화면 그리기
 	/// </summary>
-	void Draw();
-
-	Field& GetField() { return field; };
+	void Draw() override;
+	
+	Field& GetField() override { return field; };
 
 private:
 	void ProcessCollision(CollisionInfo& _colInfo);

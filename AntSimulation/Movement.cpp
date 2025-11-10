@@ -95,7 +95,7 @@ bool Movement::SetRandomMove()
 
 Field& Movement::GetField()
 {
-	return GameManager::GetInstance().GetField();
+	return IGameManager::GetInstance().GetField();
 }
 
 void Movement::ResetMove()
