@@ -30,10 +30,8 @@ private:
 	ConsolePos logStartPos;
 
 public:
-	GameManager();
-	~GameManager() override;
-
 	void Init();
+	void Release();
 
 	/// <summary>
 	/// 게임 메인 로직 업데이트

@@ -8,13 +8,10 @@ import console;
 
 using namespace Constants;
 
-LogManager::LogManager()
+void LogManager::Init()
 {
 	logList.reserve(c_LOG_printLine);
-}
-
-LogManager::~LogManager()
-{
+	Reset();
 }
 
 void LogManager::AddLog(LogType _logType, std::string _logText) {

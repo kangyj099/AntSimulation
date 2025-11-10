@@ -1,6 +1,6 @@
 ﻿export module singleton;
 
-export template <typename T>
+export template <class T>
 class Singleton
 {
 public:
@@ -11,7 +11,9 @@ public:
 	}
 	Singleton(const Singleton&) = delete;
 	Singleton& operator=(const Singleton&) = delete;
+
 protected:
 	Singleton() = default;
 	virtual ~Singleton() = default;
+	friend T;
 };

@@ -12,18 +12,13 @@ import antHome;
 import ant;
 import food;
 
-GameManager::GameManager() : logStartPos(Constants::c_SCREEN_logStartX, Constants::c_SCREEN_logStartY), antHome(nullptr)
-{
-	using namespace Constants;
-	objects.reserve(c_GAME_antCount + c_GAME_foodCount + c_GAME_homeCount);
-}
-
-GameManager::~GameManager()
-{
-}
-
 void GameManager::Init()
 {
+	logStartPos = { Constants::c_SCREEN_logStartX, Constants::c_SCREEN_logStartY };
+	antHome = nullptr;
+	{ using namespace Constants;
+	objects.reserve(c_GAME_antCount + c_GAME_foodCount + c_GAME_homeCount); }
+
 	// 게임 시작 틱
 	startTime = std::chrono::steady_clock::now();
 
@@ -76,10 +71,14 @@ void GameManager::Init()
 	}
 
 	// 로그 초기화
-	LogManager::GetInstance().Reset();
+	LogManager::GetInstance().Init();
 
 	// test
 	LogManager::GetInstance().AddLog(LogType::State, "게임 시작");
+}
+
+void GameManager::Release()
+{
 }
 
 bool GameManager::Update()

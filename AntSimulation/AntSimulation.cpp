@@ -10,8 +10,11 @@ int main()
 	CursorSetting(0, false);
 	OffQuickEditMode();
 
-	GameManager gameManager;
-	gameManager.Init();
+	// 게임 매니저 초기화
+	GameManager::GetInstance().Init();
+
+	// 인풋 매니저 초기화
+	InputManager::GetInstance().Init();
 
 	bool isRun = true;
 	do

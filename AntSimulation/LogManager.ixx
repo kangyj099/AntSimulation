@@ -34,8 +34,7 @@ export class LogManager : public Singleton<LogManager>
 	std::vector<Log> logList;
 
 public:
-	LogManager();
-	~LogManager() override;
+	void Init();
 
 	/// <summary>
 	/// 로그 리스트에 로그 추가 (최대 개수 제한됨)

@@ -4,16 +4,6 @@
 
 module inputManager;
 
-InputManager::InputManager()
-{
-	Init();
-}
-
-InputManager::~InputManager()
-{
-	Release();
-}
-
 void InputManager::Init()
 {
 	// 인풋 핸들 가져오기

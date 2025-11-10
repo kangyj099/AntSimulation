@@ -68,9 +68,6 @@ private:
 	bool isRunning;
 
 public:
-	InputManager();
-	~InputManager() override;
-
 	void Init();
 	void Release();
 
