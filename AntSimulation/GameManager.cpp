@@ -265,11 +265,12 @@ bool GameManager::ProcessRemoveReserved()
 	objects.erase(
 		std::remove_if(objects.begin(),
 			objects.end(),
-			[](std::unique_ptr<GameObject>& object)
+			[&](std::unique_ptr<GameObject>& object)
 			{
 				if (true == object->IsReserveRemove())
 				{
 					object->Remove();
+					field.RemoveObject(*object, object->GetPos());
 
 					return true;
 				}

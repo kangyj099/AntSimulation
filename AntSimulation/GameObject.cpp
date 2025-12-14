@@ -39,8 +39,6 @@ void GameObject::Draw()
 void GameObject::Remove()
 {
 	OnRemove();
-
-	IGameManager::GetInstance().GetField().RemoveObject(*this, GetPos());
 }
 
 void GameObject::Setting(FieldPos _pos, std::string _name, float _weight)
