@@ -10,7 +10,7 @@ using namespace Constants;
 using namespace std::chrono;
 
 Movement::Movement(GameObject& _owner, FieldPos& _ownerPos, float _speed)
-	: ComponentBase(_owner), ownerPos(_ownerPos), destPos({ -1,-1 }), isMoving(false), isDestMove(false)
+	: Component(_owner), ownerPos(_ownerPos), destPos({ -1,-1 }), isMoving(false), isDestMove(false)
 	, direction(Direction8::None), targetTileCount(0), curMoveTileCount(0)
 	, speed(_speed)
 	, durationPerTile(duration_cast<steady_clock::duration>(duration<double>(1.0 / _speed)))

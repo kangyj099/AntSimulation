@@ -32,7 +32,7 @@ protected:
 
 private:
 	// 컴포넌트
-	std::unordered_map<ComponentType, std::unique_ptr<ComponentBase>> allComponents;
+	std::unordered_map<ComponentType, std::unique_ptr<Component>> allComponents;
 	std::vector<IUpdate*> updateComponents;
 	std::vector<IDraw*> drawComponents;
 
