@@ -1,7 +1,5 @@
 ﻿module gameObject;
 
-import field;
-
 GameObject::GameObject() : isReserveRemove(false)
 , bgColor(Constants::c_COLOR_defaultBG), textColor(Constants::c_COLOR_defaultText)
 {

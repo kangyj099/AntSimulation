@@ -29,7 +29,7 @@ private:
 
 public:
 	void Init() override;
-	void Release();
+	void Release() override;
 
 	/// <summary>
 	/// 게임 메인 로직 업데이트

@@ -15,8 +15,10 @@ void GameManager::Init()
 {
 	logStartPos = { Constants::c_SCREEN_logStartX, Constants::c_SCREEN_logStartY };
 	antHome = nullptr;
-	{ using namespace Constants;
-	objects.reserve(c_GAME_antCount + c_GAME_foodCount + c_GAME_homeCount); }
+	{
+		using namespace Constants;
+		objects.reserve(c_GAME_antCount + c_GAME_foodCount + c_GAME_homeCount);
+	}
 
 	// 게임 시작 틱
 	startTime = std::chrono::steady_clock::now();
@@ -137,7 +139,6 @@ void GameManager::Draw()
 	}
 
 	// 로그 출력
-	// 로그 갱신 있을때만
 	GotoXY(logStartPos);
 	LogManager::GetInstance().PrintLog();
 }
@@ -288,7 +289,7 @@ bool GameManager::ProcessRemoveReserved()
 			}
 		),
 		objects.end()
-				);	//END erase
+	);	//END erase
 
 	return true;
 }
