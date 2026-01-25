@@ -20,6 +20,7 @@ public:
 	static IGameManager& GetInstance();	// 게임매니저 싱글톤 인스턴스 반환
 
 	virtual void Init() = 0;
+	virtual void Release() = 0;
 
 	virtual Field& GetField() = 0;
 

@@ -78,6 +78,10 @@ void GameManager::Init()
 
 void GameManager::Release()
 {
+	for (auto& object : objects)
+	{
+		object->Remove();
+	}
 }
 
 bool GameManager::Update()
