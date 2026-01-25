@@ -104,17 +104,7 @@ bool GameManager::Update()
 	ProcessInputEvent();
 
 	// 충돌 처리
-	while (0 < field.IsHaveCollisionEvent())
-	{
-		CollisionInfo info = field.PopCollisionInfo();
-
-		if (false == info.IsValidInfo())
-		{
-			continue;
-		}
-
-		ProcessCollision(info);
-	}
+	ProcessCollision();
 
 	// 삭제 대기 오브젝트 삭제
 	ProcessRemoveReserved();
@@ -148,7 +138,7 @@ void GameManager::Draw()
 	LogManager::GetInstance().PrintLog();
 }
 
-void GameManager::ProcessCollision(CollisionInfo& _colInfo)
+void GameManager::HandleCollision(CollisionInfo& _colInfo)
 {
 	switch (_colInfo.type)
 	{
@@ -162,6 +152,21 @@ void GameManager::ProcessCollision(CollisionInfo& _colInfo)
 	} break;
 	default:
 		break;
+	}
+}
+
+void GameManager::ProcessCollision()
+{
+	while (0 < field.IsHaveCollisionEvent())
+	{
+		CollisionInfo info = field.PopCollisionInfo();
+
+		if (false == info.IsValidInfo())
+		{
+			continue;
+		}
+
+		HandleCollision(info);
 	}
 }
 
