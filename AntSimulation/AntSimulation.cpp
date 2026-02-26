@@ -26,4 +26,7 @@ int main()
 		SwapScreenBuffer();
 		
 	} while (isRun);
+
+	InputManager::GetInstance().Release();
+	IGameManager::GetInstance().Release();
 }

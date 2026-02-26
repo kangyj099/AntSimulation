@@ -19,7 +19,7 @@ private:
 
 	std::thread inputThread;
 	mutable std::mutex queueMutex;
-	bool isRunning;
+	std::atomic<bool> isRunning;
 
 public:
 	void Init();

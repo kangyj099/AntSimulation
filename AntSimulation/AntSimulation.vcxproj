@@ -149,7 +149,7 @@
     <ClCompile Include="InputManager.ixx" />
     <ClCompile Include="Input_common.ixx" />
     <ClCompile Include="Component.ixx" />
-    <ClCompile Include="ComponentBase.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="Concepts.ixx" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameManager.ixx" />

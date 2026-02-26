@@ -29,7 +29,7 @@ private:
 
 public:
 	void Init() override;
-	void Release();
+	void Release() override;
 
 	/// <summary>
 	/// 게임 메인 로직 업데이트
@@ -45,7 +45,8 @@ public:
 	Field& GetField() override { return field; };
 
 private:
-	void ProcessCollision(CollisionInfo& _colInfo);
+	void HandleCollision(CollisionInfo& _colInfo);
+	void ProcessCollision();
 	void ProcessInputEvent();
 
 	bool CreateObject(ObjectType _objType, FieldPos _pos, std::string _name = "", float _weight = Constants::c_GAME_defaultWeightMG);

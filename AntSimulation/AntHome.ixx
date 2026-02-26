@@ -73,6 +73,8 @@ public:
 	void OnUpdate() override;
 	void OnDraw() override;
 
+	void OnOverlap(GameObject* _other) override;
+
 	// name, weight는 기본값만을 사용함, 인자 넣어도 사용하지 않음
 	void Setting(FieldPos _pos, std::string _name = "HomeSweetHome", float _weight = 0.0f) override;
 

@@ -95,6 +95,11 @@ float Ant::LiftFood(float _foodWeight)
 		return 0.0f;
 	}
 
+	if (0.0f >= addWeight)
+	{
+		return 0.0f;
+	}
+
 	carringFoodWeight += addWeight;
 	LogManager::GetInstance().AddLog(LogType::Action, std::format("{} 음식 {} 들어올림 (현재 {})", GetName(), addWeight, carringFoodWeight));
 

@@ -35,6 +35,7 @@ void InputManager::Stop()
 		return;
 	}
 
+	isRunning = false;
 	if (true == inputThread.joinable())
 	{
 		inputThread.join();

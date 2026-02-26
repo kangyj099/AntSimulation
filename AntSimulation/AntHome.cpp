@@ -5,6 +5,7 @@ import console;
 import logManager;
 import ant;
 import field;
+import food;
 
 AntHome::AntHome()
 {
@@ -27,6 +28,28 @@ void AntHome::OnDraw()
 	ConsolePos consolePos = Utils::FieldPositionToConsolePos(pos);
 	GotoXY(consolePos);
 	PrintText("H", bgColor, textColor);
+}
+
+void AntHome::OnOverlap(GameObject* _other)
+{
+	if (nullptr == _other)
+	{
+		return;
+	}
+
+	switch (_other->GetObjectType())
+	{
+	case ObjectType::Food:
+	{
+		// 집에 먹이 추가
+		float weight = _other->GetWeight();
+		Food* food = dynamic_cast<Food*>(_other);
+		// 차감부터 함
+		food->PickedUp(weight);
+
+		AddFood(weight);
+	} break;
+	}
 }
 
 // name, weight는 기본값만을 사용함, 인자 넣어도 사용하지 않음

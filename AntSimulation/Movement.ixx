@@ -7,7 +7,7 @@ import field_common;
 import component;
 
 // Todo: 스피드 정보 생성해서 넣는 것 어디서 할지 정하기
-export class Movement sealed : public ComponentBase
+export class Movement sealed : public Component
 {
 private:
 	FieldPos& ownerPos;

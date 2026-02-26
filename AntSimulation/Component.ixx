@@ -6,7 +6,7 @@ import interfaces;
 /////////////////////////////////
 // 컴포넌트
 /// <summary>
-/// 컴포넌트 타입(ComponentBase 상속 클래스의 기능 종류)
+/// 컴포넌트 타입(Component 상속 클래스의 기능 종류)
 /// </summary>
 export enum class ComponentType
 {
@@ -14,14 +14,14 @@ export enum class ComponentType
 	Movement = 0,
 };
 
-export class ComponentBase : public IUpdate
+export class Component : public IUpdate
 {
 protected:
 	GameObject* owner;
 
 public:
-	ComponentBase(GameObject& _owner);
-	virtual ~ComponentBase() {}
+	Component(GameObject& _owner);
+	virtual ~Component() {}
 
 	virtual ComponentType GetType() = 0;
 };

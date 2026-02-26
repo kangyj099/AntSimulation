@@ -15,8 +15,10 @@ void GameManager::Init()
 {
 	logStartPos = { Constants::c_SCREEN_logStartX, Constants::c_SCREEN_logStartY };
 	antHome = nullptr;
-	{ using namespace Constants;
-	objects.reserve(c_GAME_antCount + c_GAME_foodCount + c_GAME_homeCount); }
+	{
+		using namespace Constants;
+		objects.reserve(c_GAME_antCount + c_GAME_foodCount + c_GAME_homeCount);
+	}
 
 	// 게임 시작 틱
 	startTime = std::chrono::steady_clock::now();
@@ -78,6 +80,10 @@ void GameManager::Init()
 
 void GameManager::Release()
 {
+	for (auto& object : objects)
+	{
+		object->Remove();
+	}
 }
 
 bool GameManager::Update()
@@ -104,17 +110,7 @@ bool GameManager::Update()
 	ProcessInputEvent();
 
 	// 충돌 처리
-	while (0 < field.IsHaveCollisionEvent())
-	{
-		CollisionInfo info = field.PopCollisionInfo();
-
-		if (false == info.IsValidInfo())
-		{
-			continue;
-		}
-
-		ProcessCollision(info);
-	}
+	ProcessCollision();
 
 	// 삭제 대기 오브젝트 삭제
 	ProcessRemoveReserved();
@@ -143,12 +139,11 @@ void GameManager::Draw()
 	}
 
 	// 로그 출력
-	// 로그 갱신 있을때만
 	GotoXY(logStartPos);
 	LogManager::GetInstance().PrintLog();
 }
 
-void GameManager::ProcessCollision(CollisionInfo& _colInfo)
+void GameManager::HandleCollision(CollisionInfo& _colInfo)
 {
 	switch (_colInfo.type)
 	{
@@ -162,6 +157,21 @@ void GameManager::ProcessCollision(CollisionInfo& _colInfo)
 	} break;
 	default:
 		break;
+	}
+}
+
+void GameManager::ProcessCollision()
+{
+	while (0 < field.IsHaveCollisionEvent())
+	{
+		CollisionInfo info = field.PopCollisionInfo();
+
+		if (false == info.IsValidInfo())
+		{
+			continue;
+		}
+
+		HandleCollision(info);
 	}
 }
 
@@ -265,11 +275,12 @@ bool GameManager::ProcessRemoveReserved()
 	objects.erase(
 		std::remove_if(objects.begin(),
 			objects.end(),
-			[](std::unique_ptr<GameObject>& object)
+			[&](std::unique_ptr<GameObject>& object)
 			{
 				if (true == object->IsReserveRemove())
 				{
 					object->Remove();
+					field.RemoveObject(*object, object->GetPos());
 
 					return true;
 				}
@@ -278,7 +289,7 @@ bool GameManager::ProcessRemoveReserved()
 			}
 		),
 		objects.end()
-				);	//END erase
+	);	//END erase
 
 	return true;
 }

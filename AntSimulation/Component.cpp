@@ -2,7 +2,7 @@
 
 import gameObject;
 
-ComponentBase::ComponentBase(GameObject& _owner)
+Component::Component(GameObject& _owner)
 {
 	owner = &_owner;
 }
