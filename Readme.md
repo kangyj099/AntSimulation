@@ -50,7 +50,7 @@ C++20, 콘솔
 
 InputManager에 별개의 Thread를 할당했습니다.
 
-입력 정보는 구조체에 담에 queue에 쌓습니다.
+입력 정보는 구조체에 담아 queue에 쌓습니다.
 
 GameManager의 Update주기가 돌아왔을 때 큐에 쌓인 입력 정보를 처리합니다.
 
